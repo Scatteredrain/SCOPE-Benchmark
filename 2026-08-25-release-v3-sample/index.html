@@ -1,0 +1,1383 @@
+<!DOCTYPE html>
+<html lang="zh"><head><meta charset="utf-8">
+<title>release_v3 分层抽样查看 · 7 层各 8 条</title><style>
+body { font-family: -apple-system, "Helvetica Neue", "PingFang SC", sans-serif;
+       margin: 0 auto; max-width: 1180px; padding: 24px; color: #1a1a1a; line-height: 1.6; }
+h1 { border-bottom: 2px solid #1a1a1a; padding-bottom: 8px; }
+h2 { margin-top: 40px; background: #1a1a1a; color: #fff; padding: 8px 12px; font-size: 1.15em; }
+.warn { background: #fff4e5; border-left: 4px solid #d97706; padding: 12px 16px; margin: 16px 0; }
+.case { border: 1px solid #d4d4d4; border-radius: 6px; margin: 18px 0; padding: 0 18px 12px; }
+.case > summary { cursor: pointer; padding: 12px 0; font-weight: 600; font-size: 1.05em; }
+.meta { font-size: .9em; color: #555; margin: 4px 0 14px; }
+.meta code { background: #f1f1f1; padding: 1px 5px; border-radius: 3px; }
+table { border-collapse: collapse; margin: 10px 0 18px; font-size: .92em; }
+th, td { border: 1px solid #ddd; padding: 5px 10px; text-align: left; vertical-align: top; }
+th { background: #f6f6f6; }
+.gate-ok { color: #15803d; } .gate-bad { color: #b91c1c; font-weight: 600; }
+.gate-skip { color: #6b7280; }
+.mismatch { background: #fef2f2; }
+.layer { margin: 14px 0; }
+.layer h4 { margin: 0 0 6px; font-size: .95em; color: #1d4ed8; }
+.layer pre { white-space: pre-wrap; background: #fafafa; border-left: 3px solid #ddd;
+             margin: 0; padding: 8px 12px; font-family: inherit; font-size: .92em; }
+.frames { display: flex; flex-wrap: wrap; gap: 10px; }
+.frame { width: 210px; }
+.frame img { width: 210px; border: 1px solid #ccc; border-radius: 4px; display: block; }
+.frame span { font-size: .82em; color: #666; }
+</style></head><body>
+<h1>release_v3 分层抽样查看 · 7 层各 8 条</h1>
+<p class="meta">共 56 条，来自 7 个任务层，抽自
+<code>outputs/v3/release_v3.jsonl</code>（16559 条）。每条附题干、标准答案、任务参数、
+标签来源与问法变体。</p>
+<div class="warn"><b>这些题目与标签由报告自动派生，未经人工逐条确认。</b>标签来源写在每条的
+<code>provenance</code> 里：<code>report_findings</code> 表示取自报告所见文本，
+<code>physician_stated_grade</code> 表示医师在报告里直接写了分级。因此「答案错」有两种可能——抽取
+规则错，或报告本身没写/写错，看的时候请分开记。图像与标签的对应只到<b>部位</b>一级：
+<code>frames_site_matched_only</code> 标记的条目只保证帧来自该部位，不保证病灶在这几帧里可见。</div>
+<div class="warn"><b>仅供内部查看，勿外传。</b>图像按原字节复制到 <code>images/</code> 并以相对路径引用，帧名改成 F 序号——源文件名带姓名、院区与住院号，不能外传；但叠加在像素上的信息本脚本不处理。</div>
+<h2>L2 异常发现列举 <code>L2_abnormal_findings</code></h2><p class="meta">全库 3507 条 · 按部位分层，抽 8 / 3507 条，覆盖 8 / 8 个分层<br>帧数 1/3/3（最少/中位/最多） · 划分 test 1208、train 1205、val 1094 · 输入档 clean_matched 3507 · 问法 mcq 3430、open_ended 3507、select_all 3507</p><details class="case"><summary>L2_0c323d14_十二指肠</summary>
+<p class="meta">检查号 <code>SCOPEV2_1df80c323d14</code> · 划分 <code>train</code> · 输入档 <code>clean_matched</code> · 发布角色 <code>balanced</code> · 分层 <code>AX01_07</code> · 标签置信 <code>1</code> · 标记 <code>frames_site_matched_only</code></p>
+<div class="layer"><h4>题干</h4><pre>以下是该患者十二指肠的胃镜图像，请列出可见的异常发现。</pre></div>
+<div class="layer"><h4>标准答案</h4><pre>[
+  {
+    &quot;code&quot;: &quot;AX01_07&quot;,
+    &quot;label&quot;: &quot;变形&quot;
+  },
+  {
+    &quot;code&quot;: &quot;AX10_04&quot;,
+    &quot;label&quot;: &quot;溃疡&quot;
+  }
+]</pre></div>
+<div class="layer"><h4>任务参数 task_payload</h4><pre>{
+  &quot;site&quot;: &quot;十二指肠&quot;
+}</pre></div>
+<div class="layer"><h4>标签来源 provenance</h4><pre>{
+  &quot;label_source&quot;: &quot;report_findings&quot;,
+  &quot;site&quot;: &quot;十二指肠&quot;,
+  &quot;frame_lesion_verified&quot;: false
+}</pre></div>
+<h4 style="margin:18px 0 8px">问法变体</h4>
+<table><tr><th>问法</th><th>题干</th><th>选项</th><th>答案</th></tr><tr><td><code>open_ended</code></td><td>以下是该患者十二指肠的胃镜图像，请列出可见的异常发现。</td><td>—</td><td>[{&quot;code&quot;: &quot;AX01_07&quot;, &quot;label&quot;: &quot;变形&quot;}, {&quot;code&quot;: &quot;AX10_04&quot;, &quot;label&quot;: &quot;溃疡&quot;}]</td></tr><tr><td><code>mcq</code></td><td>以下哪一项异常发现在该图像中可见？请选择唯一正确的选项。</td><td>A. 吻合口/造口；B. 狭窄；C. 变形</td><td>&quot;C&quot;</td></tr><tr><td><code>select_all</code></td><td>以下哪些异常发现在该图像中可见？可能有多项正确，请选出全部成立的选项。</td><td>A. 管腔狭小；B. 胃角拱形消失；C. 变形；D. 溃疡</td><td>[&quot;C&quot;, &quot;D&quot;]</td></tr></table>
+<h4 style="margin:18px 0 8px">图像</h4>
+<div class="frames"><div class="frame"><img src="images/L2_0c323d14_十二指肠/F01.jpg" alt="F01" loading="lazy" decoding="async"><span><b>F01</b> · 十二指肠 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L2_0c323d14_十二指肠/F02.jpg" alt="F02" loading="lazy" decoding="async"><span><b>F02</b> · 十二指肠 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L2_0c323d14_十二指肠/F03.jpg" alt="F03" loading="lazy" decoding="async"><span><b>F03</b> · 十二指肠 · white_light · 部位置信 1.00</span></div></div>
+</details><details class="case"><summary>L2_79c1793f_幽门</summary>
+<p class="meta">检查号 <code>SCOPEV2_92f979c1793f</code> · 划分 <code>train</code> · 输入档 <code>clean_matched</code> · 发布角色 <code>rare_appendix</code> · 分层 <code>AX10_13</code> · 标签置信 <code>0.9071</code> · 标记 <code>frames_site_matched_only</code></p>
+<div class="layer"><h4>题干</h4><pre>以下是该患者幽门的胃镜图像，请列出可见的异常发现。</pre></div>
+<div class="layer"><h4>标准答案</h4><pre>[
+  {
+    &quot;code&quot;: &quot;AX01_07&quot;,
+    &quot;label&quot;: &quot;变形&quot;
+  },
+  {
+    &quot;code&quot;: &quot;AX10_13&quot;,
+    &quot;label&quot;: &quot;瘘管/窦道&quot;
+  },
+  {
+    &quot;code&quot;: &quot;AX10_08&quot;,
+    &quot;label&quot;: &quot;凹陷&quot;
+  },
+  {
+    &quot;code&quot;: &quot;AX04_16&quot;,
+    &quot;label&quot;: &quot;水肿/肿胀&quot;
+  }
+]</pre></div>
+<div class="layer"><h4>任务参数 task_payload</h4><pre>{
+  &quot;site&quot;: &quot;幽门&quot;
+}</pre></div>
+<div class="layer"><h4>标签来源 provenance</h4><pre>{
+  &quot;label_source&quot;: &quot;report_findings&quot;,
+  &quot;site&quot;: &quot;幽门&quot;,
+  &quot;frame_lesion_verified&quot;: false
+}</pre></div>
+<h4 style="margin:18px 0 8px">问法变体</h4>
+<table><tr><th>问法</th><th>题干</th><th>选项</th><th>答案</th></tr><tr><td><code>open_ended</code></td><td>以下是该患者幽门的胃镜图像，请列出可见的异常发现。</td><td>—</td><td>[{&quot;code&quot;: &quot;AX01_07&quot;, &quot;label&quot;: &quot;变形&quot;}, {&quot;code&quot;: &quot;AX10_13&quot;, &quot;label&quot;: &quot;瘘管/窦道&quot;}, {&quot;code&quot;: &quot;AX10_08&quot;, &quot;label&quot;: &quot;凹陷&quot;}, {&quot;code&quot;: &quot;AX04_16&quot;, &quot;label&quot;: &quot;水肿/肿胀&quot;}]</td></tr><tr><td><code>mcq</code></td><td>以下哪一项异常发现在该图像中可见？请选择唯一正确的选项。</td><td>A. IPCL异常；B. 萎缩；C. 白苔；D. 变形</td><td>&quot;D&quot;</td></tr><tr><td><code>select_all</code></td><td>以下哪些异常发现在该图像中可见？可能有多项正确，请选出全部成立的选项。</td><td>A. 色泽异常（非特异）；B. 表面粗糙；C. 变形；D. 瘘管/窦道</td><td>[&quot;C&quot;, &quot;D&quot;]</td></tr></table>
+<h4 style="margin:18px 0 8px">图像</h4>
+<div class="frames"><div class="frame"><img src="images/L2_79c1793f_幽门/F01.jpg" alt="F01" loading="lazy" decoding="async"><span><b>F01</b> · 幽门 · white_light · 部位置信 0.99</span></div><div class="frame"><img src="images/L2_79c1793f_幽门/F02.jpg" alt="F02" loading="lazy" decoding="async"><span><b>F02</b> · 幽门 · white_light · 部位置信 0.98</span></div><div class="frame"><img src="images/L2_79c1793f_幽门/F03.jpg" alt="F03" loading="lazy" decoding="async"><span><b>F03</b> · 幽门 · white_light · 部位置信 0.91</span></div></div>
+</details><details class="case"><summary>L2_7c1d83a5_胃体</summary>
+<p class="meta">检查号 <code>SCOPEV2_788a7c1d83a5</code> · 划分 <code>test</code> · 输入档 <code>clean_matched</code> · 发布角色 <code>balanced</code> · 分层 <code>AX06_06</code> · 标签置信 <code>1</code> · 标记 <code>frames_site_matched_only</code></p>
+<div class="layer"><h4>题干</h4><pre>以下是该患者胃体的胃镜图像，请列出可见的异常发现。</pre></div>
+<div class="layer"><h4>标准答案</h4><pre>[
+  {
+    &quot;code&quot;: &quot;AX10_01&quot;,
+    &quot;label&quot;: &quot;糜烂&quot;
+  },
+  {
+    &quot;code&quot;: &quot;AX06_06&quot;,
+    &quot;label&quot;: &quot;陈旧性出血&quot;
+  }
+]</pre></div>
+<div class="layer"><h4>任务参数 task_payload</h4><pre>{
+  &quot;site&quot;: &quot;胃体&quot;
+}</pre></div>
+<div class="layer"><h4>标签来源 provenance</h4><pre>{
+  &quot;label_source&quot;: &quot;report_findings&quot;,
+  &quot;site&quot;: &quot;胃体&quot;,
+  &quot;frame_lesion_verified&quot;: false
+}</pre></div>
+<h4 style="margin:18px 0 8px">问法变体</h4>
+<table><tr><th>问法</th><th>题干</th><th>选项</th><th>答案</th></tr><tr><td><code>open_ended</code></td><td>以下是该患者胃体的胃镜图像，请列出可见的异常发现。</td><td>—</td><td>[{&quot;code&quot;: &quot;AX10_01&quot;, &quot;label&quot;: &quot;糜烂&quot;}, {&quot;code&quot;: &quot;AX06_06&quot;, &quot;label&quot;: &quot;陈旧性出血&quot;}]</td></tr><tr><td><code>mcq</code></td><td>以下哪一项异常发现在该图像中可见？请选择唯一正确的选项。</td><td>A. 口疮样糜烂；B. 溃疡；C. 陈旧性出血</td><td>&quot;C&quot;</td></tr><tr><td><code>select_all</code></td><td>以下哪些异常发现在该图像中可见？可能有多项正确，请选出全部成立的选项。</td><td>A. 瘘管/窦道；B. 糜烂；C. 陈旧性出血；D. 喷射性出血</td><td>[&quot;B&quot;, &quot;C&quot;]</td></tr></table>
+<h4 style="margin:18px 0 8px">图像</h4>
+<div class="frames"><div class="frame"><img src="images/L2_7c1d83a5_胃体/F01.jpg" alt="F01" loading="lazy" decoding="async"><span><b>F01</b> · 胃体 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L2_7c1d83a5_胃体/F02.jpg" alt="F02" loading="lazy" decoding="async"><span><b>F02</b> · 胃体 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L2_7c1d83a5_胃体/F03.jpg" alt="F03" loading="lazy" decoding="async"><span><b>F03</b> · 胃体 · white_light · 部位置信 1.00</span></div></div>
+</details><details class="case"><summary>L2_8c85cd0a_胃底</summary>
+<p class="meta">检查号 <code>SCOPEV2_449f8c85cd0a</code> · 划分 <code>val</code> · 输入档 <code>clean_matched</code> · 发布角色 <code>balanced</code> · 分层 <code>AX09_04</code> · 标签置信 <code>1</code> · 标记 <code>frames_site_matched_only</code></p>
+<div class="layer"><h4>题干</h4><pre>以下是该患者胃底的胃镜图像，请列出可见的异常发现。</pre></div>
+<div class="layer"><h4>标准答案</h4><pre>[
+  {
+    &quot;code&quot;: &quot;AX09_04&quot;,
+    &quot;label&quot;: &quot;息肉样隆起&quot;
+  }
+]</pre></div>
+<div class="layer"><h4>任务参数 task_payload</h4><pre>{
+  &quot;site&quot;: &quot;胃底&quot;
+}</pre></div>
+<div class="layer"><h4>标签来源 provenance</h4><pre>{
+  &quot;label_source&quot;: &quot;report_findings&quot;,
+  &quot;site&quot;: &quot;胃底&quot;,
+  &quot;frame_lesion_verified&quot;: false
+}</pre></div>
+<h4 style="margin:18px 0 8px">问法变体</h4>
+<table><tr><th>问法</th><th>题干</th><th>选项</th><th>答案</th></tr><tr><td><code>open_ended</code></td><td>以下是该患者胃底的胃镜图像，请列出可见的异常发现。</td><td>—</td><td>[{&quot;code&quot;: &quot;AX09_04&quot;, &quot;label&quot;: &quot;息肉样隆起&quot;}]</td></tr><tr><td><code>mcq</code></td><td>以下哪一项异常发现在该图像中可见？请选择唯一正确的选项。</td><td>A. 息肉样隆起；B. 隆起（非特异）；C. 颗粒状隆起；D. 肿块</td><td>&quot;A&quot;</td></tr><tr><td><code>select_all</code></td><td>以下哪些异常发现在该图像中可见？可能有多项正确，请选出全部成立的选项。</td><td>A. 脐状凹陷丘疹；B. 颗粒状隆起；C. 肉芽组织；D. 息肉样隆起</td><td>[&quot;D&quot;]</td></tr></table>
+<h4 style="margin:18px 0 8px">图像</h4>
+<div class="frames"><div class="frame"><img src="images/L2_8c85cd0a_胃底/F01.jpg" alt="F01" loading="lazy" decoding="async"><span><b>F01</b> · 胃底 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L2_8c85cd0a_胃底/F02.jpg" alt="F02" loading="lazy" decoding="async"><span><b>F02</b> · 胃底 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L2_8c85cd0a_胃底/F03.jpg" alt="F03" loading="lazy" decoding="async"><span><b>F03</b> · 胃底 · white_light · 部位置信 1.00</span></div></div>
+</details><details class="case"><summary>L2_7bd2fe0d_胃窦</summary>
+<p class="meta">检查号 <code>SCOPEV2_2f617bd2fe0d</code> · 划分 <code>test</code> · 输入档 <code>clean_matched</code> · 发布角色 <code>balanced</code> · 分层 <code>AX08_07</code> · 标签置信 <code>0.8873</code> · 标记 <code>frames_site_matched_only</code></p>
+<div class="layer"><h4>题干</h4><pre>以下是该患者胃窦的胃镜图像，请列出可见的异常发现。</pre></div>
+<div class="layer"><h4>标准答案</h4><pre>[
+  {
+    &quot;code&quot;: &quot;AX04_02&quot;,
+    &quot;label&quot;: &quot;白相为主&quot;
+  },
+  {
+    &quot;code&quot;: &quot;AX09_04&quot;,
+    &quot;label&quot;: &quot;息肉样隆起&quot;
+  },
+  {
+    &quot;code&quot;: &quot;AX04_32&quot;,
+    &quot;label&quot;: &quot;腺管结构异常&quot;
+  },
+  {
+    &quot;code&quot;: &quot;AX10_08&quot;,
+    &quot;label&quot;: &quot;凹陷&quot;
+  },
+  {
+    &quot;code&quot;: &quot;AX10_05&quot;,
+    &quot;label&quot;: &quot;白苔&quot;
+  },
+  {
+    &quot;code&quot;: &quot;AX04_33&quot;,
+    &quot;label&quot;: &quot;微血管异常&quot;
+  },
+  {
+    &quot;code&quot;: &quot;AX08_07&quot;,
+    &quot;label&quot;: &quot;indigo染色病灶不染&quot;
+  },
+  {
+    &quot;code&quot;: &quot;AX04_19&quot;,
+    &quot;label&quot;: &quot;用12mhz超声探头探测见胃壁层次清楚，清晰显示凸向胃腔灶，黏膜层增厚、呈低回声，第三层表层部分模糊，病灶约2.0*0.5cm大小&quot;
+  },
+  {
+    &quot;code&quot;: &quot;AX10_15&quot;,
+    &quot;label&quot;: &quot;止血钳处理创面血管&quot;
+  }
+]</pre></div>
+<div class="layer"><h4>任务参数 task_payload</h4><pre>{
+  &quot;site&quot;: &quot;胃窦&quot;
+}</pre></div>
+<div class="layer"><h4>标签来源 provenance</h4><pre>{
+  &quot;label_source&quot;: &quot;report_findings&quot;,
+  &quot;site&quot;: &quot;胃窦&quot;,
+  &quot;frame_lesion_verified&quot;: false
+}</pre></div>
+<h4 style="margin:18px 0 8px">问法变体</h4>
+<table><tr><th>问法</th><th>题干</th><th>选项</th><th>答案</th></tr><tr><td><code>open_ended</code></td><td>以下是该患者胃窦的胃镜图像，请列出可见的异常发现。</td><td>—</td><td>[{&quot;code&quot;: &quot;AX04_02&quot;, &quot;label&quot;: &quot;白相为主&quot;}, {&quot;code&quot;: &quot;AX09_04&quot;, &quot;label&quot;: &quot;息肉样隆起&quot;}, {&quot;code&quot;: &quot;AX04_32&quot;, &quot;label&quot;: &quot;腺管结构异常&quot;}, {&quot;code&quot;: &quot;AX10_08&quot;, &quot;label&quot;: &quot;凹陷&quot;}, {&quot;code&quot;: &quot;AX10_05&quot;, &quot;label&quot;: &quot;白苔&quot;}, {&quot;code&quot;: &quot;AX04_33&quot;, &quot;label&quot;: &quot;微血管异常&quot;}, {&quot;code&quot;: &quot;AX08_07&quot;, &quot;label&quot;: &quot;indigo染色病灶不染&quot;}, {&quot;code&quot;: &quot;AX04_19&quot;, &quot;label&quot;: &quot;用12mhz超声探头探测见胃壁层次清楚，清晰显示凸向胃腔灶，黏膜层增厚、呈低回声，第三层表层部分模糊，病灶约2.0*0.5cm大小&quot;}, {&quot;code&quot;: &quot;AX10_15&quot;, &quot;label&quot;: &quot;止血钳处理创面血管&quot;}]</td></tr><tr><td><code>mcq</code></td><td>以下哪一项异常发现在该图像中可见？请选择唯一正确的选项。</td><td>A. 绒毛结构异常；B. 花斑样；C. 白色球状物；D. 治疗后疤痕/创面</td><td>&quot;D&quot;</td></tr><tr><td><code>select_all</code></td><td>以下哪些异常发现在该图像中可见？可能有多项正确，请选出全部成立的选项。</td><td>A. 穿孔；B. 舌状橘色黏膜上延；C. 黏膜肥厚/增生；D. 治疗后疤痕/创面</td><td>[&quot;C&quot;, &quot;D&quot;]</td></tr></table>
+<h4 style="margin:18px 0 8px">图像</h4>
+<div class="frames"><div class="frame"><img src="images/L2_7bd2fe0d_胃窦/F01.jpg" alt="F01" loading="lazy" decoding="async"><span><b>F01</b> · 胃窦 · white_light · 部位置信 0.99</span></div><div class="frame"><img src="images/L2_7bd2fe0d_胃窦/F02.jpg" alt="F02" loading="lazy" decoding="async"><span><b>F02</b> · 胃窦 · white_light · 部位置信 0.96</span></div><div class="frame"><img src="images/L2_7bd2fe0d_胃窦/F03.jpg" alt="F03" loading="lazy" decoding="async"><span><b>F03</b> · 胃窦 · white_light · 部位置信 0.89</span></div></div>
+</details><details class="case"><summary>L2_0a771257_胃角</summary>
+<p class="meta">检查号 <code>SCOPEV2_60b90a771257</code> · 划分 <code>val</code> · 输入档 <code>clean_matched</code> · 发布角色 <code>balanced</code> · 分层 <code>AX04_18</code> · 标签置信 <code>0.9999</code> · 标记 <code>frames_site_matched_only</code></p>
+<div class="layer"><h4>题干</h4><pre>以下是该患者胃角的胃镜图像，请列出可见的异常发现。</pre></div>
+<div class="layer"><h4>标准答案</h4><pre>[
+  {
+    &quot;code&quot;: &quot;AX04_18&quot;,
+    &quot;label&quot;: &quot;黏膜变薄&quot;
+  },
+  {
+    &quot;code&quot;: &quot;AX04_02&quot;,
+    &quot;label&quot;: &quot;白相为主&quot;
+  }
+]</pre></div>
+<div class="layer"><h4>任务参数 task_payload</h4><pre>{
+  &quot;site&quot;: &quot;胃角&quot;
+}</pre></div>
+<div class="layer"><h4>标签来源 provenance</h4><pre>{
+  &quot;label_source&quot;: &quot;report_findings&quot;,
+  &quot;site&quot;: &quot;胃角&quot;,
+  &quot;frame_lesion_verified&quot;: false
+}</pre></div>
+<h4 style="margin:18px 0 8px">问法变体</h4>
+<table><tr><th>问法</th><th>题干</th><th>选项</th><th>答案</th></tr><tr><td><code>open_ended</code></td><td>以下是该患者胃角的胃镜图像，请列出可见的异常发现。</td><td>—</td><td>[{&quot;code&quot;: &quot;AX04_18&quot;, &quot;label&quot;: &quot;黏膜变薄&quot;}, {&quot;code&quot;: &quot;AX04_02&quot;, &quot;label&quot;: &quot;白相为主&quot;}]</td></tr><tr><td><code>mcq</code></td><td>以下哪一项异常发现在该图像中可见？请选择唯一正确的选项。</td><td>A. 黏膜变薄；B. 口疮样/阿弗他；C. 瘀血</td><td>&quot;A&quot;</td></tr><tr><td><code>select_all</code></td><td>以下哪些异常发现在该图像中可见？可能有多项正确，请选出全部成立的选项。</td><td>A. 易出血；B. 白相为主；C. 边界不清；D. 黏膜变薄</td><td>[&quot;B&quot;, &quot;D&quot;]</td></tr></table>
+<h4 style="margin:18px 0 8px">图像</h4>
+<div class="frames"><div class="frame"><img src="images/L2_0a771257_胃角/F01.jpg" alt="F01" loading="lazy" decoding="async"><span><b>F01</b> · 胃角 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L2_0a771257_胃角/F02.jpg" alt="F02" loading="lazy" decoding="async"><span><b>F02</b> · 胃角 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L2_0a771257_胃角/F03.jpg" alt="F03" loading="lazy" decoding="async"><span><b>F03</b> · 胃角 · white_light · 部位置信 1.00</span></div></div>
+</details><details class="case"><summary>L2_432f9143_贲门</summary>
+<p class="meta">检查号 <code>SCOPEV2_8552432f9143</code> · 划分 <code>val</code> · 输入档 <code>clean_matched</code> · 发布角色 <code>balanced</code> · 分层 <code>AX04_39</code> · 标签置信 <code>0.9364</code> · 标记 <code>frames_site_matched_only</code></p>
+<div class="layer"><h4>题干</h4><pre>以下是该患者贲门的胃镜图像，请列出可见的异常发现。</pre></div>
+<div class="layer"><h4>标准答案</h4><pre>[
+  {
+    &quot;code&quot;: &quot;AX04_39&quot;,
+    &quot;label&quot;: &quot;齿状线模糊&quot;
+  }
+]</pre></div>
+<div class="layer"><h4>任务参数 task_payload</h4><pre>{
+  &quot;site&quot;: &quot;贲门&quot;
+}</pre></div>
+<div class="layer"><h4>标签来源 provenance</h4><pre>{
+  &quot;label_source&quot;: &quot;report_findings&quot;,
+  &quot;site&quot;: &quot;贲门&quot;,
+  &quot;frame_lesion_verified&quot;: false
+}</pre></div>
+<h4 style="margin:18px 0 8px">问法变体</h4>
+<table><tr><th>问法</th><th>题干</th><th>选项</th><th>答案</th></tr><tr><td><code>open_ended</code></td><td>以下是该患者贲门的胃镜图像，请列出可见的异常发现。</td><td>—</td><td>[{&quot;code&quot;: &quot;AX04_39&quot;, &quot;label&quot;: &quot;齿状线模糊&quot;}]</td></tr><tr><td><code>mcq</code></td><td>以下哪一项异常发现在该图像中可见？请选择唯一正确的选项。</td><td>A. 齿状线模糊；B. 地图状/马赛克样改变；C. 苍白/贫血样；D. 腺管结构异常</td><td>&quot;A&quot;</td></tr><tr><td><code>select_all</code></td><td>以下哪些异常发现在该图像中可见？可能有多项正确，请选出全部成立的选项。</td><td>A. 充血/发红；B. 齿状线模糊；C. 边界不清；D. 白色球状物</td><td>[&quot;B&quot;]</td></tr></table>
+<h4 style="margin:18px 0 8px">图像</h4>
+<div class="frames"><div class="frame"><img src="images/L2_432f9143_贲门/F01.jpg" alt="F01" loading="lazy" decoding="async"><span><b>F01</b> · 贲门 · white_light · 部位置信 0.99</span></div><div class="frame"><img src="images/L2_432f9143_贲门/F02.jpg" alt="F02" loading="lazy" decoding="async"><span><b>F02</b> · 贲门 · white_light · 部位置信 0.94</span></div><div class="frame"><img src="images/L2_432f9143_贲门/F03.jpg" alt="F03" loading="lazy" decoding="async"><span><b>F03</b> · 贲门 · white_light · 部位置信 0.94</span></div></div>
+</details><details class="case"><summary>L2_e7a18d1b_食管</summary>
+<p class="meta">检查号 <code>SCOPEV2_3bafe7a18d1b</code> · 划分 <code>test</code> · 输入档 <code>clean_matched</code> · 发布角色 <code>balanced</code> · 分层 <code>AX04_25</code> · 标签置信 <code>0.9993</code> · 标记 <code>frames_site_matched_only</code></p>
+<div class="layer"><h4>题干</h4><pre>以下是该患者食管的胃镜图像，请列出可见的异常发现。</pre></div>
+<div class="layer"><h4>标准答案</h4><pre>[
+  {
+    &quot;code&quot;: &quot;AX04_25&quot;,
+    &quot;label&quot;: &quot;白斑&quot;
+  }
+]</pre></div>
+<div class="layer"><h4>任务参数 task_payload</h4><pre>{
+  &quot;site&quot;: &quot;食管&quot;
+}</pre></div>
+<div class="layer"><h4>标签来源 provenance</h4><pre>{
+  &quot;label_source&quot;: &quot;report_findings&quot;,
+  &quot;site&quot;: &quot;食管&quot;,
+  &quot;frame_lesion_verified&quot;: false
+}</pre></div>
+<h4 style="margin:18px 0 8px">问法变体</h4>
+<table><tr><th>问法</th><th>题干</th><th>选项</th><th>答案</th></tr><tr><td><code>open_ended</code></td><td>以下是该患者食管的胃镜图像，请列出可见的异常发现。</td><td>—</td><td>[{&quot;code&quot;: &quot;AX04_25&quot;, &quot;label&quot;: &quot;白斑&quot;}]</td></tr><tr><td><code>mcq</code></td><td>以下哪一项异常发现在该图像中可见？请选择唯一正确的选项。</td><td>A. IPCL异常；B. 白斑；C. 质硬</td><td>&quot;B&quot;</td></tr><tr><td><code>select_all</code></td><td>以下哪些异常发现在该图像中可见？可能有多项正确，请选出全部成立的选项。</td><td>A. 易出血；B. 白斑；C. 黏膜变薄；D. 红斑</td><td>[&quot;B&quot;]</td></tr></table>
+<h4 style="margin:18px 0 8px">图像</h4>
+<div class="frames"><div class="frame"><img src="images/L2_e7a18d1b_食管/F01.jpg" alt="F01" loading="lazy" decoding="async"><span><b>F01</b> · 食管 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L2_e7a18d1b_食管/F02.jpg" alt="F02" loading="lazy" decoding="async"><span><b>F02</b> · 食管 · white_light · 部位置信 1.00</span></div></div>
+</details><h2>L2b 单发现有无 <code>L2b_finding_presence</code></h2><p class="meta">全库 721 条 · 按有无分层，抽 8 / 721 条，覆盖 2 / 2 个分层<br>帧数 1/3/3（最少/中位/最多） · 划分 test 120、train 495、val 106 · 输入档 clean_matched 721 · 问法 mcq 721、open_ended 721</p><details class="case"><summary>L2b_97591654_胃体_AX10_04</summary>
+<p class="meta">检查号 <code>SCOPEV2_4da397591654</code> · 划分 <code>val</code> · 输入档 <code>clean_matched</code> · 发布角色 <code>balanced</code> · 分层 <code>溃疡:False</code> · 标签置信 <code>1</code> · 标记 <code>frames_site_matched_only</code></p>
+<div class="layer"><h4>题干</h4><pre>以下是该患者胃体的胃镜图像，该部位是否可见溃疡？</pre></div>
+<div class="layer"><h4>标准答案</h4><pre>{
+  &quot;finding&quot;: &quot;溃疡&quot;,
+  &quot;code&quot;: &quot;AX10_04&quot;,
+  &quot;present&quot;: false
+}</pre></div>
+<div class="layer"><h4>任务参数 task_payload</h4><pre>{
+  &quot;site&quot;: &quot;胃体&quot;,
+  &quot;finding_code&quot;: &quot;AX10_04&quot;
+}</pre></div>
+<div class="layer"><h4>标签来源 provenance</h4><pre>{
+  &quot;label_source&quot;: &quot;report_findings&quot;,
+  &quot;negative_from_explicit_negation&quot;: true
+}</pre></div>
+<h4 style="margin:18px 0 8px">问法变体</h4>
+<table><tr><th>问法</th><th>题干</th><th>选项</th><th>答案</th></tr><tr><td><code>open_ended</code></td><td>以下是该患者胃体的胃镜图像，该部位是否可见溃疡？</td><td>—</td><td>{&quot;finding&quot;: &quot;溃疡&quot;, &quot;code&quot;: &quot;AX10_04&quot;, &quot;present&quot;: false}</td></tr><tr><td><code>mcq</code></td><td>该部位是否可见溃疡？请选择唯一正确的选项。</td><td>A. 可见；B. 未见</td><td>&quot;B&quot;</td></tr></table>
+<h4 style="margin:18px 0 8px">图像</h4>
+<div class="frames"><div class="frame"><img src="images/L2b_97591654_胃体_AX10_04/F01.jpg" alt="F01" loading="lazy" decoding="async"><span><b>F01</b> · 胃体 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L2b_97591654_胃体_AX10_04/F02.jpg" alt="F02" loading="lazy" decoding="async"><span><b>F02</b> · 胃体 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L2b_97591654_胃体_AX10_04/F03.jpg" alt="F03" loading="lazy" decoding="async"><span><b>F03</b> · 胃体 · white_light · 部位置信 1.00</span></div></div>
+</details><details class="case"><summary>L2b_616644c2_十二指肠_AX10_04</summary>
+<p class="meta">检查号 <code>SCOPEV2_4be5616644c2</code> · 划分 <code>val</code> · 输入档 <code>clean_matched</code> · 发布角色 <code>balanced</code> · 分层 <code>溃疡:False</code> · 标签置信 <code>1</code> · 标记 <code>frames_site_matched_only</code></p>
+<div class="layer"><h4>题干</h4><pre>以下是该患者十二指肠的胃镜图像，该部位是否可见溃疡？</pre></div>
+<div class="layer"><h4>标准答案</h4><pre>{
+  &quot;finding&quot;: &quot;溃疡&quot;,
+  &quot;code&quot;: &quot;AX10_04&quot;,
+  &quot;present&quot;: false
+}</pre></div>
+<div class="layer"><h4>任务参数 task_payload</h4><pre>{
+  &quot;site&quot;: &quot;十二指肠&quot;,
+  &quot;finding_code&quot;: &quot;AX10_04&quot;
+}</pre></div>
+<div class="layer"><h4>标签来源 provenance</h4><pre>{
+  &quot;label_source&quot;: &quot;report_findings&quot;,
+  &quot;negative_from_explicit_negation&quot;: true
+}</pre></div>
+<h4 style="margin:18px 0 8px">问法变体</h4>
+<table><tr><th>问法</th><th>题干</th><th>选项</th><th>答案</th></tr><tr><td><code>open_ended</code></td><td>以下是该患者十二指肠的胃镜图像，该部位是否可见溃疡？</td><td>—</td><td>{&quot;finding&quot;: &quot;溃疡&quot;, &quot;code&quot;: &quot;AX10_04&quot;, &quot;present&quot;: false}</td></tr><tr><td><code>mcq</code></td><td>该部位是否可见溃疡？请选择唯一正确的选项。</td><td>A. 可见；B. 未见</td><td>&quot;B&quot;</td></tr></table>
+<h4 style="margin:18px 0 8px">图像</h4>
+<div class="frames"><div class="frame"><img src="images/L2b_616644c2_十二指肠_AX10_04/F01.jpg" alt="F01" loading="lazy" decoding="async"><span><b>F01</b> · 十二指肠 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L2b_616644c2_十二指肠_AX10_04/F02.jpg" alt="F02" loading="lazy" decoding="async"><span><b>F02</b> · 十二指肠 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L2b_616644c2_十二指肠_AX10_04/F03.jpg" alt="F03" loading="lazy" decoding="async"><span><b>F03</b> · 十二指肠 · white_light · 部位置信 1.00</span></div></div>
+</details><details class="case"><summary>L2b_585427b8_胃体_AX10_04</summary>
+<p class="meta">检查号 <code>SCOPEV2_4d1f585427b8</code> · 划分 <code>test</code> · 输入档 <code>clean_matched</code> · 发布角色 <code>balanced</code> · 分层 <code>溃疡:False</code> · 标签置信 <code>1</code> · 标记 <code>frames_site_matched_only</code></p>
+<div class="layer"><h4>题干</h4><pre>以下是该患者胃体的胃镜图像，该部位是否可见溃疡？</pre></div>
+<div class="layer"><h4>标准答案</h4><pre>{
+  &quot;finding&quot;: &quot;溃疡&quot;,
+  &quot;code&quot;: &quot;AX10_04&quot;,
+  &quot;present&quot;: false
+}</pre></div>
+<div class="layer"><h4>任务参数 task_payload</h4><pre>{
+  &quot;site&quot;: &quot;胃体&quot;,
+  &quot;finding_code&quot;: &quot;AX10_04&quot;
+}</pre></div>
+<div class="layer"><h4>标签来源 provenance</h4><pre>{
+  &quot;label_source&quot;: &quot;report_findings&quot;,
+  &quot;negative_from_explicit_negation&quot;: true
+}</pre></div>
+<h4 style="margin:18px 0 8px">问法变体</h4>
+<table><tr><th>问法</th><th>题干</th><th>选项</th><th>答案</th></tr><tr><td><code>open_ended</code></td><td>以下是该患者胃体的胃镜图像，该部位是否可见溃疡？</td><td>—</td><td>{&quot;finding&quot;: &quot;溃疡&quot;, &quot;code&quot;: &quot;AX10_04&quot;, &quot;present&quot;: false}</td></tr><tr><td><code>mcq</code></td><td>该部位是否可见溃疡？请选择唯一正确的选项。</td><td>A. 未见；B. 可见</td><td>&quot;A&quot;</td></tr></table>
+<h4 style="margin:18px 0 8px">图像</h4>
+<div class="frames"><div class="frame"><img src="images/L2b_585427b8_胃体_AX10_04/F01.jpg" alt="F01" loading="lazy" decoding="async"><span><b>F01</b> · 胃体 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L2b_585427b8_胃体_AX10_04/F02.jpg" alt="F02" loading="lazy" decoding="async"><span><b>F02</b> · 胃体 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L2b_585427b8_胃体_AX10_04/F03.jpg" alt="F03" loading="lazy" decoding="async"><span><b>F03</b> · 胃体 · white_light · 部位置信 1.00</span></div></div>
+</details><details class="case"><summary>L2b_62d507dc_十二指肠_AX10_04</summary>
+<p class="meta">检查号 <code>SCOPEV2_04f762d507dc</code> · 划分 <code>train</code> · 输入档 <code>clean_matched</code> · 发布角色 <code>balanced</code> · 分层 <code>溃疡:False</code> · 标签置信 <code>1</code> · 标记 <code>frames_site_matched_only</code></p>
+<div class="layer"><h4>题干</h4><pre>以下是该患者十二指肠的胃镜图像，该部位是否可见溃疡？</pre></div>
+<div class="layer"><h4>标准答案</h4><pre>{
+  &quot;finding&quot;: &quot;溃疡&quot;,
+  &quot;code&quot;: &quot;AX10_04&quot;,
+  &quot;present&quot;: false
+}</pre></div>
+<div class="layer"><h4>任务参数 task_payload</h4><pre>{
+  &quot;site&quot;: &quot;十二指肠&quot;,
+  &quot;finding_code&quot;: &quot;AX10_04&quot;
+}</pre></div>
+<div class="layer"><h4>标签来源 provenance</h4><pre>{
+  &quot;label_source&quot;: &quot;report_findings&quot;,
+  &quot;negative_from_explicit_negation&quot;: true
+}</pre></div>
+<h4 style="margin:18px 0 8px">问法变体</h4>
+<table><tr><th>问法</th><th>题干</th><th>选项</th><th>答案</th></tr><tr><td><code>open_ended</code></td><td>以下是该患者十二指肠的胃镜图像，该部位是否可见溃疡？</td><td>—</td><td>{&quot;finding&quot;: &quot;溃疡&quot;, &quot;code&quot;: &quot;AX10_04&quot;, &quot;present&quot;: false}</td></tr><tr><td><code>mcq</code></td><td>该部位是否可见溃疡？请选择唯一正确的选项。</td><td>A. 未见；B. 可见</td><td>&quot;A&quot;</td></tr></table>
+<h4 style="margin:18px 0 8px">图像</h4>
+<div class="frames"><div class="frame"><img src="images/L2b_62d507dc_十二指肠_AX10_04/F01.jpg" alt="F01" loading="lazy" decoding="async"><span><b>F01</b> · 十二指肠 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L2b_62d507dc_十二指肠_AX10_04/F02.jpg" alt="F02" loading="lazy" decoding="async"><span><b>F02</b> · 十二指肠 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L2b_62d507dc_十二指肠_AX10_04/F03.jpg" alt="F03" loading="lazy" decoding="async"><span><b>F03</b> · 十二指肠 · white_light · 部位置信 1.00</span></div></div>
+</details><details class="case"><summary>L2b_f5aae836_胃体_AX06_01</summary>
+<p class="meta">检查号 <code>SCOPEV2_7f96f5aae836</code> · 划分 <code>train</code> · 输入档 <code>clean_matched</code> · 发布角色 <code>balanced</code> · 分层 <code>活动性出血点:True</code> · 标签置信 <code>0.9997</code> · 标记 <code>frames_site_matched_only</code></p>
+<div class="layer"><h4>题干</h4><pre>以下是该患者胃体的胃镜图像，该部位是否可见活动性出血点？</pre></div>
+<div class="layer"><h4>标准答案</h4><pre>{
+  &quot;finding&quot;: &quot;活动性出血点&quot;,
+  &quot;code&quot;: &quot;AX06_01&quot;,
+  &quot;present&quot;: true
+}</pre></div>
+<div class="layer"><h4>任务参数 task_payload</h4><pre>{
+  &quot;site&quot;: &quot;胃体&quot;,
+  &quot;finding_code&quot;: &quot;AX06_01&quot;
+}</pre></div>
+<div class="layer"><h4>标签来源 provenance</h4><pre>{
+  &quot;label_source&quot;: &quot;report_findings&quot;,
+  &quot;negative_from_explicit_negation&quot;: false
+}</pre></div>
+<h4 style="margin:18px 0 8px">问法变体</h4>
+<table><tr><th>问法</th><th>题干</th><th>选项</th><th>答案</th></tr><tr><td><code>open_ended</code></td><td>以下是该患者胃体的胃镜图像，该部位是否可见活动性出血点？</td><td>—</td><td>{&quot;finding&quot;: &quot;活动性出血点&quot;, &quot;code&quot;: &quot;AX06_01&quot;, &quot;present&quot;: true}</td></tr><tr><td><code>mcq</code></td><td>该部位是否可见活动性出血点？请选择唯一正确的选项。</td><td>A. 可见；B. 未见</td><td>&quot;A&quot;</td></tr></table>
+<h4 style="margin:18px 0 8px">图像</h4>
+<div class="frames"><div class="frame"><img src="images/L2b_f5aae836_胃体_AX06_01/F01.jpg" alt="F01" loading="lazy" decoding="async"><span><b>F01</b> · 胃体 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L2b_f5aae836_胃体_AX06_01/F02.jpg" alt="F02" loading="lazy" decoding="async"><span><b>F02</b> · 胃体 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L2b_f5aae836_胃体_AX06_01/F03.jpg" alt="F03" loading="lazy" decoding="async"><span><b>F03</b> · 胃体 · white_light · 部位置信 1.00</span></div></div>
+</details><details class="case"><summary>L2b_f1b36df1_十二指肠_AX10_04</summary>
+<p class="meta">检查号 <code>SCOPEV2_8970f1b36df1</code> · 划分 <code>train</code> · 输入档 <code>clean_matched</code> · 发布角色 <code>balanced</code> · 分层 <code>溃疡:True</code> · 标签置信 <code>1</code> · 标记 <code>frames_site_matched_only</code></p>
+<div class="layer"><h4>题干</h4><pre>以下是该患者十二指肠的胃镜图像，该部位是否可见溃疡？</pre></div>
+<div class="layer"><h4>标准答案</h4><pre>{
+  &quot;finding&quot;: &quot;溃疡&quot;,
+  &quot;code&quot;: &quot;AX10_04&quot;,
+  &quot;present&quot;: true
+}</pre></div>
+<div class="layer"><h4>任务参数 task_payload</h4><pre>{
+  &quot;site&quot;: &quot;十二指肠&quot;,
+  &quot;finding_code&quot;: &quot;AX10_04&quot;
+}</pre></div>
+<div class="layer"><h4>标签来源 provenance</h4><pre>{
+  &quot;label_source&quot;: &quot;report_findings&quot;,
+  &quot;negative_from_explicit_negation&quot;: false
+}</pre></div>
+<h4 style="margin:18px 0 8px">问法变体</h4>
+<table><tr><th>问法</th><th>题干</th><th>选项</th><th>答案</th></tr><tr><td><code>open_ended</code></td><td>以下是该患者十二指肠的胃镜图像，该部位是否可见溃疡？</td><td>—</td><td>{&quot;finding&quot;: &quot;溃疡&quot;, &quot;code&quot;: &quot;AX10_04&quot;, &quot;present&quot;: true}</td></tr><tr><td><code>mcq</code></td><td>该部位是否可见溃疡？请选择唯一正确的选项。</td><td>A. 未见；B. 可见</td><td>&quot;B&quot;</td></tr></table>
+<h4 style="margin:18px 0 8px">图像</h4>
+<div class="frames"><div class="frame"><img src="images/L2b_f1b36df1_十二指肠_AX10_04/F01.jpg" alt="F01" loading="lazy" decoding="async"><span><b>F01</b> · 十二指肠 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L2b_f1b36df1_十二指肠_AX10_04/F02.jpg" alt="F02" loading="lazy" decoding="async"><span><b>F02</b> · 十二指肠 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L2b_f1b36df1_十二指肠_AX10_04/F03.jpg" alt="F03" loading="lazy" decoding="async"><span><b>F03</b> · 十二指肠 · white_light · 部位置信 1.00</span></div></div>
+</details><details class="case"><summary>L2b_93340a04_胃角_AX06_01</summary>
+<p class="meta">检查号 <code>SCOPEV2_d48793340a04</code> · 划分 <code>train</code> · 输入档 <code>clean_matched</code> · 发布角色 <code>balanced</code> · 分层 <code>活动性出血点:True</code> · 标签置信 <code>0.9262</code> · 标记 <code>frames_site_matched_only</code></p>
+<div class="layer"><h4>题干</h4><pre>以下是该患者胃角的胃镜图像，该部位是否可见活动性出血点？</pre></div>
+<div class="layer"><h4>标准答案</h4><pre>{
+  &quot;finding&quot;: &quot;活动性出血点&quot;,
+  &quot;code&quot;: &quot;AX06_01&quot;,
+  &quot;present&quot;: true
+}</pre></div>
+<div class="layer"><h4>任务参数 task_payload</h4><pre>{
+  &quot;site&quot;: &quot;胃角&quot;,
+  &quot;finding_code&quot;: &quot;AX06_01&quot;
+}</pre></div>
+<div class="layer"><h4>标签来源 provenance</h4><pre>{
+  &quot;label_source&quot;: &quot;report_findings&quot;,
+  &quot;negative_from_explicit_negation&quot;: false
+}</pre></div>
+<h4 style="margin:18px 0 8px">问法变体</h4>
+<table><tr><th>问法</th><th>题干</th><th>选项</th><th>答案</th></tr><tr><td><code>open_ended</code></td><td>以下是该患者胃角的胃镜图像，该部位是否可见活动性出血点？</td><td>—</td><td>{&quot;finding&quot;: &quot;活动性出血点&quot;, &quot;code&quot;: &quot;AX06_01&quot;, &quot;present&quot;: true}</td></tr><tr><td><code>mcq</code></td><td>该部位是否可见活动性出血点？请选择唯一正确的选项。</td><td>A. 可见；B. 未见</td><td>&quot;A&quot;</td></tr></table>
+<h4 style="margin:18px 0 8px">图像</h4>
+<div class="frames"><div class="frame"><img src="images/L2b_93340a04_胃角_AX06_01/F01.jpg" alt="F01" loading="lazy" decoding="async"><span><b>F01</b> · 胃角 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L2b_93340a04_胃角_AX06_01/F02.jpg" alt="F02" loading="lazy" decoding="async"><span><b>F02</b> · 胃角 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L2b_93340a04_胃角_AX06_01/F03.jpg" alt="F03" loading="lazy" decoding="async"><span><b>F03</b> · 胃角 · white_light · 部位置信 0.93</span></div></div>
+</details><details class="case"><summary>L2b_fb9182cf_胃窦_AX06_01</summary>
+<p class="meta">检查号 <code>SCOPEV2_7c17fb9182cf</code> · 划分 <code>train</code> · 输入档 <code>clean_matched</code> · 发布角色 <code>balanced</code> · 分层 <code>活动性出血点:True</code> · 标签置信 <code>0.9557</code> · 标记 <code>frames_site_matched_only</code></p>
+<div class="layer"><h4>题干</h4><pre>以下是该患者胃窦的胃镜图像，该部位是否可见活动性出血点？</pre></div>
+<div class="layer"><h4>标准答案</h4><pre>{
+  &quot;finding&quot;: &quot;活动性出血点&quot;,
+  &quot;code&quot;: &quot;AX06_01&quot;,
+  &quot;present&quot;: true
+}</pre></div>
+<div class="layer"><h4>任务参数 task_payload</h4><pre>{
+  &quot;site&quot;: &quot;胃窦&quot;,
+  &quot;finding_code&quot;: &quot;AX06_01&quot;
+}</pre></div>
+<div class="layer"><h4>标签来源 provenance</h4><pre>{
+  &quot;label_source&quot;: &quot;report_findings&quot;,
+  &quot;negative_from_explicit_negation&quot;: false
+}</pre></div>
+<h4 style="margin:18px 0 8px">问法变体</h4>
+<table><tr><th>问法</th><th>题干</th><th>选项</th><th>答案</th></tr><tr><td><code>open_ended</code></td><td>以下是该患者胃窦的胃镜图像，该部位是否可见活动性出血点？</td><td>—</td><td>{&quot;finding&quot;: &quot;活动性出血点&quot;, &quot;code&quot;: &quot;AX06_01&quot;, &quot;present&quot;: true}</td></tr><tr><td><code>mcq</code></td><td>该部位是否可见活动性出血点？请选择唯一正确的选项。</td><td>A. 可见；B. 未见</td><td>&quot;A&quot;</td></tr></table>
+<h4 style="margin:18px 0 8px">图像</h4>
+<div class="frames"><div class="frame"><img src="images/L2b_fb9182cf_胃窦_AX06_01/F01.jpg" alt="F01" loading="lazy" decoding="async"><span><b>F01</b> · 胃窦 · white_light · 部位置信 0.97</span></div><div class="frame"><img src="images/L2b_fb9182cf_胃窦_AX06_01/F02.jpg" alt="F02" loading="lazy" decoding="async"><span><b>F02</b> · 胃窦 · white_light · 部位置信 0.96</span></div></div>
+</details><h2>L2b 部位是否正常 <code>L2b_normal_state</code></h2><p class="meta">全库 3600 条 · 按是否正常分层，抽 8 / 3600 条，覆盖 2 / 2 个分层<br>帧数 1/3/3（最少/中位/最多） · 划分 test 1200、train 1200、val 1200 · 输入档 clean_matched 3600 · 问法 mcq 3600、open_ended 3600</p><details class="case"><summary>L2b_ded56118_食管</summary>
+<p class="meta">检查号 <code>SCOPEV2_c7d9ded56118</code> · 划分 <code>test</code> · 输入档 <code>clean_matched</code> · 发布角色 <code>balanced</code> · 分层 <code>normal:False</code> · 标签置信 <code>1</code> · 标记 <code>frames_site_matched_only</code></p>
+<div class="layer"><h4>题干</h4><pre>以下是该患者食管的胃镜图像，该部位黏膜是否正常？</pre></div>
+<div class="layer"><h4>标准答案</h4><pre>{
+  &quot;is_normal&quot;: false
+}</pre></div>
+<div class="layer"><h4>任务参数 task_payload</h4><pre>{
+  &quot;site&quot;: &quot;食管&quot;
+}</pre></div>
+<div class="layer"><h4>标签来源 provenance</h4><pre>{
+  &quot;label_source&quot;: &quot;report_findings&quot;,
+  &quot;normal_evidence_codes&quot;: [
+    &quot;AX04_09&quot;,
+    &quot;AX01_12&quot;
+  ],
+  &quot;abnormal_codes&quot;: [
+    &quot;AX09_08&quot;,
+    &quot;AX99_02&quot;
+  ]
+}</pre></div>
+<h4 style="margin:18px 0 8px">问法变体</h4>
+<table><tr><th>问法</th><th>题干</th><th>选项</th><th>答案</th></tr><tr><td><code>open_ended</code></td><td>以下是该患者食管的胃镜图像，该部位黏膜是否正常？</td><td>—</td><td>{&quot;is_normal&quot;: false}</td></tr><tr><td><code>mcq</code></td><td>该部位黏膜是否正常？请选择唯一正确的选项。</td><td>A. 异常；B. 正常</td><td>&quot;A&quot;</td></tr></table>
+<h4 style="margin:18px 0 8px">图像</h4>
+<div class="frames"><div class="frame"><img src="images/L2b_ded56118_食管/F01.jpg" alt="F01" loading="lazy" decoding="async"><span><b>F01</b> · 食管 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L2b_ded56118_食管/F02.jpg" alt="F02" loading="lazy" decoding="async"><span><b>F02</b> · 食管 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L2b_ded56118_食管/F03.jpg" alt="F03" loading="lazy" decoding="async"><span><b>F03</b> · 食管 · white_light · 部位置信 1.00</span></div></div>
+</details><details class="case"><summary>L2b_a8c235f7_胃角</summary>
+<p class="meta">检查号 <code>SCOPEV2_cc5ea8c235f7</code> · 划分 <code>test</code> · 输入档 <code>clean_matched</code> · 发布角色 <code>balanced</code> · 分层 <code>normal:False</code> · 标签置信 <code>1</code> · 标记 <code>frames_site_matched_only</code></p>
+<div class="layer"><h4>题干</h4><pre>以下是该患者胃角的胃镜图像，该部位黏膜是否正常？</pre></div>
+<div class="layer"><h4>标准答案</h4><pre>{
+  &quot;is_normal&quot;: false
+}</pre></div>
+<div class="layer"><h4>任务参数 task_payload</h4><pre>{
+  &quot;site&quot;: &quot;胃角&quot;
+}</pre></div>
+<div class="layer"><h4>标签来源 provenance</h4><pre>{
+  &quot;label_source&quot;: &quot;report_findings&quot;,
+  &quot;normal_evidence_codes&quot;: [
+    &quot;AX01_15&quot;
+  ],
+  &quot;abnormal_codes&quot;: [
+    &quot;AX04_04&quot;
+  ]
+}</pre></div>
+<h4 style="margin:18px 0 8px">问法变体</h4>
+<table><tr><th>问法</th><th>题干</th><th>选项</th><th>答案</th></tr><tr><td><code>open_ended</code></td><td>以下是该患者胃角的胃镜图像，该部位黏膜是否正常？</td><td>—</td><td>{&quot;is_normal&quot;: false}</td></tr><tr><td><code>mcq</code></td><td>该部位黏膜是否正常？请选择唯一正确的选项。</td><td>A. 正常；B. 异常</td><td>&quot;B&quot;</td></tr></table>
+<h4 style="margin:18px 0 8px">图像</h4>
+<div class="frames"><div class="frame"><img src="images/L2b_a8c235f7_胃角/F01.jpg" alt="F01" loading="lazy" decoding="async"><span><b>F01</b> · 胃角 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L2b_a8c235f7_胃角/F02.jpg" alt="F02" loading="lazy" decoding="async"><span><b>F02</b> · 胃角 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L2b_a8c235f7_胃角/F03.jpg" alt="F03" loading="lazy" decoding="async"><span><b>F03</b> · 胃角 · white_light · 部位置信 1.00</span></div></div>
+</details><details class="case"><summary>L2b_0c22eb8e_胃体</summary>
+<p class="meta">检查号 <code>SCOPEV2_0cda0c22eb8e</code> · 划分 <code>test</code> · 输入档 <code>clean_matched</code> · 发布角色 <code>balanced</code> · 分层 <code>normal:False</code> · 标签置信 <code>1</code> · 标记 <code>frames_site_matched_only</code></p>
+<div class="layer"><h4>题干</h4><pre>以下是该患者胃体的胃镜图像，该部位黏膜是否正常？</pre></div>
+<div class="layer"><h4>标准答案</h4><pre>{
+  &quot;is_normal&quot;: false
+}</pre></div>
+<div class="layer"><h4>任务参数 task_payload</h4><pre>{
+  &quot;site&quot;: &quot;胃体&quot;
+}</pre></div>
+<div class="layer"><h4>标签来源 provenance</h4><pre>{
+  &quot;label_source&quot;: &quot;report_findings&quot;,
+  &quot;normal_evidence_codes&quot;: [],
+  &quot;abnormal_codes&quot;: [
+    &quot;AX04_04&quot;,
+    &quot;AX04_42&quot;,
+    &quot;AX04_22&quot;,
+    &quot;AX06_06&quot;
+  ]
+}</pre></div>
+<h4 style="margin:18px 0 8px">问法变体</h4>
+<table><tr><th>问法</th><th>题干</th><th>选项</th><th>答案</th></tr><tr><td><code>open_ended</code></td><td>以下是该患者胃体的胃镜图像，该部位黏膜是否正常？</td><td>—</td><td>{&quot;is_normal&quot;: false}</td></tr><tr><td><code>mcq</code></td><td>该部位黏膜是否正常？请选择唯一正确的选项。</td><td>A. 正常；B. 异常</td><td>&quot;B&quot;</td></tr></table>
+<h4 style="margin:18px 0 8px">图像</h4>
+<div class="frames"><div class="frame"><img src="images/L2b_0c22eb8e_胃体/F01.jpg" alt="F01" loading="lazy" decoding="async"><span><b>F01</b> · 胃体 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L2b_0c22eb8e_胃体/F02.jpg" alt="F02" loading="lazy" decoding="async"><span><b>F02</b> · 胃体 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L2b_0c22eb8e_胃体/F03.jpg" alt="F03" loading="lazy" decoding="async"><span><b>F03</b> · 胃体 · white_light · 部位置信 1.00</span></div></div>
+</details><details class="case"><summary>L2b_636edc9e_胃体</summary>
+<p class="meta">检查号 <code>SCOPEV2_db25636edc9e</code> · 划分 <code>test</code> · 输入档 <code>clean_matched</code> · 发布角色 <code>balanced</code> · 分层 <code>normal:False</code> · 标签置信 <code>1</code> · 标记 <code>frames_site_matched_only</code></p>
+<div class="layer"><h4>题干</h4><pre>以下是该患者胃体的胃镜图像，该部位黏膜是否正常？</pre></div>
+<div class="layer"><h4>标准答案</h4><pre>{
+  &quot;is_normal&quot;: false
+}</pre></div>
+<div class="layer"><h4>任务参数 task_payload</h4><pre>{
+  &quot;site&quot;: &quot;胃体&quot;
+}</pre></div>
+<div class="layer"><h4>标签来源 provenance</h4><pre>{
+  &quot;label_source&quot;: &quot;report_findings&quot;,
+  &quot;normal_evidence_codes&quot;: [
+    &quot;AX04_09&quot;,
+    &quot;AX04_01&quot;,
+    &quot;AX03_01&quot;
+  ],
+  &quot;abnormal_codes&quot;: [
+    &quot;AX09_04&quot;
+  ]
+}</pre></div>
+<h4 style="margin:18px 0 8px">问法变体</h4>
+<table><tr><th>问法</th><th>题干</th><th>选项</th><th>答案</th></tr><tr><td><code>open_ended</code></td><td>以下是该患者胃体的胃镜图像，该部位黏膜是否正常？</td><td>—</td><td>{&quot;is_normal&quot;: false}</td></tr><tr><td><code>mcq</code></td><td>该部位黏膜是否正常？请选择唯一正确的选项。</td><td>A. 异常；B. 正常</td><td>&quot;A&quot;</td></tr></table>
+<h4 style="margin:18px 0 8px">图像</h4>
+<div class="frames"><div class="frame"><img src="images/L2b_636edc9e_胃体/F01.jpg" alt="F01" loading="lazy" decoding="async"><span><b>F01</b> · 胃体 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L2b_636edc9e_胃体/F02.jpg" alt="F02" loading="lazy" decoding="async"><span><b>F02</b> · 胃体 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L2b_636edc9e_胃体/F03.jpg" alt="F03" loading="lazy" decoding="async"><span><b>F03</b> · 胃体 · white_light · 部位置信 1.00</span></div></div>
+</details><details class="case"><summary>L2b_a26b07df_胃角</summary>
+<p class="meta">检查号 <code>SCOPEV2_fc70a26b07df</code> · 划分 <code>train</code> · 输入档 <code>clean_matched</code> · 发布角色 <code>balanced</code> · 分层 <code>normal:True</code> · 标签置信 <code>1</code> · 标记 <code>frames_site_matched_only</code></p>
+<div class="layer"><h4>题干</h4><pre>以下是该患者胃角的胃镜图像，该部位黏膜是否正常？</pre></div>
+<div class="layer"><h4>标准答案</h4><pre>{
+  &quot;is_normal&quot;: true
+}</pre></div>
+<div class="layer"><h4>任务参数 task_payload</h4><pre>{
+  &quot;site&quot;: &quot;胃角&quot;
+}</pre></div>
+<div class="layer"><h4>标签来源 provenance</h4><pre>{
+  &quot;label_source&quot;: &quot;report_findings&quot;,
+  &quot;normal_evidence_codes&quot;: [
+    &quot;AX01_15&quot;,
+    &quot;AX03_03&quot;
+  ],
+  &quot;abnormal_codes&quot;: []
+}</pre></div>
+<h4 style="margin:18px 0 8px">问法变体</h4>
+<table><tr><th>问法</th><th>题干</th><th>选项</th><th>答案</th></tr><tr><td><code>open_ended</code></td><td>以下是该患者胃角的胃镜图像，该部位黏膜是否正常？</td><td>—</td><td>{&quot;is_normal&quot;: true}</td></tr><tr><td><code>mcq</code></td><td>该部位黏膜是否正常？请选择唯一正确的选项。</td><td>A. 正常；B. 异常</td><td>&quot;A&quot;</td></tr></table>
+<h4 style="margin:18px 0 8px">图像</h4>
+<div class="frames"><div class="frame"><img src="images/L2b_a26b07df_胃角/F01.jpg" alt="F01" loading="lazy" decoding="async"><span><b>F01</b> · 胃角 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L2b_a26b07df_胃角/F02.jpg" alt="F02" loading="lazy" decoding="async"><span><b>F02</b> · 胃角 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L2b_a26b07df_胃角/F03.jpg" alt="F03" loading="lazy" decoding="async"><span><b>F03</b> · 胃角 · white_light · 部位置信 1.00</span></div></div>
+</details><details class="case"><summary>L2b_24eb7686_食管</summary>
+<p class="meta">检查号 <code>SCOPEV2_bfd524eb7686</code> · 划分 <code>test</code> · 输入档 <code>clean_matched</code> · 发布角色 <code>balanced</code> · 分层 <code>normal:True</code> · 标签置信 <code>1</code> · 标记 <code>frames_site_matched_only</code></p>
+<div class="layer"><h4>题干</h4><pre>以下是该患者食管的胃镜图像，该部位黏膜是否正常？</pre></div>
+<div class="layer"><h4>标准答案</h4><pre>{
+  &quot;is_normal&quot;: true
+}</pre></div>
+<div class="layer"><h4>任务参数 task_payload</h4><pre>{
+  &quot;site&quot;: &quot;食管&quot;
+}</pre></div>
+<div class="layer"><h4>标签来源 provenance</h4><pre>{
+  &quot;label_source&quot;: &quot;report_findings&quot;,
+  &quot;normal_evidence_codes&quot;: [
+    &quot;AX01_01&quot;
+  ],
+  &quot;abnormal_codes&quot;: []
+}</pre></div>
+<h4 style="margin:18px 0 8px">问法变体</h4>
+<table><tr><th>问法</th><th>题干</th><th>选项</th><th>答案</th></tr><tr><td><code>open_ended</code></td><td>以下是该患者食管的胃镜图像，该部位黏膜是否正常？</td><td>—</td><td>{&quot;is_normal&quot;: true}</td></tr><tr><td><code>mcq</code></td><td>该部位黏膜是否正常？请选择唯一正确的选项。</td><td>A. 异常；B. 正常</td><td>&quot;B&quot;</td></tr></table>
+<h4 style="margin:18px 0 8px">图像</h4>
+<div class="frames"><div class="frame"><img src="images/L2b_24eb7686_食管/F01.jpg" alt="F01" loading="lazy" decoding="async"><span><b>F01</b> · 食管 · white_light · 部位置信 1.00</span></div></div>
+</details><details class="case"><summary>L2b_4a0180b1_幽门</summary>
+<p class="meta">检查号 <code>SCOPEV2_7a7e4a0180b1</code> · 划分 <code>val</code> · 输入档 <code>clean_matched</code> · 发布角色 <code>balanced</code> · 分层 <code>normal:True</code> · 标签置信 <code>0.9999</code> · 标记 <code>frames_site_matched_only</code></p>
+<div class="layer"><h4>题干</h4><pre>以下是该患者幽门的胃镜图像，该部位黏膜是否正常？</pre></div>
+<div class="layer"><h4>标准答案</h4><pre>{
+  &quot;is_normal&quot;: true
+}</pre></div>
+<div class="layer"><h4>任务参数 task_payload</h4><pre>{
+  &quot;site&quot;: &quot;幽门&quot;
+}</pre></div>
+<div class="layer"><h4>标签来源 provenance</h4><pre>{
+  &quot;label_source&quot;: &quot;report_findings&quot;,
+  &quot;normal_evidence_codes&quot;: [
+    &quot;AX01_14&quot;,
+    &quot;AX01_12&quot;,
+    &quot;AX05_01&quot;,
+    &quot;AX04_01&quot;
+  ],
+  &quot;abnormal_codes&quot;: []
+}</pre></div>
+<h4 style="margin:18px 0 8px">问法变体</h4>
+<table><tr><th>问法</th><th>题干</th><th>选项</th><th>答案</th></tr><tr><td><code>open_ended</code></td><td>以下是该患者幽门的胃镜图像，该部位黏膜是否正常？</td><td>—</td><td>{&quot;is_normal&quot;: true}</td></tr><tr><td><code>mcq</code></td><td>该部位黏膜是否正常？请选择唯一正确的选项。</td><td>A. 异常；B. 正常</td><td>&quot;B&quot;</td></tr></table>
+<h4 style="margin:18px 0 8px">图像</h4>
+<div class="frames"><div class="frame"><img src="images/L2b_4a0180b1_幽门/F01.jpg" alt="F01" loading="lazy" decoding="async"><span><b>F01</b> · 幽门 · white_light · 部位置信 1.00</span></div></div>
+</details><details class="case"><summary>L2b_a46bd1fe_胃角</summary>
+<p class="meta">检查号 <code>SCOPEV2_fd0ea46bd1fe</code> · 划分 <code>train</code> · 输入档 <code>clean_matched</code> · 发布角色 <code>balanced</code> · 分层 <code>normal:True</code> · 标签置信 <code>1</code> · 标记 <code>frames_site_matched_only</code></p>
+<div class="layer"><h4>题干</h4><pre>以下是该患者胃角的胃镜图像，该部位黏膜是否正常？</pre></div>
+<div class="layer"><h4>标准答案</h4><pre>{
+  &quot;is_normal&quot;: true
+}</pre></div>
+<div class="layer"><h4>任务参数 task_payload</h4><pre>{
+  &quot;site&quot;: &quot;胃角&quot;
+}</pre></div>
+<div class="layer"><h4>标签来源 provenance</h4><pre>{
+  &quot;label_source&quot;: &quot;report_findings&quot;,
+  &quot;normal_evidence_codes&quot;: [
+    &quot;AX01_15&quot;,
+    &quot;AX04_09&quot;
+  ],
+  &quot;abnormal_codes&quot;: []
+}</pre></div>
+<h4 style="margin:18px 0 8px">问法变体</h4>
+<table><tr><th>问法</th><th>题干</th><th>选项</th><th>答案</th></tr><tr><td><code>open_ended</code></td><td>以下是该患者胃角的胃镜图像，该部位黏膜是否正常？</td><td>—</td><td>{&quot;is_normal&quot;: true}</td></tr><tr><td><code>mcq</code></td><td>该部位黏膜是否正常？请选择唯一正确的选项。</td><td>A. 正常；B. 异常</td><td>&quot;A&quot;</td></tr></table>
+<h4 style="margin:18px 0 8px">图像</h4>
+<div class="frames"><div class="frame"><img src="images/L2b_a46bd1fe_胃角/F01.jpg" alt="F01" loading="lazy" decoding="async"><span><b>F01</b> · 胃角 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L2b_a46bd1fe_胃角/F02.jpg" alt="F02" loading="lazy" decoding="async"><span><b>F02</b> · 胃角 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L2b_a46bd1fe_胃角/F03.jpg" alt="F03" loading="lazy" decoding="async"><span><b>F03</b> · 胃角 · white_light · 部位置信 1.00</span></div></div>
+</details><h2>L3 病灶属性 <code>L3_lesion_attributes</code></h2><p class="meta">全库 4011 条 · 按属性槽分层，抽 8 / 4011 条，覆盖 8 / 10 个分层，未抽到：surface、surrounding<br>帧数 1/3/3（最少/中位/最多） · 划分 test 1346、train 1563、val 1102 · 输入档 clean_matched 4011 · 问法 mcq 1659、open_ended 4011</p><details class="case"><summary>L3_d4083c32_胃窦_AX10_01_attachment</summary>
+<p class="meta">检查号 <code>SCOPEV2_0d58d4083c32</code> · 划分 <code>test</code> · 输入档 <code>clean_matched</code> · 发布角色 <code>rare_appendix</code> · 分层 <code>attachment:粘液附着</code> · 标签置信 <code>0.9612</code> · 标记 <code>frames_site_matched_only</code></p>
+<div class="layer"><h4>题干</h4><pre>以下是该患者胃窦的胃镜图像，其中糜烂表面附着物是什么？</pre></div>
+<div class="layer"><h4>标准答案</h4><pre>{
+  &quot;slot&quot;: &quot;attachment&quot;,
+  &quot;value&quot;: &quot;粘液附着&quot;
+}</pre></div>
+<div class="layer"><h4>任务参数 task_payload</h4><pre>{
+  &quot;site&quot;: &quot;胃窦&quot;,
+  &quot;lesion_code&quot;: &quot;AX10_01&quot;,
+  &quot;lesion_term&quot;: &quot;糜烂&quot;,
+  &quot;slot&quot;: &quot;attachment&quot;,
+  &quot;slot_zh&quot;: &quot;附着物&quot;,
+  &quot;value_type&quot;: &quot;closed&quot;,
+  &quot;options&quot;: [
+    &quot;白苔&quot;,
+    &quot;覆白苔&quot;,
+    &quot;血痂&quot;,
+    &quot;食物残渣&quot;,
+    &quot;粘液附着&quot;,
+    &quot;黏液附着&quot;,
+    &quot;脓性&quot;,
+    &quot;坏死物&quot;
+  ]
+}</pre></div>
+<div class="layer"><h4>标签来源 provenance</h4><pre>{
+  &quot;label_source&quot;: &quot;report_findings_phrase&quot;,
+  &quot;phrase&quot;: &quot;见点片状糜烂及粘液附着&quot;,
+  &quot;value_type&quot;: &quot;closed&quot;,
+  &quot;structured_value&quot;: null
+}</pre></div>
+<h4 style="margin:18px 0 8px">问法变体</h4>
+<table><tr><th>问法</th><th>题干</th><th>选项</th><th>答案</th></tr><tr><td><code>open_ended</code></td><td>以下是该患者胃窦的胃镜图像，其中糜烂表面附着物是什么？</td><td>—</td><td>{&quot;slot&quot;: &quot;attachment&quot;, &quot;value&quot;: &quot;粘液附着&quot;}</td></tr><tr><td><code>mcq</code></td><td>以下是该患者胃窦的胃镜图像，其中糜烂表面附着物是什么？请选择唯一正确的选项。</td><td>A. 黏液附着；B. 粘液附着；C. 脓性；D. 白苔</td><td>&quot;B&quot;</td></tr></table>
+<h4 style="margin:18px 0 8px">图像</h4>
+<div class="frames"><div class="frame"><img src="images/L3_d4083c32_胃窦_AX10_01_attachment/F01.jpg" alt="F01" loading="lazy" decoding="async"><span><b>F01</b> · 胃窦 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L3_d4083c32_胃窦_AX10_01_attachment/F02.jpg" alt="F02" loading="lazy" decoding="async"><span><b>F02</b> · 胃窦 · white_light · 部位置信 0.96</span></div></div>
+</details><details class="case"><summary>L3_1cbde75e_胃窦_AX09_08_border</summary>
+<p class="meta">检查号 <code>SCOPEV2_b7f01cbde75e</code> · 划分 <code>train</code> · 输入档 <code>clean_matched</code> · 发布角色 <code>rare_appendix</code> · 分层 <code>border:边界清</code> · 标签置信 <code>0.9944</code> · 标记 <code>frames_site_matched_only</code></p>
+<div class="layer"><h4>题干</h4><pre>以下是该患者胃窦的胃镜图像，其中隆起（非特异）的边界是怎样的？</pre></div>
+<div class="layer"><h4>标准答案</h4><pre>{
+  &quot;slot&quot;: &quot;border&quot;,
+  &quot;value&quot;: &quot;边界清&quot;
+}</pre></div>
+<div class="layer"><h4>任务参数 task_payload</h4><pre>{
+  &quot;site&quot;: &quot;胃窦&quot;,
+  &quot;lesion_code&quot;: &quot;AX09_08&quot;,
+  &quot;lesion_term&quot;: &quot;隆起（非特异）&quot;,
+  &quot;slot&quot;: &quot;border&quot;,
+  &quot;slot_zh&quot;: &quot;边界&quot;,
+  &quot;value_type&quot;: &quot;closed&quot;,
+  &quot;options&quot;: [
+    &quot;边界清&quot;,
+    &quot;边界不清&quot;,
+    &quot;边缘清&quot;,
+    &quot;边缘不规则&quot;,
+    &quot;界限清&quot;,
+    &quot;界限不清&quot;,
+    &quot;境界清&quot;
+  ]
+}</pre></div>
+<div class="layer"><h4>标签来源 provenance</h4><pre>{
+  &quot;label_source&quot;: &quot;report_findings_phrase&quot;,
+  &quot;phrase&quot;: &quot;NBI+ME隆起灶内边界清晰&quot;,
+  &quot;value_type&quot;: &quot;closed&quot;,
+  &quot;structured_value&quot;: null
+}</pre></div>
+<h4 style="margin:18px 0 8px">问法变体</h4>
+<table><tr><th>问法</th><th>题干</th><th>选项</th><th>答案</th></tr><tr><td><code>open_ended</code></td><td>以下是该患者胃窦的胃镜图像，其中隆起（非特异）的边界是怎样的？</td><td>—</td><td>{&quot;slot&quot;: &quot;border&quot;, &quot;value&quot;: &quot;边界清&quot;}</td></tr><tr><td><code>mcq</code></td><td>以下是该患者胃窦的胃镜图像，其中隆起（非特异）的边界是怎样的？请选择唯一正确的选项。</td><td>A. 界限不清；B. 境界清；C. 界限清；D. 边界清</td><td>&quot;D&quot;</td></tr></table>
+<h4 style="margin:18px 0 8px">图像</h4>
+<div class="frames"><div class="frame"><img src="images/L3_1cbde75e_胃窦_AX09_08_border/F01.jpg" alt="F01" loading="lazy" decoding="async"><span><b>F01</b> · 胃窦 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L3_1cbde75e_胃窦_AX09_08_border/F02.jpg" alt="F02" loading="lazy" decoding="async"><span><b>F02</b> · 胃窦 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L3_1cbde75e_胃窦_AX09_08_border/F03.jpg" alt="F03" loading="lazy" decoding="async"><span><b>F03</b> · 胃窦 · white_light · 部位置信 0.99</span></div></div>
+</details><details class="case"><summary>L3_e178c197_胃底_AX02_05_color</summary>
+<p class="meta">检查号 <code>SCOPEV2_43d4e178c197</code> · 划分 <code>test</code> · 输入档 <code>clean_matched</code> · 发布角色 <code>balanced</code> · 分层 <code>color:黄色</code> · 标签置信 <code>1</code> · 标记 <code>frames_site_matched_only</code></p>
+<div class="layer"><h4>题干</h4><pre>以下是该患者胃底的胃镜图像，其中胆汁呈什么颜色？</pre></div>
+<div class="layer"><h4>标准答案</h4><pre>{
+  &quot;slot&quot;: &quot;color&quot;,
+  &quot;value&quot;: &quot;黄色&quot;
+}</pre></div>
+<div class="layer"><h4>任务参数 task_payload</h4><pre>{
+  &quot;site&quot;: &quot;胃底&quot;,
+  &quot;lesion_code&quot;: &quot;AX02_05&quot;,
+  &quot;lesion_term&quot;: &quot;胆汁&quot;,
+  &quot;slot&quot;: &quot;color&quot;,
+  &quot;slot_zh&quot;: &quot;颜色&quot;,
+  &quot;value_type&quot;: &quot;closed&quot;,
+  &quot;options&quot;: [
+    &quot;发红&quot;,
+    &quot;黄色&quot;,
+    &quot;白色&quot;,
+    &quot;灰白&quot;,
+    &quot;苍白&quot;,
+    &quot;红色&quot;,
+    &quot;橘红&quot;,
+    &quot;褐&quot;,
+    &quot;黑&quot;,
+    &quot;褪色&quot;,
+    &quot;紫&quot;
+  ]
+}</pre></div>
+<div class="layer"><h4>标签来源 provenance</h4><pre>{
+  &quot;label_source&quot;: &quot;report_findings_phrase&quot;,
+  &quot;phrase&quot;: &quot;黏液湖呈黄色&quot;,
+  &quot;value_type&quot;: &quot;closed&quot;,
+  &quot;structured_value&quot;: null
+}</pre></div>
+<h4 style="margin:18px 0 8px">问法变体</h4>
+<table><tr><th>问法</th><th>题干</th><th>选项</th><th>答案</th></tr><tr><td><code>open_ended</code></td><td>以下是该患者胃底的胃镜图像，其中胆汁呈什么颜色？</td><td>—</td><td>{&quot;slot&quot;: &quot;color&quot;, &quot;value&quot;: &quot;黄色&quot;}</td></tr><tr><td><code>mcq</code></td><td>以下是该患者胃底的胃镜图像，其中胆汁呈什么颜色？请选择唯一正确的选项。</td><td>A. 黄色；B. 苍白；C. 发红；D. 黑</td><td>&quot;A&quot;</td></tr></table>
+<h4 style="margin:18px 0 8px">图像</h4>
+<div class="frames"><div class="frame"><img src="images/L3_e178c197_胃底_AX02_05_color/F01.jpg" alt="F01" loading="lazy" decoding="async"><span><b>F01</b> · 胃底 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L3_e178c197_胃底_AX02_05_color/F02.jpg" alt="F02" loading="lazy" decoding="async"><span><b>F02</b> · 胃底 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L3_e178c197_胃底_AX02_05_color/F03.jpg" alt="F03" loading="lazy" decoding="async"><span><b>F03</b> · 胃底 · white_light · 部位置信 1.00</span></div></div>
+</details><details class="case"><summary>L3_7b067af8_胃底_AX10_15_count</summary>
+<p class="meta">检查号 <code>SCOPEV2_891a7b067af8</code> · 划分 <code>test</code> · 输入档 <code>clean_matched</code> · 发布角色 <code>balanced</code> · 分层 <code>count:1枚</code> · 标签置信 <code>0.9998</code> · 标记 <code>frames_site_matched_only</code></p>
+<div class="layer"><h4>题干</h4><pre>以下是该患者胃底的胃镜图像，其中治疗后疤痕/创面有几处？</pre></div>
+<div class="layer"><h4>标准答案</h4><pre>{
+  &quot;slot&quot;: &quot;count&quot;,
+  &quot;value&quot;: &quot;1枚&quot;
+}</pre></div>
+<div class="layer"><h4>任务参数 task_payload</h4><pre>{
+  &quot;site&quot;: &quot;胃底&quot;,
+  &quot;lesion_code&quot;: &quot;AX10_15&quot;,
+  &quot;lesion_term&quot;: &quot;治疗后疤痕/创面&quot;,
+  &quot;slot&quot;: &quot;count&quot;,
+  &quot;slot_zh&quot;: &quot;数量&quot;,
+  &quot;value_type&quot;: &quot;open_quantifier&quot;,
+  &quot;options&quot;: []
+}</pre></div>
+<div class="layer"><h4>标签来源 provenance</h4><pre>{
+  &quot;label_source&quot;: &quot;report_findings_phrase&quot;,
+  &quot;phrase&quot;: &quot;予创面组织夹1枚夹闭创面&quot;,
+  &quot;value_type&quot;: &quot;open_quantifier&quot;,
+  &quot;structured_value&quot;: null
+}</pre></div>
+<h4 style="margin:18px 0 8px">问法变体</h4>
+<table><tr><th>问法</th><th>题干</th><th>选项</th><th>答案</th></tr><tr><td><code>open_ended</code></td><td>以下是该患者胃底的胃镜图像，其中治疗后疤痕/创面有几处？</td><td>—</td><td>{&quot;slot&quot;: &quot;count&quot;, &quot;value&quot;: &quot;1枚&quot;}</td></tr></table>
+<h4 style="margin:18px 0 8px">图像</h4>
+<div class="frames"><div class="frame"><img src="images/L3_7b067af8_胃底_AX10_15_count/F01.jpg" alt="F01" loading="lazy" decoding="async"><span><b>F01</b> · 胃底 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L3_7b067af8_胃底_AX10_15_count/F02.jpg" alt="F02" loading="lazy" decoding="async"><span><b>F02</b> · 胃底 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L3_7b067af8_胃底_AX10_15_count/F03.jpg" alt="F03" loading="lazy" decoding="async"><span><b>F03</b> · 胃底 · white_light · 部位置信 1.00</span></div></div>
+</details><details class="case"><summary>L3_dc434dd0_胃底_AX04_02_distribution</summary>
+<p class="meta">检查号 <code>SCOPEV2_809cdc434dd0</code> · 划分 <code>test</code> · 输入档 <code>clean_matched</code> · 发布角色 <code>balanced</code> · 分层 <code>distribution:局限</code> · 标签置信 <code>1</code> · 标记 <code>frames_site_matched_only</code></p>
+<div class="layer"><h4>题干</h4><pre>以下是该患者胃底的胃镜图像，其中白相为主的分布是怎样的？</pre></div>
+<div class="layer"><h4>标准答案</h4><pre>{
+  &quot;slot&quot;: &quot;distribution&quot;,
+  &quot;value&quot;: &quot;局限&quot;
+}</pre></div>
+<div class="layer"><h4>任务参数 task_payload</h4><pre>{
+  &quot;site&quot;: &quot;胃底&quot;,
+  &quot;lesion_code&quot;: &quot;AX04_02&quot;,
+  &quot;lesion_term&quot;: &quot;白相为主&quot;,
+  &quot;slot&quot;: &quot;distribution&quot;,
+  &quot;slot_zh&quot;: &quot;分布&quot;,
+  &quot;value_type&quot;: &quot;closed&quot;,
+  &quot;options&quot;: [
+    &quot;散在&quot;,
+    &quot;多发&quot;,
+    &quot;局限&quot;,
+    &quot;多处&quot;,
+    &quot;弥漫&quot;,
+    &quot;数处&quot;,
+    &quot;孤立&quot;,
+    &quot;广泛&quot;,
+    &quot;成片&quot;,
+    &quot;满布&quot;,
+    &quot;单发&quot;
+  ]
+}</pre></div>
+<div class="layer"><h4>标签来源 provenance</h4><pre>{
+  &quot;label_source&quot;: &quot;report_findings_phrase&quot;,
+  &quot;phrase&quot;: &quot;局限白相为主&quot;,
+  &quot;value_type&quot;: &quot;closed&quot;,
+  &quot;structured_value&quot;: null
+}</pre></div>
+<h4 style="margin:18px 0 8px">问法变体</h4>
+<table><tr><th>问法</th><th>题干</th><th>选项</th><th>答案</th></tr><tr><td><code>open_ended</code></td><td>以下是该患者胃底的胃镜图像，其中白相为主的分布是怎样的？</td><td>—</td><td>{&quot;slot&quot;: &quot;distribution&quot;, &quot;value&quot;: &quot;局限&quot;}</td></tr><tr><td><code>mcq</code></td><td>以下是该患者胃底的胃镜图像，其中白相为主的分布是怎样的？请选择唯一正确的选项。</td><td>A. 满布；B. 成片；C. 散在；D. 局限</td><td>&quot;D&quot;</td></tr></table>
+<h4 style="margin:18px 0 8px">图像</h4>
+<div class="frames"><div class="frame"><img src="images/L3_dc434dd0_胃底_AX04_02_distribution/F01.jpg" alt="F01" loading="lazy" decoding="async"><span><b>F01</b> · 胃底 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L3_dc434dd0_胃底_AX04_02_distribution/F02.jpg" alt="F02" loading="lazy" decoding="async"><span><b>F02</b> · 胃底 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L3_dc434dd0_胃底_AX04_02_distribution/F03.jpg" alt="F03" loading="lazy" decoding="async"><span><b>F03</b> · 胃底 · white_light · 部位置信 1.00</span></div></div>
+</details><details class="case"><summary>L3_1dcfc95d_胃底_AX04_03_shape</summary>
+<p class="meta">检查号 <code>SCOPEV2_8bd11dcfc95d</code> · 划分 <code>train</code> · 输入档 <code>clean_matched</code> · 发布角色 <code>balanced</code> · 分层 <code>shape:点状</code> · 标签置信 <code>1</code> · 标记 <code>frames_site_matched_only</code></p>
+<div class="layer"><h4>题干</h4><pre>以下是该患者胃底的胃镜图像，其中充血/发红的形态是怎样的？</pre></div>
+<div class="layer"><h4>标准答案</h4><pre>{
+  &quot;slot&quot;: &quot;shape&quot;,
+  &quot;value&quot;: &quot;点状&quot;
+}</pre></div>
+<div class="layer"><h4>任务参数 task_payload</h4><pre>{
+  &quot;site&quot;: &quot;胃底&quot;,
+  &quot;lesion_code&quot;: &quot;AX04_03&quot;,
+  &quot;lesion_term&quot;: &quot;充血/发红&quot;,
+  &quot;slot&quot;: &quot;shape&quot;,
+  &quot;slot_zh&quot;: &quot;形态&quot;,
+  &quot;value_type&quot;: &quot;closed&quot;,
+  &quot;options&quot;: [
+    &quot;片状&quot;,
+    &quot;点状&quot;,
+    &quot;条状&quot;,
+    &quot;斑状&quot;,
+    &quot;不规则&quot;,
+    &quot;球形&quot;,
+    &quot;半球形&quot;,
+    &quot;线状&quot;,
+    &quot;分叶&quot;,
+    &quot;地图状&quot;,
+    &quot;类圆形&quot;,
+    &quot;隆起型&quot;,
+    &quot;凹陷型&quot;,
+    &quot;平坦型&quot;,
+    &quot;环状&quot;,
+    &quot;星芒状&quot;
+  ]
+}</pre></div>
+<div class="layer"><h4>标签来源 provenance</h4><pre>{
+  &quot;label_source&quot;: &quot;report_findings_phrase&quot;,
+  &quot;phrase&quot;: &quot;黏膜多发点状充血&quot;,
+  &quot;value_type&quot;: &quot;closed&quot;,
+  &quot;structured_value&quot;: null
+}</pre></div>
+<h4 style="margin:18px 0 8px">问法变体</h4>
+<table><tr><th>问法</th><th>题干</th><th>选项</th><th>答案</th></tr><tr><td><code>open_ended</code></td><td>以下是该患者胃底的胃镜图像，其中充血/发红的形态是怎样的？</td><td>—</td><td>{&quot;slot&quot;: &quot;shape&quot;, &quot;value&quot;: &quot;点状&quot;}</td></tr><tr><td><code>mcq</code></td><td>以下是该患者胃底的胃镜图像，其中充血/发红的形态是怎样的？请选择唯一正确的选项。</td><td>A. 斑状；B. 条状；C. 隆起型；D. 点状</td><td>&quot;D&quot;</td></tr></table>
+<h4 style="margin:18px 0 8px">图像</h4>
+<div class="frames"><div class="frame"><img src="images/L3_1dcfc95d_胃底_AX04_03_shape/F01.jpg" alt="F01" loading="lazy" decoding="async"><span><b>F01</b> · 胃底 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L3_1dcfc95d_胃底_AX04_03_shape/F02.jpg" alt="F02" loading="lazy" decoding="async"><span><b>F02</b> · 胃底 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L3_1dcfc95d_胃底_AX04_03_shape/F03.jpg" alt="F03" loading="lazy" decoding="async"><span><b>F03</b> · 胃底 · white_light · 部位置信 1.00</span></div></div>
+</details><details class="case"><summary>L3_91ac034c_胃角_AX09_04_size</summary>
+<p class="meta">检查号 <code>SCOPEV2_c6ab91ac034c</code> · 划分 <code>val</code> · 输入档 <code>clean_matched</code> · 发布角色 <code>balanced</code> · 分层 <code>size:约0.6cm</code> · 标签置信 <code>0.9957</code> · 标记 <code>frames_site_matched_only、requires_scale_reference</code></p>
+<div class="layer"><h4>题干</h4><pre>以下是该患者胃角的胃镜图像，其中息肉样隆起大小约为多少？</pre></div>
+<div class="layer"><h4>标准答案</h4><pre>{
+  &quot;slot&quot;: &quot;size&quot;,
+  &quot;value&quot;: &quot;约0.6cm&quot;
+}</pre></div>
+<div class="layer"><h4>任务参数 task_payload</h4><pre>{
+  &quot;site&quot;: &quot;胃角&quot;,
+  &quot;lesion_code&quot;: &quot;AX09_04&quot;,
+  &quot;lesion_term&quot;: &quot;息肉样隆起&quot;,
+  &quot;slot&quot;: &quot;size&quot;,
+  &quot;slot_zh&quot;: &quot;大小&quot;,
+  &quot;value_type&quot;: &quot;open_measure&quot;,
+  &quot;options&quot;: []
+}</pre></div>
+<div class="layer"><h4>标签来源 provenance</h4><pre>{
+  &quot;label_source&quot;: &quot;report_findings_phrase&quot;,
+  &quot;phrase&quot;: &quot;可见约0.6cm息肉&quot;,
+  &quot;value_type&quot;: &quot;open_measure&quot;,
+  &quot;structured_value&quot;: {
+    &quot;raw&quot;: &quot;约0.6cm&quot;,
+    &quot;type&quot;: &quot;numeric&quot;,
+    &quot;mm&quot;: 6.0
+  }
+}</pre></div>
+<h4 style="margin:18px 0 8px">问法变体</h4>
+<table><tr><th>问法</th><th>题干</th><th>选项</th><th>答案</th></tr><tr><td><code>open_ended</code></td><td>以下是该患者胃角的胃镜图像，其中息肉样隆起大小约为多少？</td><td>—</td><td>{&quot;slot&quot;: &quot;size&quot;, &quot;value&quot;: &quot;约0.6cm&quot;}</td></tr></table>
+<h4 style="margin:18px 0 8px">图像</h4>
+<div class="frames"><div class="frame"><img src="images/L3_91ac034c_胃角_AX09_04_size/F01.jpg" alt="F01" loading="lazy" decoding="async"><span><b>F01</b> · 胃角 · white_light · 部位置信 1.00</span></div></div>
+</details><details class="case"><summary>L3_8cab32bf_胃角_AX10_15_sub_position</summary>
+<p class="meta">检查号 <code>SCOPEV2_19ea8cab32bf</code> · 划分 <code>test</code> · 输入档 <code>clean_matched</code> · 发布角色 <code>balanced</code> · 分层 <code>sub_position:前壁</code> · 标签置信 <code>1</code> · 标记 <code>frames_site_matched_only</code></p>
+<div class="layer"><h4>题干</h4><pre>以下是该患者胃角的胃镜图像，其中治疗后疤痕/创面位于该部位的哪个方位？</pre></div>
+<div class="layer"><h4>标准答案</h4><pre>{
+  &quot;slot&quot;: &quot;sub_position&quot;,
+  &quot;value&quot;: &quot;前壁&quot;
+}</pre></div>
+<div class="layer"><h4>任务参数 task_payload</h4><pre>{
+  &quot;site&quot;: &quot;胃角&quot;,
+  &quot;lesion_code&quot;: &quot;AX10_15&quot;,
+  &quot;lesion_term&quot;: &quot;治疗后疤痕/创面&quot;,
+  &quot;slot&quot;: &quot;sub_position&quot;,
+  &quot;slot_zh&quot;: &quot;段内细分&quot;,
+  &quot;value_type&quot;: &quot;closed&quot;,
+  &quot;options&quot;: [
+    &quot;小弯&quot;,
+    &quot;大弯&quot;,
+    &quot;下段&quot;,
+    &quot;前壁&quot;,
+    &quot;后壁&quot;,
+    &quot;上段&quot;,
+    &quot;中段&quot;,
+    &quot;远端&quot;,
+    &quot;穹窿&quot;,
+    &quot;侧壁&quot;,
+    &quot;穹隆&quot;,
+    &quot;近端&quot;,
+    &quot;球部&quot;,
+    &quot;降部&quot;
+  ]
+}</pre></div>
+<div class="layer"><h4>标签来源 provenance</h4><pre>{
+  &quot;label_source&quot;: &quot;report_findings_phrase&quot;,
+  &quot;phrase&quot;: &quot;前壁见白色ESD疤痕&quot;,
+  &quot;value_type&quot;: &quot;closed&quot;,
+  &quot;structured_value&quot;: null
+}</pre></div>
+<h4 style="margin:18px 0 8px">问法变体</h4>
+<table><tr><th>问法</th><th>题干</th><th>选项</th><th>答案</th></tr><tr><td><code>open_ended</code></td><td>以下是该患者胃角的胃镜图像，其中治疗后疤痕/创面位于该部位的哪个方位？</td><td>—</td><td>{&quot;slot&quot;: &quot;sub_position&quot;, &quot;value&quot;: &quot;前壁&quot;}</td></tr><tr><td><code>mcq</code></td><td>以下是该患者胃角的胃镜图像，其中治疗后疤痕/创面位于该部位的哪个方位？请选择唯一正确的选项。</td><td>A. 小弯；B. 后壁；C. 前壁；D. 球部</td><td>&quot;C&quot;</td></tr></table>
+<h4 style="margin:18px 0 8px">图像</h4>
+<div class="frames"><div class="frame"><img src="images/L3_8cab32bf_胃角_AX10_15_sub_position/F01.jpg" alt="F01" loading="lazy" decoding="async"><span><b>F01</b> · 胃角 · white_light · 部位置信 1.00</span></div></div>
+</details><h2>L4 所见报告生成 <code>L4_findings_report_generation</code></h2><p class="meta">全库 1200 条 · 按划分分层，抽 8 / 1200 条，覆盖 3 / 3 个分层<br>帧数 1/32/399（最少/中位/最多） · 划分 test 400、train 400、val 400 · 输入档 raw_dense 1200 · 问法 无变体</p><details class="case"><summary>L4_42770d2a</summary>
+<p class="meta">检查号 <code>SCOPEV2_0e4f42770d2a</code> · 划分 <code>test</code> · 输入档 <code>raw_dense</code> · 发布角色 <code>balanced</code> · 分层 <code>—</code> · 标签置信 <code>1</code></p>
+<div class="layer"><h4>题干</h4><pre>以下是一次胃镜检查留存的全部图像，请按部位撰写内镜所见。</pre></div>
+<div class="layer"><h4>标准答案</h4><pre>&quot;食管：黏膜光滑，血管纹理清晰，齿状线上方见2处条形黏膜破损，最长约1.5cm\n贲门：齿状线清晰，黏膜光滑\n胃底：黏膜光滑\n胃体：黏膜粗糙，小弯侧灰白色越过贲门至部分前后壁，小弯侧见多处斑片状地图样红斑，NBI未见异常MV，于上部、下部红斑处分别活检\n胃角：拱形存在，黏膜粗糙，多处红斑及乳白色再生黏膜，活检，前壁见黄色斑一处\n胃窦：黏膜光滑，灰白色，多处红斑\n幽门：呈圆形，开闭正常\n十二指肠：球部及降部未见异常&quot;</pre></div>
+<div class="layer"><h4>任务参数 task_payload</h4><pre>（空）</pre></div>
+<div class="layer"><h4>标签来源 provenance</h4><pre>{
+  &quot;label_source&quot;: &quot;report_findings_verbatim&quot;
+}</pre></div>
+<h4 style="margin:18px 0 8px">问法变体</h4>
+<p class="meta">该层无问法变体——答案是自由文本报告，做不成选项。</p>
+<h4 style="margin:18px 0 8px">图像</h4>
+<p class="meta">共 37 帧，等距展示其中 8 帧。<b>模型收到的是全部 37 帧</b>，这里只是够不够看的抽样。</p><div class="frames"><div class="frame"><img src="images/L4_42770d2a/F01.jpg" alt="F01" loading="lazy" decoding="async"><span><b>F01</b> · 食管 · narrow_band · 部位置信 0.99</span></div><div class="frame"><img src="images/L4_42770d2a/F05.jpg" alt="F05" loading="lazy" decoding="async"><span><b>F05</b> · 食管 · uncertain · 部位置信 0.76</span></div><div class="frame"><img src="images/L4_42770d2a/F10.jpg" alt="F10" loading="lazy" decoding="async"><span><b>F10</b> · 胃角 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L4_42770d2a/F14.jpg" alt="F14" loading="lazy" decoding="async"><span><b>F14</b> · 胃窦 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L4_42770d2a/F19.jpg" alt="F19" loading="lazy" decoding="async"><span><b>F19</b> · 十二指肠 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L4_42770d2a/F24.jpg" alt="F24" loading="lazy" decoding="async"><span><b>F24</b> · 胃角 · narrow_band · 部位置信 0.61</span></div><div class="frame"><img src="images/L4_42770d2a/F28.jpg" alt="F28" loading="lazy" decoding="async"><span><b>F28</b> · 胃底 · white_light · 部位置信 0.95</span></div><div class="frame"><img src="images/L4_42770d2a/F33.jpg" alt="F33" loading="lazy" decoding="async"><span><b>F33</b> · 胃底 · narrow_band · 部位置信 0.93</span></div></div>
+</details><details class="case"><summary>L4_3f2eb3b1</summary>
+<p class="meta">检查号 <code>SCOPEV2_30783f2eb3b1</code> · 划分 <code>test</code> · 输入档 <code>raw_dense</code> · 发布角色 <code>balanced</code> · 分层 <code>—</code> · 标签置信 <code>1</code></p>
+<div class="layer"><h4>题干</h4><pre>以下是一次胃镜检查留存的全部图像，请按部位撰写内镜所见。</pre></div>
+<div class="layer"><h4>标准答案</h4><pre>&quot;食管：食管通畅，黏膜光滑柔软，血管纹理清晰，管壁蠕动正常。\n贲门：齿状线清晰，黏膜光滑，开闭正常。\n胃底：黏膜红白相间，黏液湖呈黄色，量少。\n胃体：黏膜光整，色泽红白相间，未见溃疡及出血，蠕动正常。\n胃角：拱形存在，黏膜光滑柔软，见一黏膜隆起，大小约1.0cm，活检。\n胃窦：黏膜充血水肿，色泽红白相间，局限白相为主，活检。\n幽门：呈圆形，开闭正常，黏膜光滑。\n十二指肠：形态正常，黏膜色泽正常，未见溃疡及新生物，球部见一浅溃疡，覆白苔。十二指肠降部通畅，未见异常。&quot;</pre></div>
+<div class="layer"><h4>任务参数 task_payload</h4><pre>（空）</pre></div>
+<div class="layer"><h4>标签来源 provenance</h4><pre>{
+  &quot;label_source&quot;: &quot;report_findings_verbatim&quot;
+}</pre></div>
+<h4 style="margin:18px 0 8px">问法变体</h4>
+<p class="meta">该层无问法变体——答案是自由文本报告，做不成选项。</p>
+<h4 style="margin:18px 0 8px">图像</h4>
+<p class="meta">共 19 帧，等距展示其中 8 帧。<b>模型收到的是全部 19 帧</b>，这里只是够不够看的抽样。</p><div class="frames"><div class="frame"><img src="images/L4_3f2eb3b1/F01.jpg" alt="F01" loading="lazy" decoding="async"><span><b>F01</b> · 胃体 · grayscale · 部位置信 0.24</span></div><div class="frame"><img src="images/L4_3f2eb3b1/F03.jpg" alt="F03" loading="lazy" decoding="async"><span><b>F03</b> · 食管 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L4_3f2eb3b1/F05.jpg" alt="F05" loading="lazy" decoding="async"><span><b>F05</b> · 食管 · narrow_band · 部位置信 0.83</span></div><div class="frame"><img src="images/L4_3f2eb3b1/F08.jpg" alt="F08" loading="lazy" decoding="async"><span><b>F08</b> · 胃窦 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L4_3f2eb3b1/F10.jpg" alt="F10" loading="lazy" decoding="async"><span><b>F10</b> · 十二指肠 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L4_3f2eb3b1/F12.jpg" alt="F12" loading="lazy" decoding="async"><span><b>F12</b> · 十二指肠 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L4_3f2eb3b1/F15.jpg" alt="F15" loading="lazy" decoding="async"><span><b>F15</b> · 胃角 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L4_3f2eb3b1/F17.jpg" alt="F17" loading="lazy" decoding="async"><span><b>F17</b> · 胃底 · white_light · 部位置信 0.51</span></div></div>
+</details><details class="case"><summary>L4_523d4830</summary>
+<p class="meta">检查号 <code>SCOPEV2_10c2523d4830</code> · 划分 <code>test</code> · 输入档 <code>raw_dense</code> · 发布角色 <code>balanced</code> · 分层 <code>—</code> · 标签置信 <code>1</code></p>
+<div class="layer"><h4>题干</h4><pre>以下是一次胃镜检查留存的全部图像，请按部位撰写内镜所见。</pre></div>
+<div class="layer"><h4>标准答案</h4><pre>&quot;食管：食管通畅，距门齿36㎝处见一静脉球，对侧小片状黏膜发红，NBI见IPCL增粗。食管下端小片状黏膜缺损，直径小于5mm。\n贲门：齿状线清晰，黏膜光滑，开闭正常。\n胃底：黏膜红白相间，黏液湖呈黄色，量少。\n胃体：黏膜斑片状充血，色泽红白相间，蠕动正常，RAC结构消失。\n胃角：拱形存在，黏膜充血。\n胃窦：黏膜充血水肿，后壁见一约1.5×2.5㎝隆起病变，表面发红，NBI+ME见腺体结构不规则，微血管紊乱，触之易出血，活检。\n幽门：呈圆形，开闭正常，黏膜光滑。\n十二指肠：形态正常，黏膜色泽正常，未见溃疡及新生物。十二指肠降部通畅，未见异常。&quot;</pre></div>
+<div class="layer"><h4>任务参数 task_payload</h4><pre>（空）</pre></div>
+<div class="layer"><h4>标签来源 provenance</h4><pre>{
+  &quot;label_source&quot;: &quot;report_findings_verbatim&quot;
+}</pre></div>
+<h4 style="margin:18px 0 8px">问法变体</h4>
+<p class="meta">该层无问法变体——答案是自由文本报告，做不成选项。</p>
+<h4 style="margin:18px 0 8px">图像</h4>
+<p class="meta">共 68 帧，等距展示其中 8 帧。<b>模型收到的是全部 68 帧</b>，这里只是够不够看的抽样。</p><div class="frames"><div class="frame"><img src="images/L4_523d4830/F01.jpg" alt="F01" loading="lazy" decoding="async"><span><b>F01</b> · 食管 · narrow_band · 部位置信 0.81</span></div><div class="frame"><img src="images/L4_523d4830/F09.jpg" alt="F09" loading="lazy" decoding="async"><span><b>F09</b> · 食管 · narrow_band · 部位置信 0.98</span></div><div class="frame"><img src="images/L4_523d4830/F18.jpg" alt="F18" loading="lazy" decoding="async"><span><b>F18</b> · 十二指肠 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L4_523d4830/F26.jpg" alt="F26" loading="lazy" decoding="async"><span><b>F26</b> · 胃窦 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L4_523d4830/F35.jpg" alt="F35" loading="lazy" decoding="async"><span><b>F35</b> · 胃底 · narrow_band · 部位置信 0.88</span></div><div class="frame"><img src="images/L4_523d4830/F43.jpg" alt="F43" loading="lazy" decoding="async"><span><b>F43</b> · 胃底 · narrow_band · 部位置信 0.60</span></div><div class="frame"><img src="images/L4_523d4830/F52.jpg" alt="F52" loading="lazy" decoding="async"><span><b>F52</b> · 胃底 · narrow_band · 部位置信 0.58</span></div><div class="frame"><img src="images/L4_523d4830/F60.jpg" alt="F60" loading="lazy" decoding="async"><span><b>F60</b> · 胃体 · narrow_band · 部位置信 0.80</span></div></div>
+</details><details class="case"><summary>L4_26450d9e</summary>
+<p class="meta">检查号 <code>SCOPEV2_0ede26450d9e</code> · 划分 <code>train</code> · 输入档 <code>raw_dense</code> · 发布角色 <code>balanced</code> · 分层 <code>—</code> · 标签置信 <code>1</code></p>
+<div class="layer"><h4>题干</h4><pre>以下是一次胃镜检查留存的全部图像，请按部位撰写内镜所见。</pre></div>
+<div class="layer"><h4>标准答案</h4><pre>&quot;食管：食管下端齿状线上方见孤立糜烂灶数处。\n贲门：齿状线清晰，黏膜充血。\n胃底：黏液湖清，少量，皱襞呈脑回状。\n胃体：黏膜充血。\n胃角：黏膜光滑，蠕动可。散在数处点条状糜烂\n胃窦：黏膜充血，散在白相区及数处点状糜烂，活检。\n幽门：呈圆形，开闭尚可。\n十二指肠：球部及降部黏膜未见异常。&quot;</pre></div>
+<div class="layer"><h4>任务参数 task_payload</h4><pre>（空）</pre></div>
+<div class="layer"><h4>标签来源 provenance</h4><pre>{
+  &quot;label_source&quot;: &quot;report_findings_verbatim&quot;
+}</pre></div>
+<h4 style="margin:18px 0 8px">问法变体</h4>
+<p class="meta">该层无问法变体——答案是自由文本报告，做不成选项。</p>
+<h4 style="margin:18px 0 8px">图像</h4>
+<p class="meta">共 21 帧，等距展示其中 8 帧。<b>模型收到的是全部 21 帧</b>，这里只是够不够看的抽样。</p><div class="frames"><div class="frame"><img src="images/L4_26450d9e/F01.jpg" alt="F01" loading="lazy" decoding="async"><span><b>F01</b> · 食管 · narrow_band · 部位置信 0.67</span></div><div class="frame"><img src="images/L4_26450d9e/F03.jpg" alt="F03" loading="lazy" decoding="async"><span><b>F03</b> · 食管 · narrow_band · 部位置信 1.00</span></div><div class="frame"><img src="images/L4_26450d9e/F06.jpg" alt="F06" loading="lazy" decoding="async"><span><b>F06</b> · 幽门 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L4_26450d9e/F08.jpg" alt="F08" loading="lazy" decoding="async"><span><b>F08</b> · 十二指肠 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L4_26450d9e/F11.jpg" alt="F11" loading="lazy" decoding="async"><span><b>F11</b> · 胃窦 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L4_26450d9e/F14.jpg" alt="F14" loading="lazy" decoding="async"><span><b>F14</b> · 胃体 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L4_26450d9e/F16.jpg" alt="F16" loading="lazy" decoding="async"><span><b>F16</b> · 胃底 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L4_26450d9e/F19.jpg" alt="F19" loading="lazy" decoding="async"><span><b>F19</b> · 胃体 · white_light · 部位置信 1.00</span></div></div>
+</details><details class="case"><summary>L4_b2bb1ced</summary>
+<p class="meta">检查号 <code>SCOPEV2_0a28b2bb1ced</code> · 划分 <code>train</code> · 输入档 <code>raw_dense</code> · 发布角色 <code>balanced</code> · 分层 <code>—</code> · 标签置信 <code>1</code></p>
+<div class="layer"><h4>题干</h4><pre>以下是一次胃镜检查留存的全部图像，请按部位撰写内镜所见。</pre></div>
+<div class="layer"><h4>标准答案</h4><pre>&quot;食管：食管通畅，黏膜光滑柔软，血管纹理清晰，管壁蠕动正常，齿状线上方见小片黏膜破损，直径小于5mm。\n贲门：齿状线清晰，黏膜光滑，开闭正常。\n胃底：黏膜多发点状充血，粘液湖浊。\n胃体：大弯侧皱襞迂曲，水肿，弥漫性点状充血，RAC消失，大弯侧见一黏膜发红糜烂。\n胃角：拱形存在，RAC消失，黏膜欠光滑。\n胃窦：黏膜粗糙呈鸡皮样，色泽红白相间，以红为主。\n幽门：呈圆形，开闭正常，黏膜光滑。\n十二指肠：形态正常，黏膜色泽正常，未见溃疡及新生物。十二指肠降部通畅，未见异常。&quot;</pre></div>
+<div class="layer"><h4>任务参数 task_payload</h4><pre>（空）</pre></div>
+<div class="layer"><h4>标签来源 provenance</h4><pre>{
+  &quot;label_source&quot;: &quot;report_findings_verbatim&quot;
+}</pre></div>
+<h4 style="margin:18px 0 8px">问法变体</h4>
+<p class="meta">该层无问法变体——答案是自由文本报告，做不成选项。</p>
+<h4 style="margin:18px 0 8px">图像</h4>
+<p class="meta">共 36 帧，等距展示其中 8 帧。<b>模型收到的是全部 36 帧</b>，这里只是够不够看的抽样。</p><div class="frames"><div class="frame"><img src="images/L4_b2bb1ced/F01.jpg" alt="F01" loading="lazy" decoding="async"><span><b>F01</b> · 食管 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L4_b2bb1ced/F05.jpg" alt="F05" loading="lazy" decoding="async"><span><b>F05</b> · 食管 · white_light · 部位置信 0.99</span></div><div class="frame"><img src="images/L4_b2bb1ced/F10.jpg" alt="F10" loading="lazy" decoding="async"><span><b>F10</b> · 胃底 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L4_b2bb1ced/F14.jpg" alt="F14" loading="lazy" decoding="async"><span><b>F14</b> · 胃角 · uncertain · 部位置信 1.00</span></div><div class="frame"><img src="images/L4_b2bb1ced/F19.jpg" alt="F19" loading="lazy" decoding="async"><span><b>F19</b> · 十二指肠 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L4_b2bb1ced/F23.jpg" alt="F23" loading="lazy" decoding="async"><span><b>F23</b> · 胃体 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L4_b2bb1ced/F28.jpg" alt="F28" loading="lazy" decoding="async"><span><b>F28</b> · 胃体 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L4_b2bb1ced/F32.jpg" alt="F32" loading="lazy" decoding="async"><span><b>F32</b> · 胃体 · white_light · 部位置信 0.99</span></div></div>
+</details><details class="case"><summary>L4_f5bdb034</summary>
+<p class="meta">检查号 <code>SCOPEV2_0881f5bdb034</code> · 划分 <code>train</code> · 输入档 <code>raw_dense</code> · 发布角色 <code>balanced</code> · 分层 <code>—</code> · 标签置信 <code>1</code></p>
+<div class="layer"><h4>题干</h4><pre>以下是一次胃镜检查留存的全部图像，请按部位撰写内镜所见。</pre></div>
+<div class="layer"><h4>标准答案</h4><pre>&quot;食管：黏膜光滑，血管纹理清晰，距门齿约16cm见一片状橘红色黏膜，表面光滑，距门齿约20处另见片状黏膜增生样改变，活检；下段见黏膜缺损，长度小于5mm\n贲门：齿状线清晰，黏膜光滑\n胃底：黏膜光滑\n胃体：黏膜充血水肿\n胃角：拱形存在，黏膜光滑，RAC消失\n胃窦：黏膜光滑，花斑样\n幽门：呈圆形，开闭正常\n十二指肠：球部及降部未见异常&quot;</pre></div>
+<div class="layer"><h4>任务参数 task_payload</h4><pre>（空）</pre></div>
+<div class="layer"><h4>标签来源 provenance</h4><pre>{
+  &quot;label_source&quot;: &quot;report_findings_verbatim&quot;
+}</pre></div>
+<h4 style="margin:18px 0 8px">问法变体</h4>
+<p class="meta">该层无问法变体——答案是自由文本报告，做不成选项。</p>
+<h4 style="margin:18px 0 8px">图像</h4>
+<p class="meta">共 62 帧，等距展示其中 8 帧。<b>模型收到的是全部 62 帧</b>，这里只是够不够看的抽样。</p><div class="frames"><div class="frame"><img src="images/L4_f5bdb034/F01.jpg" alt="F01" loading="lazy" decoding="async"><span><b>F01</b> · 食管 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L4_f5bdb034/F08.jpg" alt="F08" loading="lazy" decoding="async"><span><b>F08</b> · 胃窦 · narrow_band · 部位置信 0.21</span></div><div class="frame"><img src="images/L4_f5bdb034/F16.jpg" alt="F16" loading="lazy" decoding="async"><span><b>F16</b> · 食管 · white_light · 部位置信 0.79</span></div><div class="frame"><img src="images/L4_f5bdb034/F24.jpg" alt="F24" loading="lazy" decoding="async"><span><b>F24</b> · 十二指肠 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L4_f5bdb034/F32.jpg" alt="F32" loading="lazy" decoding="async"><span><b>F32</b> · 胃角 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L4_f5bdb034/F39.jpg" alt="F39" loading="lazy" decoding="async"><span><b>F39</b> · 胃体 · uncertain · 部位置信 1.00</span></div><div class="frame"><img src="images/L4_f5bdb034/F47.jpg" alt="F47" loading="lazy" decoding="async"><span><b>F47</b> · 胃体 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L4_f5bdb034/F55.jpg" alt="F55" loading="lazy" decoding="async"><span><b>F55</b> · 胃角 · white_light · 部位置信 0.88</span></div></div>
+</details><details class="case"><summary>L4_b937ca55</summary>
+<p class="meta">检查号 <code>SCOPEV2_5aa4b937ca55</code> · 划分 <code>val</code> · 输入档 <code>raw_dense</code> · 发布角色 <code>balanced</code> · 分层 <code>—</code> · 标签置信 <code>1</code></p>
+<div class="layer"><h4>题干</h4><pre>以下是一次胃镜检查留存的全部图像，请按部位撰写内镜所见。</pre></div>
+<div class="layer"><h4>标准答案</h4><pre>&quot;食管：黏膜光滑柔软，血管纹理清晰。\n贲门：粘膜光滑，齿状线清晰。\n胃底：粘膜光滑，粘液湖清。\n胃体：小弯侧粘膜苍白，大弯侧见多发糜烂灶，未见溃疡及出血。\n胃角：粘膜花斑样，粗糙，蠕动可。\n胃窦：粘膜苍白、粗糙。见多发糜烂灶。见浅溃疡灶，覆白苔。\n幽门：呈圆形，开闭尚可，粘膜皱襞光滑，色泽淡红，未见出血及溃疡。\n十二指肠：球部变形，见约0.8*1.0cm溃疡，覆白苔，降部未见异常。&quot;</pre></div>
+<div class="layer"><h4>任务参数 task_payload</h4><pre>（空）</pre></div>
+<div class="layer"><h4>标签来源 provenance</h4><pre>{
+  &quot;label_source&quot;: &quot;report_findings_verbatim&quot;
+}</pre></div>
+<h4 style="margin:18px 0 8px">问法变体</h4>
+<p class="meta">该层无问法变体——答案是自由文本报告，做不成选项。</p>
+<h4 style="margin:18px 0 8px">图像</h4>
+<p class="meta">共 56 帧，等距展示其中 8 帧。<b>模型收到的是全部 56 帧</b>，这里只是够不够看的抽样。</p><div class="frames"><div class="frame"><img src="images/L4_b937ca55/F01.jpg" alt="F01" loading="lazy" decoding="async"><span><b>F01</b> · 食管 · narrow_band · 部位置信 0.95</span></div><div class="frame"><img src="images/L4_b937ca55/F08.jpg" alt="F08" loading="lazy" decoding="async"><span><b>F08</b> · 食管 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L4_b937ca55/F15.jpg" alt="F15" loading="lazy" decoding="async"><span><b>F15</b> · 幽门 · white_light · 部位置信 0.86</span></div><div class="frame"><img src="images/L4_b937ca55/F22.jpg" alt="F22" loading="lazy" decoding="async"><span><b>F22</b> · 十二指肠 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L4_b937ca55/F29.jpg" alt="F29" loading="lazy" decoding="async"><span><b>F29</b> · 胃体 · uncertain · 部位置信 1.00</span></div><div class="frame"><img src="images/L4_b937ca55/F36.jpg" alt="F36" loading="lazy" decoding="async"><span><b>F36</b> · 胃体 · white_light · 部位置信 0.98</span></div><div class="frame"><img src="images/L4_b937ca55/F43.jpg" alt="F43" loading="lazy" decoding="async"><span><b>F43</b> · 胃体 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L4_b937ca55/F50.jpg" alt="F50" loading="lazy" decoding="async"><span><b>F50</b> · 胃窦 · white_light · 部位置信 0.94</span></div></div>
+</details><details class="case"><summary>L4_1b590950</summary>
+<p class="meta">检查号 <code>SCOPEV2_62fd1b590950</code> · 划分 <code>val</code> · 输入档 <code>raw_dense</code> · 发布角色 <code>balanced</code> · 分层 <code>—</code> · 标签置信 <code>1</code></p>
+<div class="layer"><h4>题干</h4><pre>以下是一次胃镜检查留存的全部图像，请按部位撰写内镜所见。</pre></div>
+<div class="layer"><h4>标准答案</h4><pre>&quot;食管：食管黏膜未见异常。\n贲门：齿状线清晰，黏膜充血。\n胃底：黏液湖清，少量，皱襞呈脑回状，点状充血数处。小弯侧片状红斑，约1.5*0.5cm，活检\n胃体：黏膜充血。小弯侧散在白相区及红斑，延及贲门，黏膜粗糙。活检\n胃角：黏膜红白相间，，见血管网，蠕动可。活检\n胃窦：黏膜充血，散在白相区及红斑隆起，表面糜烂，活检。\n幽门：呈圆形，开闭尚可。\n十二指肠：球部及降部黏膜未见异常。&quot;</pre></div>
+<div class="layer"><h4>任务参数 task_payload</h4><pre>（空）</pre></div>
+<div class="layer"><h4>标签来源 provenance</h4><pre>{
+  &quot;label_source&quot;: &quot;report_findings_verbatim&quot;
+}</pre></div>
+<h4 style="margin:18px 0 8px">问法变体</h4>
+<p class="meta">该层无问法变体——答案是自由文本报告，做不成选项。</p>
+<h4 style="margin:18px 0 8px">图像</h4>
+<p class="meta">共 31 帧，等距展示其中 8 帧。<b>模型收到的是全部 31 帧</b>，这里只是够不够看的抽样。</p><div class="frames"><div class="frame"><img src="images/L4_1b590950/F01.jpg" alt="F01" loading="lazy" decoding="async"><span><b>F01</b> · 食管 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L4_1b590950/F04.jpg" alt="F04" loading="lazy" decoding="async"><span><b>F04</b> · 胃角 · narrow_band · 部位置信 0.62</span></div><div class="frame"><img src="images/L4_1b590950/F08.jpg" alt="F08" loading="lazy" decoding="async"><span><b>F08</b> · 胃窦 · white_light · 部位置信 0.99</span></div><div class="frame"><img src="images/L4_1b590950/F12.jpg" alt="F12" loading="lazy" decoding="async"><span><b>F12</b> · 十二指肠 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L4_1b590950/F16.jpg" alt="F16" loading="lazy" decoding="async"><span><b>F16</b> · 胃角 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L4_1b590950/F20.jpg" alt="F20" loading="lazy" decoding="async"><span><b>F20</b> · 胃底 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L4_1b590950/F24.jpg" alt="F24" loading="lazy" decoding="async"><span><b>F24</b> · 胃底 · white_light · 部位置信 0.95</span></div><div class="frame"><img src="images/L4_1b590950/F28.jpg" alt="F28" loading="lazy" decoding="async"><span><b>F28</b> · 十二指肠 · white_light · 部位置信 0.93</span></div></div>
+</details><h2>L5 诊断印象 <code>L5_diagnostic_impression</code></h2><p class="meta">全库 2687 条 · 按划分分层，抽 8 / 2687 条，覆盖 3 / 3 个分层<br>帧数 1/16/24（最少/中位/最多） · 划分 test 892、train 1230、val 565 · 输入档 clean_matched 2687 · 问法 mcq 2687、open_ended 2687</p><details class="case"><summary>L5_d8689019</summary>
+<p class="meta">检查号 <code>SCOPEV2_2f77d8689019</code> · 划分 <code>test</code> · 输入档 <code>clean_matched</code> · 发布角色 <code>rare_appendix</code> · 分层 <code>贲门失弛缓症</code> · 标签置信 <code>1</code> · 标记 <code>pathology_diseases_excluded</code></p>
+<div class="layer"><h4>题干</h4><pre>根据以下胃镜图像，给出内镜诊断。</pre></div>
+<div class="layer"><h4>标准答案</h4><pre>[
+  {
+    &quot;label&quot;: &quot;慢性萎缩性胃炎&quot;
+  },
+  {
+    &quot;label&quot;: &quot;Hp感染&quot;
+  },
+  {
+    &quot;label&quot;: &quot;反流性食管炎&quot;
+  },
+  {
+    &quot;label&quot;: &quot;食管憩室&quot;
+  },
+  {
+    &quot;label&quot;: &quot;贲门失弛缓症&quot;
+  }
+]</pre></div>
+<div class="layer"><h4>任务参数 task_payload</h4><pre>（空）</pre></div>
+<div class="layer"><h4>标签来源 provenance</h4><pre>{
+  &quot;label_source&quot;: &quot;report_impression&quot;,
+  &quot;pathology_diseases_excluded&quot;: 3
+}</pre></div>
+<h4 style="margin:18px 0 8px">问法变体</h4>
+<table><tr><th>问法</th><th>题干</th><th>选项</th><th>答案</th></tr><tr><td><code>open_ended</code></td><td>根据以下胃镜图像，给出内镜诊断。</td><td>—</td><td>[{&quot;label&quot;: &quot;慢性萎缩性胃炎&quot;}, {&quot;label&quot;: &quot;Hp感染&quot;}, {&quot;label&quot;: &quot;反流性食管炎&quot;}, {&quot;label&quot;: &quot;食管憩室&quot;}, {&quot;label&quot;: &quot;贲门失弛缓症&quot;}]</td></tr><tr><td><code>mcq</code></td><td>根据该胃镜检查所见，以下哪一项内镜诊断最恰当？请选择唯一正确的选项。</td><td>A. 十二指肠瘘；B. 胃异物；C. 十二指肠异物；D. 食管憩室</td><td>&quot;D&quot;</td></tr></table>
+<h4 style="margin:18px 0 8px">图像</h4>
+<p class="meta">共 17 帧，等距展示其中 8 帧。<b>模型收到的是全部 17 帧</b>，这里只是够不够看的抽样。</p><div class="frames"><div class="frame"><img src="images/L5_d8689019/F01.jpg" alt="F01" loading="lazy" decoding="async"><span><b>F01</b> · 食管 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L5_d8689019/F03.jpg" alt="F03" loading="lazy" decoding="async"><span><b>F03</b> · 食管 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L5_d8689019/F05.jpg" alt="F05" loading="lazy" decoding="async"><span><b>F05</b> · 胃底 · white_light · 部位置信 0.99</span></div><div class="frame"><img src="images/L5_d8689019/F07.jpg" alt="F07" loading="lazy" decoding="async"><span><b>F07</b> · 胃体 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L5_d8689019/F09.jpg" alt="F09" loading="lazy" decoding="async"><span><b>F09</b> · 胃角 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L5_d8689019/F11.jpg" alt="F11" loading="lazy" decoding="async"><span><b>F11</b> · 胃角 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L5_d8689019/F13.jpg" alt="F13" loading="lazy" decoding="async"><span><b>F13</b> · 胃窦 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L5_d8689019/F15.jpg" alt="F15" loading="lazy" decoding="async"><span><b>F15</b> · 幽门 · white_light · 部位置信 1.00</span></div></div>
+</details><details class="case"><summary>L5_b7c5385b</summary>
+<p class="meta">检查号 <code>SCOPEV2_9eeab7c5385b</code> · 划分 <code>test</code> · 输入档 <code>clean_matched</code> · 发布角色 <code>balanced</code> · 分层 <code>息肉切除术后</code> · 标签置信 <code>1</code> · 标记 <code>pathology_diseases_excluded</code></p>
+<div class="layer"><h4>题干</h4><pre>根据以下胃镜图像，给出内镜诊断。</pre></div>
+<div class="layer"><h4>标准答案</h4><pre>[
+  {
+    &quot;label&quot;: &quot;慢性萎缩性胃炎&quot;
+  },
+  {
+    &quot;label&quot;: &quot;ESD术后&quot;
+  },
+  {
+    &quot;label&quot;: &quot;十二指肠溃疡&quot;
+  },
+  {
+    &quot;label&quot;: &quot;胃息肉&quot;
+  },
+  {
+    &quot;label&quot;: &quot;息肉切除术后&quot;
+  }
+]</pre></div>
+<div class="layer"><h4>任务参数 task_payload</h4><pre>（空）</pre></div>
+<div class="layer"><h4>标签来源 provenance</h4><pre>{
+  &quot;label_source&quot;: &quot;report_impression&quot;,
+  &quot;pathology_diseases_excluded&quot;: 8
+}</pre></div>
+<h4 style="margin:18px 0 8px">问法变体</h4>
+<table><tr><th>问法</th><th>题干</th><th>选项</th><th>答案</th></tr><tr><td><code>open_ended</code></td><td>根据以下胃镜图像，给出内镜诊断。</td><td>—</td><td>[{&quot;label&quot;: &quot;慢性萎缩性胃炎&quot;}, {&quot;label&quot;: &quot;ESD术后&quot;}, {&quot;label&quot;: &quot;十二指肠溃疡&quot;}, {&quot;label&quot;: &quot;胃息肉&quot;}, {&quot;label&quot;: &quot;息肉切除术后&quot;}]</td></tr><tr><td><code>mcq</code></td><td>根据该胃镜检查所见，以下哪一项内镜诊断最恰当？请选择唯一正确的选项。</td><td>A. 吻合口溃疡；B. 十二指肠溃疡；C. 胃溃疡伴出血；D. 应激性溃疡</td><td>&quot;B&quot;</td></tr></table>
+<h4 style="margin:18px 0 8px">图像</h4>
+<p class="meta">共 11 帧，等距展示其中 8 帧。<b>模型收到的是全部 11 帧</b>，这里只是够不够看的抽样。</p><div class="frames"><div class="frame"><img src="images/L5_b7c5385b/F01.jpg" alt="F01" loading="lazy" decoding="async"><span><b>F01</b> · 胃底 · white_light · 部位置信 0.92</span></div><div class="frame"><img src="images/L5_b7c5385b/F02.jpg" alt="F02" loading="lazy" decoding="async"><span><b>F02</b> · 胃体 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L5_b7c5385b/F03.jpg" alt="F03" loading="lazy" decoding="async"><span><b>F03</b> · 胃体 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L5_b7c5385b/F05.jpg" alt="F05" loading="lazy" decoding="async"><span><b>F05</b> · 胃角 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L5_b7c5385b/F06.jpg" alt="F06" loading="lazy" decoding="async"><span><b>F06</b> · 胃角 · white_light · 部位置信 0.92</span></div><div class="frame"><img src="images/L5_b7c5385b/F07.jpg" alt="F07" loading="lazy" decoding="async"><span><b>F07</b> · 胃角 · white_light · 部位置信 0.90</span></div><div class="frame"><img src="images/L5_b7c5385b/F09.jpg" alt="F09" loading="lazy" decoding="async"><span><b>F09</b> · 胃窦 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L5_b7c5385b/F10.jpg" alt="F10" loading="lazy" decoding="async"><span><b>F10</b> · 胃窦 · white_light · 部位置信 0.99</span></div></div>
+</details><details class="case"><summary>L5_16d6f75d</summary>
+<p class="meta">检查号 <code>SCOPEV2_468616d6f75d</code> · 划分 <code>test</code> · 输入档 <code>clean_matched</code> · 发布角色 <code>balanced</code> · 分层 <code>Hp感染</code> · 标签置信 <code>1</code> · 标记 <code>pathology_diseases_excluded</code></p>
+<div class="layer"><h4>题干</h4><pre>根据以下胃镜图像，给出内镜诊断。</pre></div>
+<div class="layer"><h4>标准答案</h4><pre>[
+  {
+    &quot;label&quot;: &quot;慢性萎缩性胃炎&quot;
+  },
+  {
+    &quot;label&quot;: &quot;Hp感染&quot;
+  }
+]</pre></div>
+<div class="layer"><h4>任务参数 task_payload</h4><pre>（空）</pre></div>
+<div class="layer"><h4>标签来源 provenance</h4><pre>{
+  &quot;label_source&quot;: &quot;report_impression&quot;,
+  &quot;pathology_diseases_excluded&quot;: 2
+}</pre></div>
+<h4 style="margin:18px 0 8px">问法变体</h4>
+<table><tr><th>问法</th><th>题干</th><th>选项</th><th>答案</th></tr><tr><td><code>open_ended</code></td><td>根据以下胃镜图像，给出内镜诊断。</td><td>—</td><td>[{&quot;label&quot;: &quot;慢性萎缩性胃炎&quot;}, {&quot;label&quot;: &quot;Hp感染&quot;}]</td></tr><tr><td><code>mcq</code></td><td>根据该胃镜检查所见，以下哪一项内镜诊断最恰当？请选择唯一正确的选项。</td><td>A. 肠化；B. 自身免疫性胃炎；C. 慢性萎缩性胃炎伴糜烂；D. Hp感染</td><td>&quot;D&quot;</td></tr></table>
+<h4 style="margin:18px 0 8px">图像</h4>
+<p class="meta">共 20 帧，等距展示其中 8 帧。<b>模型收到的是全部 20 帧</b>，这里只是够不够看的抽样。</p><div class="frames"><div class="frame"><img src="images/L5_16d6f75d/F01.jpg" alt="F01" loading="lazy" decoding="async"><span><b>F01</b> · 食管 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L5_16d6f75d/F03.jpg" alt="F03" loading="lazy" decoding="async"><span><b>F03</b> · 食管 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L5_16d6f75d/F06.jpg" alt="F06" loading="lazy" decoding="async"><span><b>F06</b> · 胃底 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L5_16d6f75d/F08.jpg" alt="F08" loading="lazy" decoding="async"><span><b>F08</b> · 胃体 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L5_16d6f75d/F11.jpg" alt="F11" loading="lazy" decoding="async"><span><b>F11</b> · 胃角 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L5_16d6f75d/F13.jpg" alt="F13" loading="lazy" decoding="async"><span><b>F13</b> · 胃窦 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L5_16d6f75d/F16.jpg" alt="F16" loading="lazy" decoding="async"><span><b>F16</b> · 幽门 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L5_16d6f75d/F18.jpg" alt="F18" loading="lazy" decoding="async"><span><b>F18</b> · 十二指肠 · white_light · 部位置信 1.00</span></div></div>
+</details><details class="case"><summary>L5_b4633bd8</summary>
+<p class="meta">检查号 <code>SCOPEV2_3036b4633bd8</code> · 划分 <code>train</code> · 输入档 <code>clean_matched</code> · 发布角色 <code>balanced</code> · 分层 <code>食管静脉曲张</code> · 标签置信 <code>1</code> · 标记 <code>pathology_diseases_excluded</code></p>
+<div class="layer"><h4>题干</h4><pre>根据以下胃镜图像，给出内镜诊断。</pre></div>
+<div class="layer"><h4>标准答案</h4><pre>[
+  {
+    &quot;label&quot;: &quot;胃溃疡&quot;
+  },
+  {
+    &quot;label&quot;: &quot;慢性萎缩性胃炎&quot;
+  },
+  {
+    &quot;label&quot;: &quot;反流性食管炎&quot;
+  },
+  {
+    &quot;label&quot;: &quot;食管静脉曲张&quot;
+  }
+]</pre></div>
+<div class="layer"><h4>任务参数 task_payload</h4><pre>（空）</pre></div>
+<div class="layer"><h4>标签来源 provenance</h4><pre>{
+  &quot;label_source&quot;: &quot;report_impression&quot;,
+  &quot;pathology_diseases_excluded&quot;: 1
+}</pre></div>
+<h4 style="margin:18px 0 8px">问法变体</h4>
+<table><tr><th>问法</th><th>题干</th><th>选项</th><th>答案</th></tr><tr><td><code>open_ended</code></td><td>根据以下胃镜图像，给出内镜诊断。</td><td>—</td><td>[{&quot;label&quot;: &quot;胃溃疡&quot;}, {&quot;label&quot;: &quot;慢性萎缩性胃炎&quot;}, {&quot;label&quot;: &quot;反流性食管炎&quot;}, {&quot;label&quot;: &quot;食管静脉曲张&quot;}]</td></tr><tr><td><code>mcq</code></td><td>根据该胃镜检查所见，以下哪一项内镜诊断最恰当？请选择唯一正确的选项。</td><td>A. 食管鳞状细胞癌；B. 高级别上皮内瘤变；C. 肥厚性胃炎；D. 胃溃疡</td><td>&quot;D&quot;</td></tr></table>
+<h4 style="margin:18px 0 8px">图像</h4>
+<div class="frames"><div class="frame"><img src="images/L5_b4633bd8/F01.jpg" alt="F01" loading="lazy" decoding="async"><span><b>F01</b> · 胃底 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L5_b4633bd8/F02.jpg" alt="F02" loading="lazy" decoding="async"><span><b>F02</b> · 胃底 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L5_b4633bd8/F03.jpg" alt="F03" loading="lazy" decoding="async"><span><b>F03</b> · 胃底 · white_light · 部位置信 0.99</span></div><div class="frame"><img src="images/L5_b4633bd8/F04.jpg" alt="F04" loading="lazy" decoding="async"><span><b>F04</b> · 胃角 · white_light · 部位置信 0.95</span></div><div class="frame"><img src="images/L5_b4633bd8/F05.jpg" alt="F05" loading="lazy" decoding="async"><span><b>F05</b> · 胃窦 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L5_b4633bd8/F06.jpg" alt="F06" loading="lazy" decoding="async"><span><b>F06</b> · 十二指肠 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L5_b4633bd8/F07.jpg" alt="F07" loading="lazy" decoding="async"><span><b>F07</b> · 十二指肠 · white_light · 部位置信 0.99</span></div></div>
+</details><details class="case"><summary>L5_b9399ff0</summary>
+<p class="meta">检查号 <code>SCOPEV2_59fab9399ff0</code> · 划分 <code>train</code> · 输入档 <code>clean_matched</code> · 发布角色 <code>balanced</code> · 分层 <code>术后瘢痕</code> · 标签置信 <code>1</code> · 标记 <code>pathology_diseases_excluded</code></p>
+<div class="layer"><h4>题干</h4><pre>根据以下胃镜图像，给出内镜诊断。</pre></div>
+<div class="layer"><h4>标准答案</h4><pre>[
+  {
+    &quot;label&quot;: &quot;ESD术后&quot;
+  },
+  {
+    &quot;label&quot;: &quot;术后瘢痕&quot;
+  },
+  {
+    &quot;label&quot;: &quot;胃息肉&quot;
+  },
+  {
+    &quot;label&quot;: &quot;慢性萎缩性胃炎&quot;
+  },
+  {
+    &quot;label&quot;: &quot;Hp感染&quot;
+  }
+]</pre></div>
+<div class="layer"><h4>任务参数 task_payload</h4><pre>（空）</pre></div>
+<div class="layer"><h4>标签来源 provenance</h4><pre>{
+  &quot;label_source&quot;: &quot;report_impression&quot;,
+  &quot;pathology_diseases_excluded&quot;: 4
+}</pre></div>
+<h4 style="margin:18px 0 8px">问法变体</h4>
+<table><tr><th>问法</th><th>题干</th><th>选项</th><th>答案</th></tr><tr><td><code>open_ended</code></td><td>根据以下胃镜图像，给出内镜诊断。</td><td>—</td><td>[{&quot;label&quot;: &quot;ESD术后&quot;}, {&quot;label&quot;: &quot;术后瘢痕&quot;}, {&quot;label&quot;: &quot;胃息肉&quot;}, {&quot;label&quot;: &quot;慢性萎缩性胃炎&quot;}, {&quot;label&quot;: &quot;Hp感染&quot;}]</td></tr><tr><td><code>mcq</code></td><td>根据该胃镜检查所见，以下哪一项内镜诊断最恰当？请选择唯一正确的选项。</td><td>A. 息肉病；B. 肠化；C. Dieulafoy病；D. 慢性萎缩性胃炎</td><td>&quot;D&quot;</td></tr></table>
+<h4 style="margin:18px 0 8px">图像</h4>
+<p class="meta">共 15 帧，等距展示其中 8 帧。<b>模型收到的是全部 15 帧</b>，这里只是够不够看的抽样。</p><div class="frames"><div class="frame"><img src="images/L5_b9399ff0/F01.jpg" alt="F01" loading="lazy" decoding="async"><span><b>F01</b> · 食管 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L5_b9399ff0/F02.jpg" alt="F02" loading="lazy" decoding="async"><span><b>F02</b> · 食管 · white_light · 部位置信 0.86</span></div><div class="frame"><img src="images/L5_b9399ff0/F04.jpg" alt="F04" loading="lazy" decoding="async"><span><b>F04</b> · 胃底 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L5_b9399ff0/F06.jpg" alt="F06" loading="lazy" decoding="async"><span><b>F06</b> · 胃体 · white_light · 部位置信 0.99</span></div><div class="frame"><img src="images/L5_b9399ff0/F08.jpg" alt="F08" loading="lazy" decoding="async"><span><b>F08</b> · 胃角 · white_light · 部位置信 0.99</span></div><div class="frame"><img src="images/L5_b9399ff0/F10.jpg" alt="F10" loading="lazy" decoding="async"><span><b>F10</b> · 胃窦 · white_light · 部位置信 0.95</span></div><div class="frame"><img src="images/L5_b9399ff0/F12.jpg" alt="F12" loading="lazy" decoding="async"><span><b>F12</b> · 幽门 · white_light · 部位置信 0.99</span></div><div class="frame"><img src="images/L5_b9399ff0/F14.jpg" alt="F14" loading="lazy" decoding="async"><span><b>F14</b> · 十二指肠 · white_light · 部位置信 1.00</span></div></div>
+</details><details class="case"><summary>L5_cfa63751</summary>
+<p class="meta">检查号 <code>SCOPEV2_6ccacfa63751</code> · 划分 <code>train</code> · 输入档 <code>clean_matched</code> · 发布角色 <code>balanced</code> · 分层 <code>十二指肠憩室</code> · 标签置信 <code>1</code> · 标记 <code>pathology_diseases_excluded</code></p>
+<div class="layer"><h4>题干</h4><pre>根据以下胃镜图像，给出内镜诊断。</pre></div>
+<div class="layer"><h4>标准答案</h4><pre>[
+  {
+    &quot;label&quot;: &quot;反流性食管炎&quot;
+  },
+  {
+    &quot;label&quot;: &quot;慢性萎缩性胃炎&quot;
+  },
+  {
+    &quot;label&quot;: &quot;十二指肠憩室&quot;
+  }
+]</pre></div>
+<div class="layer"><h4>任务参数 task_payload</h4><pre>（空）</pre></div>
+<div class="layer"><h4>标签来源 provenance</h4><pre>{
+  &quot;label_source&quot;: &quot;report_impression&quot;,
+  &quot;pathology_diseases_excluded&quot;: 8
+}</pre></div>
+<h4 style="margin:18px 0 8px">问法变体</h4>
+<table><tr><th>问法</th><th>题干</th><th>选项</th><th>答案</th></tr><tr><td><code>open_ended</code></td><td>根据以下胃镜图像，给出内镜诊断。</td><td>—</td><td>[{&quot;label&quot;: &quot;反流性食管炎&quot;}, {&quot;label&quot;: &quot;慢性萎缩性胃炎&quot;}, {&quot;label&quot;: &quot;十二指肠憩室&quot;}]</td></tr><tr><td><code>mcq</code></td><td>根据该胃镜检查所见，以下哪一项内镜诊断最恰当？请选择唯一正确的选项。</td><td>A. 克罗恩病（食管）；B. 反流性食管炎；C. 食管念珠菌病；D. 白塞病</td><td>&quot;B&quot;</td></tr></table>
+<h4 style="margin:18px 0 8px">图像</h4>
+<p class="meta">共 16 帧，等距展示其中 8 帧。<b>模型收到的是全部 16 帧</b>，这里只是够不够看的抽样。</p><div class="frames"><div class="frame"><img src="images/L5_cfa63751/F01.jpg" alt="F01" loading="lazy" decoding="async"><span><b>F01</b> · 食管 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L5_cfa63751/F03.jpg" alt="F03" loading="lazy" decoding="async"><span><b>F03</b> · 食管 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L5_cfa63751/F05.jpg" alt="F05" loading="lazy" decoding="async"><span><b>F05</b> · 胃角 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L5_cfa63751/F07.jpg" alt="F07" loading="lazy" decoding="async"><span><b>F07</b> · 胃角 · white_light · 部位置信 0.92</span></div><div class="frame"><img src="images/L5_cfa63751/F09.jpg" alt="F09" loading="lazy" decoding="async"><span><b>F09</b> · 胃窦 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L5_cfa63751/F11.jpg" alt="F11" loading="lazy" decoding="async"><span><b>F11</b> · 幽门 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L5_cfa63751/F13.jpg" alt="F13" loading="lazy" decoding="async"><span><b>F13</b> · 幽门 · white_light · 部位置信 0.97</span></div><div class="frame"><img src="images/L5_cfa63751/F15.jpg" alt="F15" loading="lazy" decoding="async"><span><b>F15</b> · 十二指肠 · white_light · 部位置信 1.00</span></div></div>
+</details><details class="case"><summary>L5_7efac957</summary>
+<p class="meta">检查号 <code>SCOPEV2_07247efac957</code> · 划分 <code>val</code> · 输入档 <code>clean_matched</code> · 发布角色 <code>balanced</code> · 分层 <code>十二指肠溃疡</code> · 标签置信 <code>1</code> · 标记 <code>pathology_diseases_excluded</code></p>
+<div class="layer"><h4>题干</h4><pre>根据以下胃镜图像，给出内镜诊断。</pre></div>
+<div class="layer"><h4>标准答案</h4><pre>[
+  {
+    &quot;label&quot;: &quot;慢性萎缩性胃炎&quot;
+  },
+  {
+    &quot;label&quot;: &quot;十二指肠溃疡&quot;
+  }
+]</pre></div>
+<div class="layer"><h4>任务参数 task_payload</h4><pre>（空）</pre></div>
+<div class="layer"><h4>标签来源 provenance</h4><pre>{
+  &quot;label_source&quot;: &quot;report_impression&quot;,
+  &quot;pathology_diseases_excluded&quot;: 7
+}</pre></div>
+<h4 style="margin:18px 0 8px">问法变体</h4>
+<table><tr><th>问法</th><th>题干</th><th>选项</th><th>答案</th></tr><tr><td><code>open_ended</code></td><td>根据以下胃镜图像，给出内镜诊断。</td><td>—</td><td>[{&quot;label&quot;: &quot;慢性萎缩性胃炎&quot;}, {&quot;label&quot;: &quot;十二指肠溃疡&quot;}]</td></tr><tr><td><code>mcq</code></td><td>根据该胃镜检查所见，以下哪一项内镜诊断最恰当？请选择唯一正确的选项。</td><td>A. 十二指肠溃疡；B. 应激性溃疡；C. 胃溃疡伴出血；D. 吻合口溃疡</td><td>&quot;A&quot;</td></tr></table>
+<h4 style="margin:18px 0 8px">图像</h4>
+<p class="meta">共 12 帧，等距展示其中 8 帧。<b>模型收到的是全部 12 帧</b>，这里只是够不够看的抽样。</p><div class="frames"><div class="frame"><img src="images/L5_7efac957/F01.jpg" alt="F01" loading="lazy" decoding="async"><span><b>F01</b> · 食管 · white_light · 部位置信 0.99</span></div><div class="frame"><img src="images/L5_7efac957/F02.jpg" alt="F02" loading="lazy" decoding="async"><span><b>F02</b> · 胃底 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L5_7efac957/F04.jpg" alt="F04" loading="lazy" decoding="async"><span><b>F04</b> · 胃体 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L5_7efac957/F05.jpg" alt="F05" loading="lazy" decoding="async"><span><b>F05</b> · 胃体 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L5_7efac957/F07.jpg" alt="F07" loading="lazy" decoding="async"><span><b>F07</b> · 胃角 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L5_7efac957/F08.jpg" alt="F08" loading="lazy" decoding="async"><span><b>F08</b> · 胃角 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L5_7efac957/F10.jpg" alt="F10" loading="lazy" decoding="async"><span><b>F10</b> · 十二指肠 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L5_7efac957/F11.jpg" alt="F11" loading="lazy" decoding="async"><span><b>F11</b> · 十二指肠 · white_light · 部位置信 1.00</span></div></div>
+</details><details class="case"><summary>L5_d22d4fbb</summary>
+<p class="meta">检查号 <code>SCOPEV2_2ee6d22d4fbb</code> · 划分 <code>val</code> · 输入档 <code>clean_matched</code> · 发布角色 <code>rare_appendix</code> · 分层 <code>胃潴留</code> · 标签置信 <code>1</code> · 标记 <code>pathology_diseases_excluded</code></p>
+<div class="layer"><h4>题干</h4><pre>根据以下胃镜图像，给出内镜诊断。</pre></div>
+<div class="layer"><h4>标准答案</h4><pre>[
+  {
+    &quot;label&quot;: &quot;胃癌&quot;
+  },
+  {
+    &quot;label&quot;: &quot;胃潴留&quot;
+  },
+  {
+    &quot;label&quot;: &quot;慢性萎缩性胃炎&quot;
+  },
+  {
+    &quot;label&quot;: &quot;反流性食管炎&quot;
+  },
+  {
+    &quot;label&quot;: &quot;贲门炎&quot;
+  }
+]</pre></div>
+<div class="layer"><h4>任务参数 task_payload</h4><pre>（空）</pre></div>
+<div class="layer"><h4>标签来源 provenance</h4><pre>{
+  &quot;label_source&quot;: &quot;report_impression&quot;,
+  &quot;pathology_diseases_excluded&quot;: 5
+}</pre></div>
+<h4 style="margin:18px 0 8px">问法变体</h4>
+<table><tr><th>问法</th><th>题干</th><th>选项</th><th>答案</th></tr><tr><td><code>open_ended</code></td><td>根据以下胃镜图像，给出内镜诊断。</td><td>—</td><td>[{&quot;label&quot;: &quot;胃癌&quot;}, {&quot;label&quot;: &quot;胃潴留&quot;}, {&quot;label&quot;: &quot;慢性萎缩性胃炎&quot;}, {&quot;label&quot;: &quot;反流性食管炎&quot;}, {&quot;label&quot;: &quot;贲门炎&quot;}]</td></tr><tr><td><code>mcq</code></td><td>根据该胃镜检查所见，以下哪一项内镜诊断最恰当？请选择唯一正确的选项。</td><td>A. 食管息肉；B. 胃癌；C. 弥漫性大B细胞淋巴瘤；D. MALT淋巴瘤</td><td>&quot;B&quot;</td></tr></table>
+<h4 style="margin:18px 0 8px">图像</h4>
+<p class="meta">共 19 帧，等距展示其中 8 帧。<b>模型收到的是全部 19 帧</b>，这里只是够不够看的抽样。</p><div class="frames"><div class="frame"><img src="images/L5_d22d4fbb/F01.jpg" alt="F01" loading="lazy" decoding="async"><span><b>F01</b> · 食管 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L5_d22d4fbb/F03.jpg" alt="F03" loading="lazy" decoding="async"><span><b>F03</b> · 食管 · white_light · 部位置信 0.99</span></div><div class="frame"><img src="images/L5_d22d4fbb/F05.jpg" alt="F05" loading="lazy" decoding="async"><span><b>F05</b> · 胃底 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L5_d22d4fbb/F08.jpg" alt="F08" loading="lazy" decoding="async"><span><b>F08</b> · 胃体 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L5_d22d4fbb/F10.jpg" alt="F10" loading="lazy" decoding="async"><span><b>F10</b> · 胃体 · white_light · 部位置信 0.80</span></div><div class="frame"><img src="images/L5_d22d4fbb/F12.jpg" alt="F12" loading="lazy" decoding="async"><span><b>F12</b> · 胃角 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L5_d22d4fbb/F15.jpg" alt="F15" loading="lazy" decoding="async"><span><b>F15</b> · 胃窦 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L5_d22d4fbb/F17.jpg" alt="F17" loading="lazy" decoding="async"><span><b>F17</b> · 幽门 · white_light · 部位置信 0.99</span></div></div>
+</details><h2>L7 指南推理 <code>L7_guideline_reasoning</code></h2><p class="meta">全库 833 条 · 按指南分层，抽 8 / 833 条，覆盖 6 / 6 个分层<br>帧数 1/9/18（最少/中位/最多） · 划分 test 265、train 385、val 183 · 输入档 clean_matched 833 · 问法 mcq 831、open_ended 833</p><details class="case"><summary>L7_fefc6e45_forrest</summary>
+<p class="meta">检查号 <code>SCOPEV2_a572fefc6e45</code> · 划分 <code>train</code> · 输入档 <code>clean_matched</code> · 发布角色 <code>rare_appendix</code> · 分层 <code>forrest:IIb</code> · 标签置信 <code>1</code> · 标记 <code>single_reader_grade</code></p>
+<div class="layer"><h4>题干</h4><pre>以下是该患者的胃镜图像，请按Forrest 分级（溃疡出血风险）给出分级，并说明依据的征象。</pre></div>
+<div class="layer"><h4>标准答案</h4><pre>{
+  &quot;score_or_grade&quot;: &quot;IIb&quot;
+}</pre></div>
+<div class="layer"><h4>任务参数 task_payload</h4><pre>{
+  &quot;guideline&quot;: &quot;forrest&quot;,
+  &quot;guideline_name&quot;: &quot;Forrest 分级（溃疡出血风险）&quot;,
+  &quot;organ_sites&quot;: [
+    &quot;胃体&quot;,
+    &quot;胃角&quot;,
+    &quot;胃窦&quot;,
+    &quot;十二指肠&quot;
+  ]
+}</pre></div>
+<div class="layer"><h4>标签来源 provenance</h4><pre>{
+  &quot;label_source&quot;: &quot;physician_stated_grade&quot;,
+  &quot;parsed_from&quot;: &quot;report_impression&quot;,
+  &quot;adjudicated&quot;: false
+}</pre></div>
+<h4 style="margin:18px 0 8px">问法变体</h4>
+<table><tr><th>问法</th><th>题干</th><th>选项</th><th>答案</th></tr><tr><td><code>open_ended</code></td><td>以下是该患者的胃镜图像，请按Forrest 分级（溃疡出血风险）给出分级，并说明依据的征象。</td><td>—</td><td>{&quot;score_or_grade&quot;: &quot;IIb&quot;}</td></tr><tr><td><code>mcq</code></td><td>请按Forrest 分级（溃疡出血风险）给出该病例的分级，选择唯一正确的选项。</td><td>A. Forrest IIc；B. Forrest IIa；C. Forrest Ib；D. Forrest IIb</td><td>&quot;D&quot;</td></tr></table>
+<h4 style="margin:18px 0 8px">图像</h4>
+<p class="meta">共 9 帧，等距展示其中 8 帧。<b>模型收到的是全部 9 帧</b>，这里只是够不够看的抽样。</p><div class="frames"><div class="frame"><img src="images/L7_fefc6e45_forrest/F01.jpg" alt="F01" loading="lazy" decoding="async"><span><b>F01</b> · 胃体 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L7_fefc6e45_forrest/F02.jpg" alt="F02" loading="lazy" decoding="async"><span><b>F02</b> · 胃体 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L7_fefc6e45_forrest/F03.jpg" alt="F03" loading="lazy" decoding="async"><span><b>F03</b> · 胃体 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L7_fefc6e45_forrest/F04.jpg" alt="F04" loading="lazy" decoding="async"><span><b>F04</b> · 胃角 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L7_fefc6e45_forrest/F05.jpg" alt="F05" loading="lazy" decoding="async"><span><b>F05</b> · 胃角 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L7_fefc6e45_forrest/F06.jpg" alt="F06" loading="lazy" decoding="async"><span><b>F06</b> · 胃角 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L7_fefc6e45_forrest/F07.jpg" alt="F07" loading="lazy" decoding="async"><span><b>F07</b> · 十二指肠 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L7_fefc6e45_forrest/F08.jpg" alt="F08" loading="lazy" decoding="async"><span><b>F08</b> · 十二指肠 · white_light · 部位置信 1.00</span></div></div>
+</details><details class="case"><summary>L7_ebf336d3_forrest</summary>
+<p class="meta">检查号 <code>SCOPEV2_2532ebf336d3</code> · 划分 <code>train</code> · 输入档 <code>clean_matched</code> · 发布角色 <code>rare_appendix</code> · 分层 <code>forrest:IIb</code> · 标签置信 <code>1</code> · 标记 <code>single_reader_grade</code></p>
+<div class="layer"><h4>题干</h4><pre>以下是该患者的胃镜图像，请按Forrest 分级（溃疡出血风险）给出分级，并说明依据的征象。</pre></div>
+<div class="layer"><h4>标准答案</h4><pre>{
+  &quot;score_or_grade&quot;: &quot;IIb&quot;
+}</pre></div>
+<div class="layer"><h4>任务参数 task_payload</h4><pre>{
+  &quot;guideline&quot;: &quot;forrest&quot;,
+  &quot;guideline_name&quot;: &quot;Forrest 分级（溃疡出血风险）&quot;,
+  &quot;organ_sites&quot;: [
+    &quot;胃体&quot;,
+    &quot;胃角&quot;,
+    &quot;胃窦&quot;,
+    &quot;十二指肠&quot;
+  ]
+}</pre></div>
+<div class="layer"><h4>标签来源 provenance</h4><pre>{
+  &quot;label_source&quot;: &quot;physician_stated_grade&quot;,
+  &quot;parsed_from&quot;: &quot;report_impression&quot;,
+  &quot;adjudicated&quot;: false
+}</pre></div>
+<h4 style="margin:18px 0 8px">问法变体</h4>
+<table><tr><th>问法</th><th>题干</th><th>选项</th><th>答案</th></tr><tr><td><code>open_ended</code></td><td>以下是该患者的胃镜图像，请按Forrest 分级（溃疡出血风险）给出分级，并说明依据的征象。</td><td>—</td><td>{&quot;score_or_grade&quot;: &quot;IIb&quot;}</td></tr><tr><td><code>mcq</code></td><td>请按Forrest 分级（溃疡出血风险）给出该病例的分级，选择唯一正确的选项。</td><td>A. Forrest IIb；B. Forrest IIa；C. Forrest Ib；D. Forrest IIc</td><td>&quot;A&quot;</td></tr></table>
+<h4 style="margin:18px 0 8px">图像</h4>
+<div class="frames"><div class="frame"><img src="images/L7_ebf336d3_forrest/F01.jpg" alt="F01" loading="lazy" decoding="async"><span><b>F01</b> · 胃体 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L7_ebf336d3_forrest/F02.jpg" alt="F02" loading="lazy" decoding="async"><span><b>F02</b> · 胃体 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L7_ebf336d3_forrest/F03.jpg" alt="F03" loading="lazy" decoding="async"><span><b>F03</b> · 胃体 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L7_ebf336d3_forrest/F04.jpg" alt="F04" loading="lazy" decoding="async"><span><b>F04</b> · 胃窦 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L7_ebf336d3_forrest/F05.jpg" alt="F05" loading="lazy" decoding="async"><span><b>F05</b> · 胃窦 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L7_ebf336d3_forrest/F06.jpg" alt="F06" loading="lazy" decoding="async"><span><b>F06</b> · 十二指肠 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L7_ebf336d3_forrest/F07.jpg" alt="F07" loading="lazy" decoding="async"><span><b>F07</b> · 十二指肠 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L7_ebf336d3_forrest/F08.jpg" alt="F08" loading="lazy" decoding="async"><span><b>F08</b> · 十二指肠 · white_light · 部位置信 1.00</span></div></div>
+</details><details class="case"><summary>L7_2056f210_kimura_takemoto</summary>
+<p class="meta">检查号 <code>SCOPEV2_96442056f210</code> · 划分 <code>train</code> · 输入档 <code>clean_matched</code> · 发布角色 <code>balanced</code> · 分层 <code>kimura_takemoto:C-2</code> · 标签置信 <code>1</code> · 标记 <code>single_reader_grade</code></p>
+<div class="layer"><h4>题干</h4><pre>以下是该患者的胃镜图像，请按木村-竹本分级（胃黏膜萎缩范围）给出分级，并说明依据的征象。</pre></div>
+<div class="layer"><h4>标准答案</h4><pre>{
+  &quot;score_or_grade&quot;: &quot;C-2&quot;
+}</pre></div>
+<div class="layer"><h4>任务参数 task_payload</h4><pre>{
+  &quot;guideline&quot;: &quot;kimura_takemoto&quot;,
+  &quot;guideline_name&quot;: &quot;木村-竹本分级（胃黏膜萎缩范围）&quot;,
+  &quot;organ_sites&quot;: [
+    &quot;胃底&quot;,
+    &quot;胃体&quot;,
+    &quot;胃角&quot;,
+    &quot;胃窦&quot;
+  ]
+}</pre></div>
+<div class="layer"><h4>标签来源 provenance</h4><pre>{
+  &quot;label_source&quot;: &quot;physician_stated_grade&quot;,
+  &quot;parsed_from&quot;: &quot;report_impression&quot;,
+  &quot;adjudicated&quot;: false
+}</pre></div>
+<h4 style="margin:18px 0 8px">问法变体</h4>
+<table><tr><th>问法</th><th>题干</th><th>选项</th><th>答案</th></tr><tr><td><code>open_ended</code></td><td>以下是该患者的胃镜图像，请按木村-竹本分级（胃黏膜萎缩范围）给出分级，并说明依据的征象。</td><td>—</td><td>{&quot;score_or_grade&quot;: &quot;C-2&quot;}</td></tr><tr><td><code>mcq</code></td><td>请按木村-竹本分级（胃黏膜萎缩范围）给出该病例的分级，选择唯一正确的选项。</td><td>A. Kimura-Takemoto C-3；B. Kimura-Takemoto C-1；C. Kimura-Takemoto O-1；D. Kimura-Takemoto C-2</td><td>&quot;D&quot;</td></tr></table>
+<h4 style="margin:18px 0 8px">图像</h4>
+<p class="meta">共 11 帧，等距展示其中 8 帧。<b>模型收到的是全部 11 帧</b>，这里只是够不够看的抽样。</p><div class="frames"><div class="frame"><img src="images/L7_2056f210_kimura_takemoto/F01.jpg" alt="F01" loading="lazy" decoding="async"><span><b>F01</b> · 胃底 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L7_2056f210_kimura_takemoto/F02.jpg" alt="F02" loading="lazy" decoding="async"><span><b>F02</b> · 胃底 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L7_2056f210_kimura_takemoto/F03.jpg" alt="F03" loading="lazy" decoding="async"><span><b>F03</b> · 胃底 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L7_2056f210_kimura_takemoto/F05.jpg" alt="F05" loading="lazy" decoding="async"><span><b>F05</b> · 胃体 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L7_2056f210_kimura_takemoto/F06.jpg" alt="F06" loading="lazy" decoding="async"><span><b>F06</b> · 胃体 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L7_2056f210_kimura_takemoto/F07.jpg" alt="F07" loading="lazy" decoding="async"><span><b>F07</b> · 胃角 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L7_2056f210_kimura_takemoto/F09.jpg" alt="F09" loading="lazy" decoding="async"><span><b>F09</b> · 胃窦 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L7_2056f210_kimura_takemoto/F10.jpg" alt="F10" loading="lazy" decoding="async"><span><b>F10</b> · 胃窦 · white_light · 部位置信 1.00</span></div></div>
+</details><details class="case"><summary>L7_8079b331_kimura_takemoto</summary>
+<p class="meta">检查号 <code>SCOPEV2_6abc8079b331</code> · 划分 <code>val</code> · 输入档 <code>clean_matched</code> · 发布角色 <code>balanced</code> · 分层 <code>kimura_takemoto:C-3</code> · 标签置信 <code>1</code> · 标记 <code>single_reader_grade</code></p>
+<div class="layer"><h4>题干</h4><pre>以下是该患者的胃镜图像，请按木村-竹本分级（胃黏膜萎缩范围）给出分级，并说明依据的征象。</pre></div>
+<div class="layer"><h4>标准答案</h4><pre>{
+  &quot;score_or_grade&quot;: &quot;C-3&quot;
+}</pre></div>
+<div class="layer"><h4>任务参数 task_payload</h4><pre>{
+  &quot;guideline&quot;: &quot;kimura_takemoto&quot;,
+  &quot;guideline_name&quot;: &quot;木村-竹本分级（胃黏膜萎缩范围）&quot;,
+  &quot;organ_sites&quot;: [
+    &quot;胃底&quot;,
+    &quot;胃体&quot;,
+    &quot;胃角&quot;,
+    &quot;胃窦&quot;
+  ]
+}</pre></div>
+<div class="layer"><h4>标签来源 provenance</h4><pre>{
+  &quot;label_source&quot;: &quot;physician_stated_grade&quot;,
+  &quot;parsed_from&quot;: &quot;report_impression&quot;,
+  &quot;adjudicated&quot;: false
+}</pre></div>
+<h4 style="margin:18px 0 8px">问法变体</h4>
+<table><tr><th>问法</th><th>题干</th><th>选项</th><th>答案</th></tr><tr><td><code>open_ended</code></td><td>以下是该患者的胃镜图像，请按木村-竹本分级（胃黏膜萎缩范围）给出分级，并说明依据的征象。</td><td>—</td><td>{&quot;score_or_grade&quot;: &quot;C-3&quot;}</td></tr><tr><td><code>mcq</code></td><td>请按木村-竹本分级（胃黏膜萎缩范围）给出该病例的分级，选择唯一正确的选项。</td><td>A. Kimura-Takemoto O-1；B. Kimura-Takemoto C-3；C. Kimura-Takemoto C-1；D. Kimura-Takemoto C-2</td><td>&quot;B&quot;</td></tr></table>
+<h4 style="margin:18px 0 8px">图像</h4>
+<div class="frames"><div class="frame"><img src="images/L7_8079b331_kimura_takemoto/F01.jpg" alt="F01" loading="lazy" decoding="async"><span><b>F01</b> · 胃底 · white_light · 部位置信 0.97</span></div><div class="frame"><img src="images/L7_8079b331_kimura_takemoto/F02.jpg" alt="F02" loading="lazy" decoding="async"><span><b>F02</b> · 胃体 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L7_8079b331_kimura_takemoto/F03.jpg" alt="F03" loading="lazy" decoding="async"><span><b>F03</b> · 胃体 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L7_8079b331_kimura_takemoto/F04.jpg" alt="F04" loading="lazy" decoding="async"><span><b>F04</b> · 胃体 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L7_8079b331_kimura_takemoto/F05.jpg" alt="F05" loading="lazy" decoding="async"><span><b>F05</b> · 胃窦 · white_light · 部位置信 0.89</span></div></div>
+</details><details class="case"><summary>L7_1f6294d6_la</summary>
+<p class="meta">检查号 <code>SCOPEV2_19df1f6294d6</code> · 划分 <code>train</code> · 输入档 <code>clean_matched</code> · 发布角色 <code>balanced</code> · 分层 <code>la:C</code> · 标签置信 <code>1</code> · 标记 <code>single_reader_grade</code></p>
+<div class="layer"><h4>题干</h4><pre>以下是该患者的胃镜图像，请按洛杉矶分级（反流性食管炎）给出分级，并说明依据的征象。</pre></div>
+<div class="layer"><h4>标准答案</h4><pre>{
+  &quot;score_or_grade&quot;: &quot;C&quot;
+}</pre></div>
+<div class="layer"><h4>任务参数 task_payload</h4><pre>{
+  &quot;guideline&quot;: &quot;la&quot;,
+  &quot;guideline_name&quot;: &quot;洛杉矶分级（反流性食管炎）&quot;,
+  &quot;organ_sites&quot;: [
+    &quot;食管&quot;
+  ]
+}</pre></div>
+<div class="layer"><h4>标签来源 provenance</h4><pre>{
+  &quot;label_source&quot;: &quot;physician_stated_grade&quot;,
+  &quot;parsed_from&quot;: &quot;report_impression&quot;,
+  &quot;adjudicated&quot;: false
+}</pre></div>
+<h4 style="margin:18px 0 8px">问法变体</h4>
+<table><tr><th>问法</th><th>题干</th><th>选项</th><th>答案</th></tr><tr><td><code>open_ended</code></td><td>以下是该患者的胃镜图像，请按洛杉矶分级（反流性食管炎）给出分级，并说明依据的征象。</td><td>—</td><td>{&quot;score_or_grade&quot;: &quot;C&quot;}</td></tr><tr><td><code>mcq</code></td><td>请按洛杉矶分级（反流性食管炎）给出该病例的分级，选择唯一正确的选项。</td><td>A. LA grade B；B. LA grade A；C. LA grade D；D. LA grade C</td><td>&quot;D&quot;</td></tr></table>
+<h4 style="margin:18px 0 8px">图像</h4>
+<div class="frames"><div class="frame"><img src="images/L7_1f6294d6_la/F01.jpg" alt="F01" loading="lazy" decoding="async"><span><b>F01</b> · 食管 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L7_1f6294d6_la/F02.jpg" alt="F02" loading="lazy" decoding="async"><span><b>F02</b> · 食管 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L7_1f6294d6_la/F03.jpg" alt="F03" loading="lazy" decoding="async"><span><b>F03</b> · 食管 · white_light · 部位置信 1.00</span></div></div>
+</details><details class="case"><summary>L7_e5980a73_paris</summary>
+<p class="meta">检查号 <code>SCOPEV2_543de5980a73</code> · 划分 <code>test</code> · 输入档 <code>clean_matched</code> · 发布角色 <code>rare_appendix</code> · 分层 <code>paris:0-IIc</code> · 标签置信 <code>1</code> · 标记 <code>single_reader_grade</code></p>
+<div class="layer"><h4>题干</h4><pre>以下是该患者的胃镜图像，请按巴黎分型（表浅病变形态）给出分级，并说明依据的征象。</pre></div>
+<div class="layer"><h4>标准答案</h4><pre>{
+  &quot;score_or_grade&quot;: &quot;0-IIc&quot;
+}</pre></div>
+<div class="layer"><h4>任务参数 task_payload</h4><pre>{
+  &quot;guideline&quot;: &quot;paris&quot;,
+  &quot;guideline_name&quot;: &quot;巴黎分型（表浅病变形态）&quot;,
+  &quot;organ_sites&quot;: [
+    &quot;食管&quot;,
+    &quot;胃底&quot;,
+    &quot;胃体&quot;,
+    &quot;胃角&quot;,
+    &quot;胃窦&quot;,
+    &quot;十二指肠&quot;
+  ]
+}</pre></div>
+<div class="layer"><h4>标签来源 provenance</h4><pre>{
+  &quot;label_source&quot;: &quot;physician_stated_grade&quot;,
+  &quot;parsed_from&quot;: &quot;report_impression&quot;,
+  &quot;adjudicated&quot;: false
+}</pre></div>
+<h4 style="margin:18px 0 8px">问法变体</h4>
+<table><tr><th>问法</th><th>题干</th><th>选项</th><th>答案</th></tr><tr><td><code>open_ended</code></td><td>以下是该患者的胃镜图像，请按巴黎分型（表浅病变形态）给出分级，并说明依据的征象。</td><td>—</td><td>{&quot;score_or_grade&quot;: &quot;0-IIc&quot;}</td></tr><tr><td><code>mcq</code></td><td>请按巴黎分型（表浅病变形态）给出该病例的分级，选择唯一正确的选项。</td><td>A. Paris type 0-IIc；B. Paris type 0-IIa；C. Paris type 0-IIb；D. Paris type 0-III</td><td>&quot;A&quot;</td></tr></table>
+<h4 style="margin:18px 0 8px">图像</h4>
+<p class="meta">共 18 帧，等距展示其中 8 帧。<b>模型收到的是全部 18 帧</b>，这里只是够不够看的抽样。</p><div class="frames"><div class="frame"><img src="images/L7_e5980a73_paris/F01.jpg" alt="F01" loading="lazy" decoding="async"><span><b>F01</b> · 食管 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L7_e5980a73_paris/F03.jpg" alt="F03" loading="lazy" decoding="async"><span><b>F03</b> · 食管 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L7_e5980a73_paris/F05.jpg" alt="F05" loading="lazy" decoding="async"><span><b>F05</b> · 胃底 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L7_e5980a73_paris/F07.jpg" alt="F07" loading="lazy" decoding="async"><span><b>F07</b> · 胃体 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L7_e5980a73_paris/F10.jpg" alt="F10" loading="lazy" decoding="async"><span><b>F10</b> · 胃角 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L7_e5980a73_paris/F12.jpg" alt="F12" loading="lazy" decoding="async"><span><b>F12</b> · 胃角 · white_light · 部位置信 0.99</span></div><div class="frame"><img src="images/L7_e5980a73_paris/F14.jpg" alt="F14" loading="lazy" decoding="async"><span><b>F14</b> · 胃窦 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L7_e5980a73_paris/F16.jpg" alt="F16" loading="lazy" decoding="async"><span><b>F16</b> · 十二指肠 · white_light · 部位置信 1.00</span></div></div>
+</details><details class="case"><summary>L7_f1b2c465_prague</summary>
+<p class="meta">检查号 <code>SCOPEV2_d474f1b2c465</code> · 划分 <code>train</code> · 输入档 <code>clean_matched</code> · 发布角色 <code>rare_appendix</code> · 分层 <code>prague:C0M3</code> · 标签置信 <code>1</code> · 标记 <code>single_reader_grade</code></p>
+<div class="layer"><h4>题干</h4><pre>以下是该患者的胃镜图像，请按布拉格 C&amp;M 分级（Barrett 食管）给出分级，并说明依据的征象。</pre></div>
+<div class="layer"><h4>标准答案</h4><pre>{
+  &quot;score_or_grade&quot;: &quot;C0M3&quot;
+}</pre></div>
+<div class="layer"><h4>任务参数 task_payload</h4><pre>{
+  &quot;guideline&quot;: &quot;prague&quot;,
+  &quot;guideline_name&quot;: &quot;布拉格 C&amp;M 分级（Barrett 食管）&quot;,
+  &quot;organ_sites&quot;: [
+    &quot;食管&quot;
+  ]
+}</pre></div>
+<div class="layer"><h4>标签来源 provenance</h4><pre>{
+  &quot;label_source&quot;: &quot;physician_stated_grade&quot;,
+  &quot;parsed_from&quot;: &quot;report_impression&quot;,
+  &quot;adjudicated&quot;: false
+}</pre></div>
+<h4 style="margin:18px 0 8px">问法变体</h4>
+<table><tr><th>问法</th><th>题干</th><th>选项</th><th>答案</th></tr><tr><td><code>open_ended</code></td><td>以下是该患者的胃镜图像，请按布拉格 C&amp;M 分级（Barrett 食管）给出分级，并说明依据的征象。</td><td>—</td><td>{&quot;score_or_grade&quot;: &quot;C0M3&quot;}</td></tr></table>
+<h4 style="margin:18px 0 8px">图像</h4>
+<div class="frames"><div class="frame"><img src="images/L7_f1b2c465_prague/F01.jpg" alt="F01" loading="lazy" decoding="async"><span><b>F01</b> · 食管 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L7_f1b2c465_prague/F02.jpg" alt="F02" loading="lazy" decoding="async"><span><b>F02</b> · 食管 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L7_f1b2c465_prague/F03.jpg" alt="F03" loading="lazy" decoding="async"><span><b>F03</b> · 食管 · white_light · 部位置信 1.00</span></div></div>
+</details><details class="case"><summary>L7_91a3e76d_ulcer_ahs</summary>
+<p class="meta">检查号 <code>SCOPEV2_c72c91a3e76d</code> · 划分 <code>train</code> · 输入档 <code>clean_matched</code> · 发布角色 <code>balanced</code> · 分层 <code>ulcer_ahs:A2</code> · 标签置信 <code>1</code> · 标记 <code>single_reader_grade</code></p>
+<div class="layer"><h4>题干</h4><pre>以下是该患者的胃镜图像，请按Sakita 分期（溃疡活动性）给出分级，并说明依据的征象。</pre></div>
+<div class="layer"><h4>标准答案</h4><pre>{
+  &quot;score_or_grade&quot;: &quot;A2&quot;
+}</pre></div>
+<div class="layer"><h4>任务参数 task_payload</h4><pre>{
+  &quot;guideline&quot;: &quot;ulcer_ahs&quot;,
+  &quot;guideline_name&quot;: &quot;Sakita 分期（溃疡活动性）&quot;,
+  &quot;organ_sites&quot;: [
+    &quot;胃体&quot;,
+    &quot;胃角&quot;,
+    &quot;胃窦&quot;,
+    &quot;十二指肠&quot;
+  ]
+}</pre></div>
+<div class="layer"><h4>标签来源 provenance</h4><pre>{
+  &quot;label_source&quot;: &quot;physician_stated_grade&quot;,
+  &quot;parsed_from&quot;: &quot;report_impression&quot;,
+  &quot;adjudicated&quot;: false
+}</pre></div>
+<h4 style="margin:18px 0 8px">问法变体</h4>
+<table><tr><th>问法</th><th>题干</th><th>选项</th><th>答案</th></tr><tr><td><code>open_ended</code></td><td>以下是该患者的胃镜图像，请按Sakita 分期（溃疡活动性）给出分级，并说明依据的征象。</td><td>—</td><td>{&quot;score_or_grade&quot;: &quot;A2&quot;}</td></tr><tr><td><code>mcq</code></td><td>请按Sakita 分期（溃疡活动性）给出该病例的分级，选择唯一正确的选项。</td><td>A. Sakita H2；B. Sakita A2；C. Sakita H1；D. Sakita A1</td><td>&quot;B&quot;</td></tr></table>
+<h4 style="margin:18px 0 8px">图像</h4>
+<div class="frames"><div class="frame"><img src="images/L7_91a3e76d_ulcer_ahs/F01.jpg" alt="F01" loading="lazy" decoding="async"><span><b>F01</b> · 胃体 · white_light · 部位置信 0.99</span></div><div class="frame"><img src="images/L7_91a3e76d_ulcer_ahs/F02.jpg" alt="F02" loading="lazy" decoding="async"><span><b>F02</b> · 胃体 · white_light · 部位置信 0.89</span></div><div class="frame"><img src="images/L7_91a3e76d_ulcer_ahs/F03.jpg" alt="F03" loading="lazy" decoding="async"><span><b>F03</b> · 胃角 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L7_91a3e76d_ulcer_ahs/F04.jpg" alt="F04" loading="lazy" decoding="async"><span><b>F04</b> · 胃窦 · white_light · 部位置信 0.96</span></div><div class="frame"><img src="images/L7_91a3e76d_ulcer_ahs/F05.jpg" alt="F05" loading="lazy" decoding="async"><span><b>F05</b> · 十二指肠 · white_light · 部位置信 0.99</span></div><div class="frame"><img src="images/L7_91a3e76d_ulcer_ahs/F06.jpg" alt="F06" loading="lazy" decoding="async"><span><b>F06</b> · 十二指肠 · white_light · 部位置信 0.94</span></div><div class="frame"><img src="images/L7_91a3e76d_ulcer_ahs/F07.jpg" alt="F07" loading="lazy" decoding="async"><span><b>F07</b> · 十二指肠 · white_light · 部位置信 0.92</span></div></div>
+</details>
+</body></html>

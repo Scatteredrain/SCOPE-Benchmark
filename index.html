@@ -11,7 +11,7 @@ h2 { margin-top: 40px; background: #1a1a1a; color: #fff; padding: 8px 12px; font
 .meta { font-size: .9em; color: #555; margin: 4px 0 14px; }
 .meta code { background: #f1f1f1; padding: 1px 5px; border-radius: 3px; }
 table { border-collapse: collapse; margin: 10px 0 18px; font-size: .92em; }
-th, td { border: 1px solid #ddd; padding: 5px 10px; text-align: left; }
+th, td { border: 1px solid #ddd; padding: 5px 10px; text-align: left; vertical-align: top; }
 th { background: #f6f6f6; }
 .gate-ok { color: #15803d; } .gate-bad { color: #b91c1c; font-weight: 600; }
 .gate-skip { color: #6b7280; }
@@ -28,9 +28,10 @@ th { background: #f6f6f6; }
 <h1>SCOPE 复核批次</h1>
 <p class="meta">每个批次是一个独立子目录，自带 <code>index.html</code>、<code>images/</code> 与
 <code>manifest.json</code>；批次一经发布不再改动，新的复核开新目录。</p>
-<div class="warn"><b>这些是构造产物，不是诊断预测。</b>链上标注的核验状态即为当前状态——只有
-<code>verified</code> 与 <code>corrected</code> 可用于对外报数，<code>pending</code> 一律不可。</div>
-<table><tr><th>批次</th><th>说明</th><th>例数</th><th>帧数</th><th>按疾病</th><th>生成时间</th></tr>
-<tr><td><a href="2026-08-25-gold60/">2026-08-25-gold60</a></td><td>金标准链人工核验 · 全 60 例（三疾病）</td><td>60</td><td>459</td><td>HP感染（hp_infection） 20、反流性食管炎（reflux_esophagitis） 20、慢性萎缩性胃炎（chronic_atrophic_gastritis） 20</td><td>2026-08-25T02:32</td></tr>
+<div class="warn"><b>两类批次的性质不同，不要混读。</b>CoT 链是<b>构造</b>产物，结论作为既定事实给出，
+只有核验状态为 <code>verified</code>/<code>corrected</code> 的可用于对外报数；基准条目是从报告自动
+派生的<b>题目与标签</b>，其正确性取决于报告本身与抽取规则，同样未经人工逐条确认。</div>
+<table><tr><th>批次</th><th>说明</th><th>例数</th><th>帧数</th><th>分组</th><th>生成时间</th></tr>
+<tr><td><a href="2026-08-25-gold60/">2026-08-25-gold60</a></td><td>金标准链人工核验 · 全 60 例（三疾病）</td><td>60</td><td>459</td><td>HP感染（hp_infection） 20、反流性食管炎（reflux_esophagitis） 20、慢性萎缩性胃炎（chronic_atrophic_gastritis） 20</td><td>2026-08-25T06:04</td></tr><tr><td><a href="2026-08-25-release-v3-sample/">2026-08-25-release-v3-sample</a></td><td>release_v3 分层抽样查看 · 7 层各 8 条</td><td>56</td><td>262</td><td>L2 异常发现列举 8、L2b 单发现有无 8、L2b 部位是否正常 8、L3 病灶属性 8、L4 所见报告生成 8、L5 诊断印象 8、L7 指南推理 8</td><td>2026-08-25T06:04</td></tr>
 </table>
 </body></html>

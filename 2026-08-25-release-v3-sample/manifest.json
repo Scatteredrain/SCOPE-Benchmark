@@ -1,0 +1,470 @@
+{
+  "title": "release_v3 分层抽样查看 · 7 层各 8 条",
+  "generated_at": "2026-08-25T06:04:30+00:00",
+  "cases": 56,
+  "frames": 262,
+  "groups": [
+    {
+      "title": "L2 异常发现列举",
+      "layer": "L2_abnormal_findings",
+      "population": 3507,
+      "stratified_by": "部位",
+      "coverage": "抽 8 / 3507 条，覆盖 8 / 8 个分层",
+      "frames": 23,
+      "cases": [
+        {
+          "sample_id": "L2_0c323d14_十二指肠",
+          "exam_id": "SCOPEV2_1df80c323d14",
+          "split": "train",
+          "input_tier": "clean_matched",
+          "images": 3
+        },
+        {
+          "sample_id": "L2_79c1793f_幽门",
+          "exam_id": "SCOPEV2_92f979c1793f",
+          "split": "train",
+          "input_tier": "clean_matched",
+          "images": 3
+        },
+        {
+          "sample_id": "L2_7c1d83a5_胃体",
+          "exam_id": "SCOPEV2_788a7c1d83a5",
+          "split": "test",
+          "input_tier": "clean_matched",
+          "images": 3
+        },
+        {
+          "sample_id": "L2_8c85cd0a_胃底",
+          "exam_id": "SCOPEV2_449f8c85cd0a",
+          "split": "val",
+          "input_tier": "clean_matched",
+          "images": 3
+        },
+        {
+          "sample_id": "L2_7bd2fe0d_胃窦",
+          "exam_id": "SCOPEV2_2f617bd2fe0d",
+          "split": "test",
+          "input_tier": "clean_matched",
+          "images": 3
+        },
+        {
+          "sample_id": "L2_0a771257_胃角",
+          "exam_id": "SCOPEV2_60b90a771257",
+          "split": "val",
+          "input_tier": "clean_matched",
+          "images": 3
+        },
+        {
+          "sample_id": "L2_432f9143_贲门",
+          "exam_id": "SCOPEV2_8552432f9143",
+          "split": "val",
+          "input_tier": "clean_matched",
+          "images": 3
+        },
+        {
+          "sample_id": "L2_e7a18d1b_食管",
+          "exam_id": "SCOPEV2_3bafe7a18d1b",
+          "split": "test",
+          "input_tier": "clean_matched",
+          "images": 2
+        }
+      ]
+    },
+    {
+      "title": "L2b 单发现有无",
+      "layer": "L2b_finding_presence",
+      "population": 721,
+      "stratified_by": "有无",
+      "coverage": "抽 8 / 721 条，覆盖 2 / 2 个分层",
+      "frames": 23,
+      "cases": [
+        {
+          "sample_id": "L2b_97591654_胃体_AX10_04",
+          "exam_id": "SCOPEV2_4da397591654",
+          "split": "val",
+          "input_tier": "clean_matched",
+          "images": 3
+        },
+        {
+          "sample_id": "L2b_616644c2_十二指肠_AX10_04",
+          "exam_id": "SCOPEV2_4be5616644c2",
+          "split": "val",
+          "input_tier": "clean_matched",
+          "images": 3
+        },
+        {
+          "sample_id": "L2b_585427b8_胃体_AX10_04",
+          "exam_id": "SCOPEV2_4d1f585427b8",
+          "split": "test",
+          "input_tier": "clean_matched",
+          "images": 3
+        },
+        {
+          "sample_id": "L2b_62d507dc_十二指肠_AX10_04",
+          "exam_id": "SCOPEV2_04f762d507dc",
+          "split": "train",
+          "input_tier": "clean_matched",
+          "images": 3
+        },
+        {
+          "sample_id": "L2b_f5aae836_胃体_AX06_01",
+          "exam_id": "SCOPEV2_7f96f5aae836",
+          "split": "train",
+          "input_tier": "clean_matched",
+          "images": 3
+        },
+        {
+          "sample_id": "L2b_f1b36df1_十二指肠_AX10_04",
+          "exam_id": "SCOPEV2_8970f1b36df1",
+          "split": "train",
+          "input_tier": "clean_matched",
+          "images": 3
+        },
+        {
+          "sample_id": "L2b_93340a04_胃角_AX06_01",
+          "exam_id": "SCOPEV2_d48793340a04",
+          "split": "train",
+          "input_tier": "clean_matched",
+          "images": 3
+        },
+        {
+          "sample_id": "L2b_fb9182cf_胃窦_AX06_01",
+          "exam_id": "SCOPEV2_7c17fb9182cf",
+          "split": "train",
+          "input_tier": "clean_matched",
+          "images": 2
+        }
+      ]
+    },
+    {
+      "title": "L2b 部位是否正常",
+      "layer": "L2b_normal_state",
+      "population": 3600,
+      "stratified_by": "是否正常",
+      "coverage": "抽 8 / 3600 条，覆盖 2 / 2 个分层",
+      "frames": 20,
+      "cases": [
+        {
+          "sample_id": "L2b_ded56118_食管",
+          "exam_id": "SCOPEV2_c7d9ded56118",
+          "split": "test",
+          "input_tier": "clean_matched",
+          "images": 3
+        },
+        {
+          "sample_id": "L2b_a8c235f7_胃角",
+          "exam_id": "SCOPEV2_cc5ea8c235f7",
+          "split": "test",
+          "input_tier": "clean_matched",
+          "images": 3
+        },
+        {
+          "sample_id": "L2b_0c22eb8e_胃体",
+          "exam_id": "SCOPEV2_0cda0c22eb8e",
+          "split": "test",
+          "input_tier": "clean_matched",
+          "images": 3
+        },
+        {
+          "sample_id": "L2b_636edc9e_胃体",
+          "exam_id": "SCOPEV2_db25636edc9e",
+          "split": "test",
+          "input_tier": "clean_matched",
+          "images": 3
+        },
+        {
+          "sample_id": "L2b_a26b07df_胃角",
+          "exam_id": "SCOPEV2_fc70a26b07df",
+          "split": "train",
+          "input_tier": "clean_matched",
+          "images": 3
+        },
+        {
+          "sample_id": "L2b_24eb7686_食管",
+          "exam_id": "SCOPEV2_bfd524eb7686",
+          "split": "test",
+          "input_tier": "clean_matched",
+          "images": 1
+        },
+        {
+          "sample_id": "L2b_4a0180b1_幽门",
+          "exam_id": "SCOPEV2_7a7e4a0180b1",
+          "split": "val",
+          "input_tier": "clean_matched",
+          "images": 1
+        },
+        {
+          "sample_id": "L2b_a46bd1fe_胃角",
+          "exam_id": "SCOPEV2_fd0ea46bd1fe",
+          "split": "train",
+          "input_tier": "clean_matched",
+          "images": 3
+        }
+      ]
+    },
+    {
+      "title": "L3 病灶属性",
+      "layer": "L3_lesion_attributes",
+      "population": 4011,
+      "stratified_by": "属性槽",
+      "coverage": "抽 8 / 4011 条，覆盖 8 / 10 个分层，未抽到：surface、surrounding",
+      "frames": 19,
+      "cases": [
+        {
+          "sample_id": "L3_d4083c32_胃窦_AX10_01_attachment",
+          "exam_id": "SCOPEV2_0d58d4083c32",
+          "split": "test",
+          "input_tier": "clean_matched",
+          "images": 2
+        },
+        {
+          "sample_id": "L3_1cbde75e_胃窦_AX09_08_border",
+          "exam_id": "SCOPEV2_b7f01cbde75e",
+          "split": "train",
+          "input_tier": "clean_matched",
+          "images": 3
+        },
+        {
+          "sample_id": "L3_e178c197_胃底_AX02_05_color",
+          "exam_id": "SCOPEV2_43d4e178c197",
+          "split": "test",
+          "input_tier": "clean_matched",
+          "images": 3
+        },
+        {
+          "sample_id": "L3_7b067af8_胃底_AX10_15_count",
+          "exam_id": "SCOPEV2_891a7b067af8",
+          "split": "test",
+          "input_tier": "clean_matched",
+          "images": 3
+        },
+        {
+          "sample_id": "L3_dc434dd0_胃底_AX04_02_distribution",
+          "exam_id": "SCOPEV2_809cdc434dd0",
+          "split": "test",
+          "input_tier": "clean_matched",
+          "images": 3
+        },
+        {
+          "sample_id": "L3_1dcfc95d_胃底_AX04_03_shape",
+          "exam_id": "SCOPEV2_8bd11dcfc95d",
+          "split": "train",
+          "input_tier": "clean_matched",
+          "images": 3
+        },
+        {
+          "sample_id": "L3_91ac034c_胃角_AX09_04_size",
+          "exam_id": "SCOPEV2_c6ab91ac034c",
+          "split": "val",
+          "input_tier": "clean_matched",
+          "images": 1
+        },
+        {
+          "sample_id": "L3_8cab32bf_胃角_AX10_15_sub_position",
+          "exam_id": "SCOPEV2_19ea8cab32bf",
+          "split": "test",
+          "input_tier": "clean_matched",
+          "images": 1
+        }
+      ]
+    },
+    {
+      "title": "L4 所见报告生成",
+      "layer": "L4_findings_report_generation",
+      "population": 1200,
+      "stratified_by": "划分",
+      "coverage": "抽 8 / 1200 条，覆盖 3 / 3 个分层",
+      "frames": 64,
+      "cases": [
+        {
+          "sample_id": "L4_42770d2a",
+          "exam_id": "SCOPEV2_0e4f42770d2a",
+          "split": "test",
+          "input_tier": "raw_dense",
+          "images": 37
+        },
+        {
+          "sample_id": "L4_3f2eb3b1",
+          "exam_id": "SCOPEV2_30783f2eb3b1",
+          "split": "test",
+          "input_tier": "raw_dense",
+          "images": 19
+        },
+        {
+          "sample_id": "L4_523d4830",
+          "exam_id": "SCOPEV2_10c2523d4830",
+          "split": "test",
+          "input_tier": "raw_dense",
+          "images": 68
+        },
+        {
+          "sample_id": "L4_26450d9e",
+          "exam_id": "SCOPEV2_0ede26450d9e",
+          "split": "train",
+          "input_tier": "raw_dense",
+          "images": 21
+        },
+        {
+          "sample_id": "L4_b2bb1ced",
+          "exam_id": "SCOPEV2_0a28b2bb1ced",
+          "split": "train",
+          "input_tier": "raw_dense",
+          "images": 36
+        },
+        {
+          "sample_id": "L4_f5bdb034",
+          "exam_id": "SCOPEV2_0881f5bdb034",
+          "split": "train",
+          "input_tier": "raw_dense",
+          "images": 62
+        },
+        {
+          "sample_id": "L4_b937ca55",
+          "exam_id": "SCOPEV2_5aa4b937ca55",
+          "split": "val",
+          "input_tier": "raw_dense",
+          "images": 56
+        },
+        {
+          "sample_id": "L4_1b590950",
+          "exam_id": "SCOPEV2_62fd1b590950",
+          "split": "val",
+          "input_tier": "raw_dense",
+          "images": 31
+        }
+      ]
+    },
+    {
+      "title": "L5 诊断印象",
+      "layer": "L5_diagnostic_impression",
+      "population": 2687,
+      "stratified_by": "划分",
+      "coverage": "抽 8 / 2687 条，覆盖 3 / 3 个分层",
+      "frames": 63,
+      "cases": [
+        {
+          "sample_id": "L5_d8689019",
+          "exam_id": "SCOPEV2_2f77d8689019",
+          "split": "test",
+          "input_tier": "clean_matched",
+          "images": 17
+        },
+        {
+          "sample_id": "L5_b7c5385b",
+          "exam_id": "SCOPEV2_9eeab7c5385b",
+          "split": "test",
+          "input_tier": "clean_matched",
+          "images": 11
+        },
+        {
+          "sample_id": "L5_16d6f75d",
+          "exam_id": "SCOPEV2_468616d6f75d",
+          "split": "test",
+          "input_tier": "clean_matched",
+          "images": 20
+        },
+        {
+          "sample_id": "L5_b4633bd8",
+          "exam_id": "SCOPEV2_3036b4633bd8",
+          "split": "train",
+          "input_tier": "clean_matched",
+          "images": 7
+        },
+        {
+          "sample_id": "L5_b9399ff0",
+          "exam_id": "SCOPEV2_59fab9399ff0",
+          "split": "train",
+          "input_tier": "clean_matched",
+          "images": 15
+        },
+        {
+          "sample_id": "L5_cfa63751",
+          "exam_id": "SCOPEV2_6ccacfa63751",
+          "split": "train",
+          "input_tier": "clean_matched",
+          "images": 16
+        },
+        {
+          "sample_id": "L5_7efac957",
+          "exam_id": "SCOPEV2_07247efac957",
+          "split": "val",
+          "input_tier": "clean_matched",
+          "images": 12
+        },
+        {
+          "sample_id": "L5_d22d4fbb",
+          "exam_id": "SCOPEV2_2ee6d22d4fbb",
+          "split": "val",
+          "input_tier": "clean_matched",
+          "images": 19
+        }
+      ]
+    },
+    {
+      "title": "L7 指南推理",
+      "layer": "L7_guideline_reasoning",
+      "population": 833,
+      "stratified_by": "指南",
+      "coverage": "抽 8 / 833 条，覆盖 6 / 6 个分层",
+      "frames": 50,
+      "cases": [
+        {
+          "sample_id": "L7_fefc6e45_forrest",
+          "exam_id": "SCOPEV2_a572fefc6e45",
+          "split": "train",
+          "input_tier": "clean_matched",
+          "images": 9
+        },
+        {
+          "sample_id": "L7_ebf336d3_forrest",
+          "exam_id": "SCOPEV2_2532ebf336d3",
+          "split": "train",
+          "input_tier": "clean_matched",
+          "images": 8
+        },
+        {
+          "sample_id": "L7_2056f210_kimura_takemoto",
+          "exam_id": "SCOPEV2_96442056f210",
+          "split": "train",
+          "input_tier": "clean_matched",
+          "images": 11
+        },
+        {
+          "sample_id": "L7_8079b331_kimura_takemoto",
+          "exam_id": "SCOPEV2_6abc8079b331",
+          "split": "val",
+          "input_tier": "clean_matched",
+          "images": 5
+        },
+        {
+          "sample_id": "L7_1f6294d6_la",
+          "exam_id": "SCOPEV2_19df1f6294d6",
+          "split": "train",
+          "input_tier": "clean_matched",
+          "images": 3
+        },
+        {
+          "sample_id": "L7_e5980a73_paris",
+          "exam_id": "SCOPEV2_543de5980a73",
+          "split": "test",
+          "input_tier": "clean_matched",
+          "images": 18
+        },
+        {
+          "sample_id": "L7_f1b2c465_prague",
+          "exam_id": "SCOPEV2_d474f1b2c465",
+          "split": "train",
+          "input_tier": "clean_matched",
+          "images": 3
+        },
+        {
+          "sample_id": "L7_91a3e76d_ulcer_ahs",
+          "exam_id": "SCOPEV2_c72c91a3e76d",
+          "split": "train",
+          "input_tier": "clean_matched",
+          "images": 7
+        }
+      ]
+    }
+  ]
+}
