@@ -1,0 +1,455 @@
+{
+  "title": "金标准链人工核验 · 全 60 例（三疾病）",
+  "generated_at": "2026-08-25T02:32:30+00:00",
+  "cases": 60,
+  "frames": 459,
+  "diseases": [
+    {
+      "title": "HP感染（hp_infection）",
+      "key": "hp_infection",
+      "guideline": "hp_kyoto8",
+      "source": "outputs/v3/cot_engine/hp_infection_r2.jsonl",
+      "frames": 200,
+      "cases": [
+        {
+          "case_id": "L7_HP_20231108_007_542_hp_kyoto8",
+          "exam_id": "HP_20231108.007_542",
+          "anchor": "HP_POSITIVE",
+          "gate_passed": true,
+          "verification_status": "pending"
+        },
+        {
+          "case_id": "L7_HP_20231107_005_173_hp_kyoto8",
+          "exam_id": "HP_20231107.005_173",
+          "anchor": "HP_POSITIVE",
+          "gate_passed": true,
+          "verification_status": "pending"
+        },
+        {
+          "case_id": "L7_HP_20231108_009_1298_hp_kyoto8",
+          "exam_id": "HP_20231108.009_1298",
+          "anchor": "HP_NEGATIVE",
+          "gate_passed": true,
+          "verification_status": "pending"
+        },
+        {
+          "case_id": "L7_HP_20231108_007_702_hp_kyoto8",
+          "exam_id": "HP_20231108.007_702",
+          "anchor": "HP_NEGATIVE",
+          "gate_passed": true,
+          "verification_status": "pending"
+        },
+        {
+          "case_id": "L7_HP_20231108_007_749_hp_kyoto8",
+          "exam_id": "HP_20231108.007_749",
+          "anchor": "HP_NEGATIVE",
+          "gate_passed": true,
+          "verification_status": "pending"
+        },
+        {
+          "case_id": "L7_HP_20231108_007_432_hp_kyoto8",
+          "exam_id": "HP_20231108.007_432",
+          "anchor": "HP_POSITIVE",
+          "gate_passed": true,
+          "verification_status": "pending"
+        },
+        {
+          "case_id": "L7_HP_20231107_006_242_hp_kyoto8",
+          "exam_id": "HP_20231107.006_242",
+          "anchor": "HP_POSITIVE",
+          "gate_passed": true,
+          "verification_status": "pending"
+        },
+        {
+          "case_id": "L7_HP_20231108_007_396_hp_kyoto8",
+          "exam_id": "HP_20231108.007_396",
+          "anchor": "HP_POSITIVE",
+          "gate_passed": true,
+          "verification_status": "pending"
+        },
+        {
+          "case_id": "L7_HP_20231107_005_187_hp_kyoto8",
+          "exam_id": "HP_20231107.005_187",
+          "anchor": "HP_POSITIVE",
+          "gate_passed": true,
+          "verification_status": "pending"
+        },
+        {
+          "case_id": "L7_HP_20231108_007_423_hp_kyoto8",
+          "exam_id": "HP_20231108.007_423",
+          "anchor": "HP_POSITIVE",
+          "gate_passed": true,
+          "verification_status": "pending"
+        },
+        {
+          "case_id": "L7_HP_20231108_007_356_hp_kyoto8",
+          "exam_id": "HP_20231108.007_356",
+          "anchor": "HP_POSITIVE",
+          "gate_passed": true,
+          "verification_status": "pending"
+        },
+        {
+          "case_id": "L7_HP_20231107_004_60_hp_kyoto8",
+          "exam_id": "HP_20231107.004_60",
+          "anchor": "HP_POSITIVE",
+          "gate_passed": true,
+          "verification_status": "pending"
+        },
+        {
+          "case_id": "L7_HP_20231107_006_224_hp_kyoto8",
+          "exam_id": "HP_20231107.006_224",
+          "anchor": "HP_POSITIVE",
+          "gate_passed": true,
+          "verification_status": "pending"
+        },
+        {
+          "case_id": "L7_HP_20231107_005_121_hp_kyoto8",
+          "exam_id": "HP_20231107.005_121",
+          "anchor": "HP_POSITIVE",
+          "gate_passed": true,
+          "verification_status": "pending"
+        },
+        {
+          "case_id": "L7_HP_20231108_009_1447_hp_kyoto8",
+          "exam_id": "HP_20231108.009_1447",
+          "anchor": "HP_NEGATIVE",
+          "gate_passed": true,
+          "verification_status": "pending"
+        },
+        {
+          "case_id": "L7_HP_20231108_007_472_hp_kyoto8",
+          "exam_id": "HP_20231108.007_472",
+          "anchor": "HP_POSITIVE",
+          "gate_passed": true,
+          "verification_status": "pending"
+        },
+        {
+          "case_id": "L7_HP_20231108_008_1193_hp_kyoto8",
+          "exam_id": "HP_20231108.008_1193",
+          "anchor": "HP_NEGATIVE",
+          "gate_passed": true,
+          "verification_status": "pending"
+        },
+        {
+          "case_id": "L7_HP_20231108_008_1089_hp_kyoto8",
+          "exam_id": "HP_20231108.008_1089",
+          "anchor": "HP_NEGATIVE",
+          "gate_passed": true,
+          "verification_status": "pending"
+        },
+        {
+          "case_id": "L7_HP_20231108_007_549_hp_kyoto8",
+          "exam_id": "HP_20231108.007_549",
+          "anchor": "HP_POSITIVE",
+          "gate_passed": true,
+          "verification_status": "pending"
+        },
+        {
+          "case_id": "L7_HP_20231108_008_1134_hp_kyoto8",
+          "exam_id": "HP_20231108.008_1134",
+          "anchor": "HP_NEGATIVE",
+          "gate_passed": true,
+          "verification_status": "pending"
+        }
+      ]
+    },
+    {
+      "title": "反流性食管炎（reflux_esophagitis）",
+      "key": "reflux_esophagitis",
+      "guideline": "la",
+      "source": "outputs/v3/cot_engine/reflux_esophagitis_r2.jsonl",
+      "frames": 45,
+      "cases": [
+        {
+          "case_id": "L7_446c9c79_la",
+          "exam_id": null,
+          "anchor": "A",
+          "gate_passed": true,
+          "verification_status": "pending"
+        },
+        {
+          "case_id": "L7_f2687eba_la",
+          "exam_id": null,
+          "anchor": "A",
+          "gate_passed": true,
+          "verification_status": "pending"
+        },
+        {
+          "case_id": "L7_c44bbffb_la",
+          "exam_id": null,
+          "anchor": "A",
+          "gate_passed": true,
+          "verification_status": "pending"
+        },
+        {
+          "case_id": "L7_cbb46261_la",
+          "exam_id": null,
+          "anchor": "A",
+          "gate_passed": true,
+          "verification_status": "pending"
+        },
+        {
+          "case_id": "L7_71e751fd_la",
+          "exam_id": null,
+          "anchor": "B",
+          "gate_passed": true,
+          "verification_status": "pending"
+        },
+        {
+          "case_id": "L7_50903ea8_la",
+          "exam_id": null,
+          "anchor": "A",
+          "gate_passed": true,
+          "verification_status": "pending"
+        },
+        {
+          "case_id": "L7_c1a15580_la",
+          "exam_id": null,
+          "anchor": "A",
+          "gate_passed": true,
+          "verification_status": "pending"
+        },
+        {
+          "case_id": "L7_13330a9e_la",
+          "exam_id": null,
+          "anchor": "B",
+          "gate_passed": true,
+          "verification_status": "pending"
+        },
+        {
+          "case_id": "L7_2accdf46_la",
+          "exam_id": null,
+          "anchor": "B",
+          "gate_passed": true,
+          "verification_status": "pending"
+        },
+        {
+          "case_id": "L7_773b019f_la",
+          "exam_id": null,
+          "anchor": "B",
+          "gate_passed": true,
+          "verification_status": "pending"
+        },
+        {
+          "case_id": "L7_ba80b4dd_la",
+          "exam_id": null,
+          "anchor": "A",
+          "gate_passed": true,
+          "verification_status": "pending"
+        },
+        {
+          "case_id": "L7_a4fc4397_la",
+          "exam_id": null,
+          "anchor": "B",
+          "gate_passed": true,
+          "verification_status": "pending"
+        },
+        {
+          "case_id": "L7_ac1289a7_la",
+          "exam_id": null,
+          "anchor": "A",
+          "gate_passed": true,
+          "verification_status": "pending"
+        },
+        {
+          "case_id": "L7_aeaf339d_la",
+          "exam_id": null,
+          "anchor": "A",
+          "gate_passed": true,
+          "verification_status": "pending"
+        },
+        {
+          "case_id": "L7_14f7d390_la",
+          "exam_id": null,
+          "anchor": "A",
+          "gate_passed": true,
+          "verification_status": "pending"
+        },
+        {
+          "case_id": "L7_25bbf3fe_la",
+          "exam_id": null,
+          "anchor": "B",
+          "gate_passed": true,
+          "verification_status": "pending"
+        },
+        {
+          "case_id": "L7_998a98fb_la",
+          "exam_id": null,
+          "anchor": "A",
+          "gate_passed": true,
+          "verification_status": "pending"
+        },
+        {
+          "case_id": "L7_a958124c_la",
+          "exam_id": null,
+          "anchor": "A",
+          "gate_passed": true,
+          "verification_status": "pending"
+        },
+        {
+          "case_id": "L7_0ee56e8d_la",
+          "exam_id": null,
+          "anchor": "A",
+          "gate_passed": true,
+          "verification_status": "pending"
+        },
+        {
+          "case_id": "L7_66184148_la",
+          "exam_id": null,
+          "anchor": "B",
+          "gate_passed": true,
+          "verification_status": "pending"
+        }
+      ]
+    },
+    {
+      "title": "慢性萎缩性胃炎（chronic_atrophic_gastritis）",
+      "key": "chronic_atrophic_gastritis",
+      "guideline": "kimura_takemoto",
+      "source": "outputs/v3/cot_engine/chronic_atrophic_gastritis_r2.jsonl",
+      "frames": 214,
+      "cases": [
+        {
+          "case_id": "L7_446c9c79_kimura_takemoto",
+          "exam_id": null,
+          "anchor": "C-3",
+          "gate_passed": true,
+          "verification_status": "pending"
+        },
+        {
+          "case_id": "L7_f2d9240d_kimura_takemoto",
+          "exam_id": null,
+          "anchor": "C-2",
+          "gate_passed": true,
+          "verification_status": "pending"
+        },
+        {
+          "case_id": "L7_71e751fd_kimura_takemoto",
+          "exam_id": null,
+          "anchor": "C-2",
+          "gate_passed": true,
+          "verification_status": "pending"
+        },
+        {
+          "case_id": "L7_c2f817c5_kimura_takemoto",
+          "exam_id": null,
+          "anchor": "C-2",
+          "gate_passed": true,
+          "verification_status": "pending"
+        },
+        {
+          "case_id": "L7_e53174a5_kimura_takemoto",
+          "exam_id": null,
+          "anchor": "C-2",
+          "gate_passed": true,
+          "verification_status": "pending"
+        },
+        {
+          "case_id": "L7_06cebc3b_kimura_takemoto",
+          "exam_id": null,
+          "anchor": "C-2",
+          "gate_passed": true,
+          "verification_status": "pending"
+        },
+        {
+          "case_id": "L7_13330a9e_kimura_takemoto",
+          "exam_id": null,
+          "anchor": "C-2",
+          "gate_passed": true,
+          "verification_status": "pending"
+        },
+        {
+          "case_id": "L7_c53fbfee_kimura_takemoto",
+          "exam_id": null,
+          "anchor": "C-1",
+          "gate_passed": true,
+          "verification_status": "pending"
+        },
+        {
+          "case_id": "L7_2accdf46_kimura_takemoto",
+          "exam_id": null,
+          "anchor": "O-2",
+          "gate_passed": true,
+          "verification_status": "pending"
+        },
+        {
+          "case_id": "L7_a4fc4397_kimura_takemoto",
+          "exam_id": null,
+          "anchor": "C-1",
+          "gate_passed": true,
+          "verification_status": "pending"
+        },
+        {
+          "case_id": "L7_aeaf339d_kimura_takemoto",
+          "exam_id": null,
+          "anchor": "C-1",
+          "gate_passed": true,
+          "verification_status": "pending"
+        },
+        {
+          "case_id": "L7_998a98fb_kimura_takemoto",
+          "exam_id": null,
+          "anchor": "C-2",
+          "gate_passed": true,
+          "verification_status": "pending"
+        },
+        {
+          "case_id": "L7_a958124c_kimura_takemoto",
+          "exam_id": null,
+          "anchor": "C-3",
+          "gate_passed": true,
+          "verification_status": "pending"
+        },
+        {
+          "case_id": "L7_31425837_kimura_takemoto",
+          "exam_id": null,
+          "anchor": "C-2",
+          "gate_passed": true,
+          "verification_status": "pending"
+        },
+        {
+          "case_id": "L7_e55810af_kimura_takemoto",
+          "exam_id": null,
+          "anchor": "C-2",
+          "gate_passed": true,
+          "verification_status": "pending"
+        },
+        {
+          "case_id": "L7_00e17560_kimura_takemoto",
+          "exam_id": null,
+          "anchor": "C-2",
+          "gate_passed": true,
+          "verification_status": "pending"
+        },
+        {
+          "case_id": "L7_1eae1c9d_kimura_takemoto",
+          "exam_id": null,
+          "anchor": "C-2",
+          "gate_passed": true,
+          "verification_status": "pending"
+        },
+        {
+          "case_id": "L7_ec542fde_kimura_takemoto",
+          "exam_id": null,
+          "anchor": "C-2",
+          "gate_passed": true,
+          "verification_status": "pending"
+        },
+        {
+          "case_id": "L7_4d683489_kimura_takemoto",
+          "exam_id": null,
+          "anchor": "C-2",
+          "gate_passed": true,
+          "verification_status": "pending"
+        },
+        {
+          "case_id": "L7_9cd4a246_kimura_takemoto",
+          "exam_id": null,
+          "anchor": "C-2",
+          "gate_passed": true,
+          "verification_status": "pending"
+        }
+      ]
+    }
+  ]
+}
