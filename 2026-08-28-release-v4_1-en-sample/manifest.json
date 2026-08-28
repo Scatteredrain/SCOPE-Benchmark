@@ -1,8 +1,8 @@
 {
-  "title": "release_v4_1（英文）分层抽样 · 含真 prompt 与 T6 金标准链",
+  "title": "release_v4_1（英文）分层抽样 · 含真 prompt 与 T6 金标准链 + HP（Kyoto）先导20例",
   "generated_at": "2026-08-28T05:29:19+00:00",
-  "cases": 79,
-  "frames": 320,
+  "cases": 99,
+  "frames": 520,
   "groups": [
     {
       "title": "部位识别",
@@ -643,7 +643,8 @@
           "input_tier": "clean_matched",
           "images": 11
         }
-      ]
+      ],
+      "note": "含 10 条分层抽样 + 20 例 HP（Kyoto）CoT 先导（合并自 2026-08-28-hp-infection-pilot）"
     }
   ]
 }
