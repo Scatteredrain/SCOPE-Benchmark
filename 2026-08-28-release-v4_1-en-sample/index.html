@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh"><head><meta charset="utf-8">
-<title>release_v4_1（英文）分层抽样 · 含真 prompt</title><style>
+<title>release_v4_1（英文）分层抽样 · 含真 prompt 与 T6 金标准链</title><style>
 body { font-family: -apple-system, "Helvetica Neue", "PingFang SC", sans-serif;
        margin: 0 auto; max-width: 1180px; padding: 24px; color: #1a1a1a; line-height: 1.6; }
 h1 { border-bottom: 2px solid #1a1a1a; padding-bottom: 8px; }
@@ -52,7 +52,7 @@ th { background: #f6f6f6; }
 </script>
 
 <p><a href="../">&larr; 返回总览</a></p>
-<h1>release_v4_1（英文）分层抽样 · 含真 prompt</h1>
+<h1>release_v4_1（英文）分层抽样 · 含真 prompt 与 T6 金标准链</h1>
 <p class="meta">共 79 条，来自 8 个任务层，抽自 <code>outputs/v4_1/release_v4_1_en.jsonl</code>（22433 条）。每条附题干、
 <b>实际送进模型的 prompt</b>、标准答案、任务参数、标签来源与问法变体。条目里的 <code>question</code>
 只是题干，模型收到的是 <code>build_inference_prompt</code> 拼出来的那一段——帧号范围、分节要求、
@@ -64,11 +64,13 @@ th { background: #f6f6f6; }
 <code>T2_findings:normal_state</code> 这种扁平键，与榜单行名一致。<b>本批次不做 split</b>，
 所以既没有「划分」字段也不按划分分层。<code>sample_id</code> 前缀仍是旧层名（<code>L2_…</code>、
 <code>L7_…</code>）：它同时是预测文件的 join key，本轮冻结不动。</div>
-<div class="warn"><b>T6 这一节页面上看到的不是全部金标准。</b>条目里带的是题干、最终分级
-（<code>answer</code>）与规则派生的征象表（<code>task_payload.reference</code>）——这些才是模型能看到
+<div class="warn"><b>T6 这一节现在把金标准推理链也放上来了。</b>条目本身只带题干、最终分级
+（<code>answer</code>）与规则派生的征象表（<code>task_payload.reference</code>）——这些是模型能看到
 和被比对的部分；作为参考答案的<b>完整分层推理链</b>存在 <code>provenance.cot_chain_source</code>
-指向的文件里，由 judge 使用，不随题面下发。<code>layer_config</code> 决定该条实际要求哪几步，
-六族里有四族少于五步。<b>规则本身也不给</b>：prompt 里有指南名称、答案空间（paris 与 prague 这两族
+指向的 CoT engine 文件里，本页按 <code>sample_id</code> join 回来、逐条展开（每条标注了来源文件、
+生成模型与机制、锚定答案、过闸与核验状态）。它是 judge 打分时比对的金标准，<b>不随题面下发给模型</b>。
+<code>layer_config</code> 决定该条实际要求哪几步，六族里有四族少于五步，缺的步会明确标出。
+<b>规则本身也不给</b>：prompt 里有指南名称、答案空间（paris 与 prague 这两族
 连答案空间都为空），以及在 <code>layer_config</code> 含征象步时给出的征象名单，但
 <code>schemas/guideline_cards/*.yaml</code> 里的判定规则从不注入——T6 默认是闭卷，考的是模型自己
 是否记得该指南。把卡片正文喂进去是另一套设置（见 <code>paper/overview.md</code> 的范式 2），不是这里。</div>
@@ -96,6 +98,7 @@ Reply with a single option letter only. Do not explain.</pre></div>
 <div class="layer"><h4>标准答案</h4><pre>{
   &quot;anatomy_class&quot;: &quot;cardia&quot;
 }</pre></div>
+
 <div class="layer"><h4>任务参数 task_payload</h4><pre>{
   &quot;label_source&quot;: &quot;clinician_station_annotation&quot;,
   &quot;site_model_pred&quot;: &quot;贲门&quot;,
@@ -125,6 +128,7 @@ Reply with a single option letter only. Do not explain.</pre></div>
 <div class="layer"><h4>标准答案</h4><pre>{
   &quot;anatomy_class&quot;: &quot;cardia&quot;
 }</pre></div>
+
 <div class="layer"><h4>任务参数 task_payload</h4><pre>{
   &quot;label_source&quot;: &quot;clinician_station_annotation&quot;,
   &quot;site_model_pred&quot;: &quot;贲门&quot;,
@@ -154,6 +158,7 @@ Reply with a single option letter only. Do not explain.</pre></div>
 <div class="layer"><h4>标准答案</h4><pre>{
   &quot;anatomy_class&quot;: &quot;duodenum&quot;
 }</pre></div>
+
 <div class="layer"><h4>任务参数 task_payload</h4><pre>{
   &quot;label_source&quot;: &quot;clinician_station_annotation&quot;,
   &quot;site_model_pred&quot;: &quot;十二指肠&quot;,
@@ -183,6 +188,7 @@ Reply with a single option letter only. Do not explain.</pre></div>
 <div class="layer"><h4>标准答案</h4><pre>{
   &quot;anatomy_class&quot;: &quot;duodenum&quot;
 }</pre></div>
+
 <div class="layer"><h4>任务参数 task_payload</h4><pre>{
   &quot;label_source&quot;: &quot;clinician_station_annotation&quot;,
   &quot;site_model_pred&quot;: &quot;十二指肠&quot;,
@@ -212,6 +218,7 @@ Reply with a single option letter only. Do not explain.</pre></div>
 <div class="layer"><h4>标准答案</h4><pre>{
   &quot;anatomy_class&quot;: &quot;esophagus&quot;
 }</pre></div>
+
 <div class="layer"><h4>任务参数 task_payload</h4><pre>{
   &quot;label_source&quot;: &quot;clinician_station_annotation&quot;,
   &quot;site_model_pred&quot;: &quot;食管&quot;,
@@ -241,6 +248,7 @@ Reply with a single option letter only. Do not explain.</pre></div>
 <div class="layer"><h4>标准答案</h4><pre>{
   &quot;anatomy_class&quot;: &quot;gastric angulus&quot;
 }</pre></div>
+
 <div class="layer"><h4>任务参数 task_payload</h4><pre>{
   &quot;label_source&quot;: &quot;clinician_station_annotation&quot;,
   &quot;site_model_pred&quot;: &quot;胃角&quot;,
@@ -270,6 +278,7 @@ Reply with a single option letter only. Do not explain.</pre></div>
 <div class="layer"><h4>标准答案</h4><pre>{
   &quot;anatomy_class&quot;: &quot;gastric antrum&quot;
 }</pre></div>
+
 <div class="layer"><h4>任务参数 task_payload</h4><pre>{
   &quot;label_source&quot;: &quot;clinician_station_annotation&quot;,
   &quot;site_model_pred&quot;: &quot;胃窦&quot;,
@@ -299,6 +308,7 @@ Reply with a single option letter only. Do not explain.</pre></div>
 <div class="layer"><h4>标准答案</h4><pre>{
   &quot;anatomy_class&quot;: &quot;gastric body&quot;
 }</pre></div>
+
 <div class="layer"><h4>任务参数 task_payload</h4><pre>{
   &quot;label_source&quot;: &quot;clinician_station_annotation&quot;,
   &quot;site_model_pred&quot;: &quot;胃体&quot;,
@@ -328,6 +338,7 @@ Reply with a single option letter only. Do not explain.</pre></div>
 <div class="layer"><h4>标准答案</h4><pre>{
   &quot;anatomy_class&quot;: &quot;gastric fundus&quot;
 }</pre></div>
+
 <div class="layer"><h4>任务参数 task_payload</h4><pre>{
   &quot;label_source&quot;: &quot;clinician_station_annotation&quot;,
   &quot;site_model_pred&quot;: &quot;胃底&quot;,
@@ -357,6 +368,7 @@ Reply with a single option letter only. Do not explain.</pre></div>
 <div class="layer"><h4>标准答案</h4><pre>{
   &quot;anatomy_class&quot;: &quot;pylorus&quot;
 }</pre></div>
+
 <div class="layer"><h4>任务参数 task_payload</h4><pre>{
   &quot;label_source&quot;: &quot;clinician_station_annotation&quot;,
   &quot;site_model_pred&quot;: &quot;幽门&quot;,
@@ -400,6 +412,7 @@ Reply with the letters of every option that applies, comma-separated, e.g. &quot
     &quot;label&quot;: &quot;ulcer&quot;
   }
 ]</pre></div>
+
 <div class="layer"><h4>任务参数 task_payload</h4><pre>{
   &quot;site&quot;: &quot;十二指肠&quot;
 }</pre></div>
@@ -436,6 +449,7 @@ Reply with the letters of every option that applies, comma-separated, e.g. &quot
     &quot;label&quot;: &quot;lymphangiectasia&quot;
   }
 ]</pre></div>
+
 <div class="layer"><h4>任务参数 task_payload</h4><pre>{
   &quot;site&quot;: &quot;十二指肠&quot;
 }</pre></div>
@@ -472,6 +486,7 @@ Reply with the letters of every option that applies, comma-separated, e.g. &quot
     &quot;label&quot;: &quot;reflux / retroperistalsis&quot;
   }
 ]</pre></div>
+
 <div class="layer"><h4>任务参数 task_payload</h4><pre>{
   &quot;site&quot;: &quot;幽门&quot;
 }</pre></div>
@@ -508,6 +523,7 @@ Reply with the letters of every option that applies, comma-separated, e.g. &quot
     &quot;label&quot;: &quot;reflux / retroperistalsis&quot;
   }
 ]</pre></div>
+
 <div class="layer"><h4>任务参数 task_payload</h4><pre>{
   &quot;site&quot;: &quot;幽门&quot;
 }</pre></div>
@@ -548,6 +564,7 @@ Reply with the letters of every option that applies, comma-separated, e.g. &quot
     &quot;label&quot;: &quot;nonspecific color change&quot;
   }
 ]</pre></div>
+
 <div class="layer"><h4>任务参数 task_payload</h4><pre>{
   &quot;site&quot;: &quot;胃体&quot;
 }</pre></div>
@@ -588,6 +605,7 @@ Reply with the letters of every option that applies, comma-separated, e.g. &quot
     &quot;label&quot;: &quot;congestion / ecchymosis&quot;
   }
 ]</pre></div>
+
 <div class="layer"><h4>任务参数 task_payload</h4><pre>{
   &quot;site&quot;: &quot;胃底&quot;
 }</pre></div>
@@ -632,6 +650,7 @@ Reply with the letters of every option that applies, comma-separated, e.g. &quot
     &quot;label&quot;: &quot;hyperemia / redness&quot;
   }
 ]</pre></div>
+
 <div class="layer"><h4>任务参数 task_payload</h4><pre>{
   &quot;site&quot;: &quot;胃窦&quot;
 }</pre></div>
@@ -676,6 +695,7 @@ Reply with the letters of every option that applies, comma-separated, e.g. &quot
     &quot;label&quot;: &quot;rough surface&quot;
   }
 ]</pre></div>
+
 <div class="layer"><h4>任务参数 task_payload</h4><pre>{
   &quot;site&quot;: &quot;胃角&quot;
 }</pre></div>
@@ -716,6 +736,7 @@ Reply with the letters of every option that applies, comma-separated, e.g. &quot
     &quot;label&quot;: &quot;hernia sac / prolapse&quot;
   }
 ]</pre></div>
+
 <div class="layer"><h4>任务参数 task_payload</h4><pre>{
   &quot;site&quot;: &quot;贲门&quot;
 }</pre></div>
@@ -756,6 +777,7 @@ Reply with the letters of every option that applies, comma-separated, e.g. &quot
     &quot;label&quot;: &quot;oozing (capillary) bleeding&quot;
   }
 ]</pre></div>
+
 <div class="layer"><h4>任务参数 task_payload</h4><pre>{
   &quot;site&quot;: &quot;食管&quot;
 }</pre></div>
@@ -780,6 +802,7 @@ Reply with a single option letter only. Do not explain.</pre></div>
 <div class="layer"><h4>标准答案</h4><pre>{
   &quot;is_normal&quot;: false
 }</pre></div>
+
 <div class="layer"><h4>任务参数 task_payload</h4><pre>{
   &quot;site&quot;: &quot;食管&quot;
 }</pre></div>
@@ -810,6 +833,7 @@ Reply with a single option letter only. Do not explain.</pre></div>
 <div class="layer"><h4>标准答案</h4><pre>{
   &quot;is_normal&quot;: false
 }</pre></div>
+
 <div class="layer"><h4>任务参数 task_payload</h4><pre>{
   &quot;site&quot;: &quot;十二指肠&quot;
 }</pre></div>
@@ -839,6 +863,7 @@ Reply with a single option letter only. Do not explain.</pre></div>
 <div class="layer"><h4>标准答案</h4><pre>{
   &quot;is_normal&quot;: false
 }</pre></div>
+
 <div class="layer"><h4>任务参数 task_payload</h4><pre>{
   &quot;site&quot;: &quot;胃体&quot;
 }</pre></div>
@@ -867,6 +892,7 @@ Reply with a single option letter only. Do not explain.</pre></div>
 <div class="layer"><h4>标准答案</h4><pre>{
   &quot;is_normal&quot;: false
 }</pre></div>
+
 <div class="layer"><h4>任务参数 task_payload</h4><pre>{
   &quot;site&quot;: &quot;胃窦&quot;
 }</pre></div>
@@ -894,6 +920,7 @@ Reply with a single option letter only. Do not explain.</pre></div>
 <div class="layer"><h4>标准答案</h4><pre>{
   &quot;is_normal&quot;: false
 }</pre></div>
+
 <div class="layer"><h4>任务参数 task_payload</h4><pre>{
   &quot;site&quot;: &quot;十二指肠&quot;
 }</pre></div>
@@ -923,6 +950,7 @@ Reply with a single option letter only. Do not explain.</pre></div>
 <div class="layer"><h4>标准答案</h4><pre>{
   &quot;is_normal&quot;: true
 }</pre></div>
+
 <div class="layer"><h4>任务参数 task_payload</h4><pre>{
   &quot;site&quot;: &quot;幽门&quot;
 }</pre></div>
@@ -952,6 +980,7 @@ Reply with a single option letter only. Do not explain.</pre></div>
 <div class="layer"><h4>标准答案</h4><pre>{
   &quot;is_normal&quot;: true
 }</pre></div>
+
 <div class="layer"><h4>任务参数 task_payload</h4><pre>{
   &quot;site&quot;: &quot;十二指肠&quot;
 }</pre></div>
@@ -980,6 +1009,7 @@ Reply with a single option letter only. Do not explain.</pre></div>
 <div class="layer"><h4>标准答案</h4><pre>{
   &quot;is_normal&quot;: true
 }</pre></div>
+
 <div class="layer"><h4>任务参数 task_payload</h4><pre>{
   &quot;site&quot;: &quot;食管&quot;
 }</pre></div>
@@ -1009,6 +1039,7 @@ Reply with a single option letter only. Do not explain.</pre></div>
 <div class="layer"><h4>标准答案</h4><pre>{
   &quot;is_normal&quot;: true
 }</pre></div>
+
 <div class="layer"><h4>任务参数 task_payload</h4><pre>{
   &quot;site&quot;: &quot;十二指肠&quot;
 }</pre></div>
@@ -1037,6 +1068,7 @@ Reply with a single option letter only. Do not explain.</pre></div>
 <div class="layer"><h4>标准答案</h4><pre>{
   &quot;is_normal&quot;: true
 }</pre></div>
+
 <div class="layer"><h4>任务参数 task_payload</h4><pre>{
   &quot;site&quot;: &quot;幽门&quot;
 }</pre></div>
@@ -1067,6 +1099,7 @@ Reply with a single option letter only. Do not explain.</pre></div>
   &quot;code&quot;: &quot;AX10_04&quot;,
   &quot;present&quot;: false
 }</pre></div>
+
 <div class="layer"><h4>任务参数 task_payload</h4><pre>{
   &quot;site&quot;: &quot;胃体&quot;,
   &quot;finding_code&quot;: &quot;AX10_04&quot;
@@ -1093,6 +1126,7 @@ Reply with a single option letter only. Do not explain.</pre></div>
   &quot;code&quot;: &quot;AX10_04&quot;,
   &quot;present&quot;: false
 }</pre></div>
+
 <div class="layer"><h4>任务参数 task_payload</h4><pre>{
   &quot;site&quot;: &quot;十二指肠&quot;,
   &quot;finding_code&quot;: &quot;AX10_04&quot;
@@ -1119,6 +1153,7 @@ Reply with a single option letter only. Do not explain.</pre></div>
   &quot;code&quot;: &quot;AX10_04&quot;,
   &quot;present&quot;: false
 }</pre></div>
+
 <div class="layer"><h4>任务参数 task_payload</h4><pre>{
   &quot;site&quot;: &quot;十二指肠&quot;,
   &quot;finding_code&quot;: &quot;AX10_04&quot;
@@ -1145,6 +1180,7 @@ Reply with a single option letter only. Do not explain.</pre></div>
   &quot;code&quot;: &quot;AX10_04&quot;,
   &quot;present&quot;: false
 }</pre></div>
+
 <div class="layer"><h4>任务参数 task_payload</h4><pre>{
   &quot;site&quot;: &quot;十二指肠&quot;,
   &quot;finding_code&quot;: &quot;AX10_04&quot;
@@ -1171,6 +1207,7 @@ Reply with a single option letter only. Do not explain.</pre></div>
   &quot;code&quot;: &quot;AX10_04&quot;,
   &quot;present&quot;: false
 }</pre></div>
+
 <div class="layer"><h4>任务参数 task_payload</h4><pre>{
   &quot;site&quot;: &quot;胃体&quot;,
   &quot;finding_code&quot;: &quot;AX10_04&quot;
@@ -1197,6 +1234,7 @@ Reply with a single option letter only. Do not explain.</pre></div>
   &quot;code&quot;: &quot;AX10_04&quot;,
   &quot;present&quot;: true
 }</pre></div>
+
 <div class="layer"><h4>任务参数 task_payload</h4><pre>{
   &quot;site&quot;: &quot;十二指肠&quot;,
   &quot;finding_code&quot;: &quot;AX10_04&quot;
@@ -1223,6 +1261,7 @@ Reply with a single option letter only. Do not explain.</pre></div>
   &quot;code&quot;: &quot;AX10_04&quot;,
   &quot;present&quot;: true
 }</pre></div>
+
 <div class="layer"><h4>任务参数 task_payload</h4><pre>{
   &quot;site&quot;: &quot;胃体&quot;,
   &quot;finding_code&quot;: &quot;AX10_04&quot;
@@ -1249,6 +1288,7 @@ Reply with a single option letter only. Do not explain.</pre></div>
   &quot;code&quot;: &quot;AX06_01&quot;,
   &quot;present&quot;: true
 }</pre></div>
+
 <div class="layer"><h4>任务参数 task_payload</h4><pre>{
   &quot;site&quot;: &quot;胃体&quot;,
   &quot;finding_code&quot;: &quot;AX06_01&quot;
@@ -1275,6 +1315,7 @@ Reply with a single option letter only. Do not explain.</pre></div>
   &quot;code&quot;: &quot;AX10_04&quot;,
   &quot;present&quot;: true
 }</pre></div>
+
 <div class="layer"><h4>任务参数 task_payload</h4><pre>{
   &quot;site&quot;: &quot;十二指肠&quot;,
   &quot;finding_code&quot;: &quot;AX10_04&quot;
@@ -1301,6 +1342,7 @@ Reply with a single option letter only. Do not explain.</pre></div>
   &quot;code&quot;: &quot;AX10_04&quot;,
   &quot;present&quot;: true
 }</pre></div>
+
 <div class="layer"><h4>任务参数 task_payload</h4><pre>{
   &quot;site&quot;: &quot;胃角&quot;,
   &quot;finding_code&quot;: &quot;AX10_04&quot;
@@ -1327,6 +1369,7 @@ Reply with a single option letter only. Do not explain.</pre></div>
   &quot;slot&quot;: &quot;attachment&quot;,
   &quot;value&quot;: &quot;adherent mucus&quot;
 }</pre></div>
+
 <div class="layer"><h4>任务参数 task_payload</h4><pre>{
   &quot;site&quot;: &quot;胃窦&quot;,
   &quot;lesion_code&quot;: &quot;AX10_01&quot;,
@@ -1368,6 +1411,7 @@ Reply with a single option letter only. Do not explain.</pre></div>
   &quot;slot&quot;: &quot;border&quot;,
   &quot;value&quot;: &quot;well-demarcated&quot;
 }</pre></div>
+
 <div class="layer"><h4>任务参数 task_payload</h4><pre>{
   &quot;site&quot;: &quot;胃窦&quot;,
   &quot;lesion_code&quot;: &quot;AX09_08&quot;,
@@ -1410,6 +1454,7 @@ Reply with a single option letter only. Do not explain.</pre></div>
   &quot;slot&quot;: &quot;color&quot;,
   &quot;value&quot;: &quot;white&quot;
 }</pre></div>
+
 <div class="layer"><h4>任务参数 task_payload</h4><pre>{
   &quot;site&quot;: &quot;食管&quot;,
   &quot;lesion_code&quot;: &quot;AX10_15&quot;,
@@ -1449,6 +1494,7 @@ Reply with a single option letter only. Do not explain.</pre></div>
   &quot;slot&quot;: &quot;count&quot;,
   &quot;value&quot;: &quot;several sites&quot;
 }</pre></div>
+
 <div class="layer"><h4>任务参数 task_payload</h4><pre>{
   &quot;site&quot;: &quot;胃体&quot;,
   &quot;lesion_code&quot;: &quot;AX04_03&quot;,
@@ -1483,6 +1529,7 @@ Reply with a single option letter only. Do not explain.</pre></div>
   &quot;slot&quot;: &quot;distribution&quot;,
   &quot;value&quot;: &quot;diffuse&quot;
 }</pre></div>
+
 <div class="layer"><h4>任务参数 task_payload</h4><pre>{
   &quot;site&quot;: &quot;胃体&quot;,
   &quot;lesion_code&quot;: &quot;AX04_03&quot;,
@@ -1529,6 +1576,7 @@ Reply with a single option letter only. Do not explain.</pre></div>
   &quot;slot&quot;: &quot;shape&quot;,
   &quot;value&quot;: &quot;macular&quot;
 }</pre></div>
+
 <div class="layer"><h4>任务参数 task_payload</h4><pre>{
   &quot;site&quot;: &quot;胃角&quot;,
   &quot;lesion_code&quot;: &quot;AX04_05&quot;,
@@ -1573,6 +1621,7 @@ Reply with a single option letter only. Do not explain.</pre></div>
   &quot;slot&quot;: &quot;size&quot;,
   &quot;value&quot;: &quot;approximately 0.8 cm in diameter&quot;
 }</pre></div>
+
 <div class="layer"><h4>任务参数 task_payload</h4><pre>{
   &quot;site&quot;: &quot;胃底&quot;,
   &quot;lesion_code&quot;: &quot;AX09_06&quot;,
@@ -1611,6 +1660,7 @@ Reply with a single option letter only. Do not explain.</pre></div>
   &quot;slot&quot;: &quot;sub_position&quot;,
   &quot;value&quot;: &quot;upper third&quot;
 }</pre></div>
+
 <div class="layer"><h4>任务参数 task_payload</h4><pre>{
   &quot;site&quot;: &quot;食管&quot;,
   &quot;lesion_code&quot;: &quot;AX04_37&quot;,
@@ -1660,6 +1710,7 @@ Reply with a single option letter only. Do not explain.</pre></div>
   &quot;slot&quot;: &quot;surface&quot;,
   &quot;value&quot;: &quot;coated surface&quot;
 }</pre></div>
+
 <div class="layer"><h4>任务参数 task_payload</h4><pre>{
   &quot;site&quot;: &quot;十二指肠&quot;,
   &quot;lesion_code&quot;: &quot;AX10_05&quot;,
@@ -1703,6 +1754,7 @@ Reply with a single option letter only. Do not explain.</pre></div>
   &quot;slot&quot;: &quot;surrounding&quot;,
   &quot;value&quot;: &quot;surrounding hyperemia&quot;
 }</pre></div>
+
 <div class="layer"><h4>任务参数 task_payload</h4><pre>{
   &quot;site&quot;: &quot;贲门&quot;,
   &quot;lesion_code&quot;: &quot;AX04_16&quot;,
@@ -1731,6 +1783,7 @@ Reply with a single option letter only. Do not explain.</pre></div>
 <div class="layer"><h4>题干（条目里的 <code>question</code> 字段）</h4><pre>These are all the images retained from one upper-GI endoscopy. Write the endoscopic findings, organised site by site.</pre></div>
 <div class="layer"><h4>实际送进模型的 prompt（<code>build_inference_prompt</code>）</h4><h5>open_ended</h5><pre>These are all the images retained from one upper-GI endoscopy. Write the endoscopic findings, organised site by site.</pre></div>
 <div class="layer"><h4>标准答案</h4><pre>&quot;Esophagus: The esophagus is patent, the mucosa is smooth and soft, and wall peristalsis is normal; isolated island-like orange mucosa is seen in the upper segment at 17 cm.\nCardia: The Z-line is clear, the mucosa is smooth, and opening and closing are normal.\nGastric fundus: The mucosa is mottled red and white, and the mucus lake is yellow and scant.\nGastric body: The mucosa on the lesser curvature side is rough and edematous, with localized white areas;\nGastric angulus: The arch is present, with localized white areas; scattered ulcer lesions measuring 0.2-0.5 cm are seen, covered with yellow-white fibrinous exudate, and the surrounding mucosa is congested and edematous, biopsy was taken.\nGastric antrum: The mucosa is congested and edematous, predominantly with localized white areas.\nPylorus: A shallow ulcer is seen, and the lumen is deformed;\nDuodenum: The morphology is normal, the mucosal color is normal, and no ulcers or tumors are seen. A 1.0 cm submucosal elevation is seen in the descending duodenum.&quot;</pre></div>
+
 <div class="layer"><h4>任务参数 task_payload</h4><pre>（空）</pre></div>
 <div class="layer"><h4>标签来源 provenance</h4><pre>{
   &quot;label_source&quot;: &quot;report_findings_verbatim&quot;
@@ -1744,6 +1797,7 @@ Reply with a single option letter only. Do not explain.</pre></div>
 <div class="layer"><h4>题干（条目里的 <code>question</code> 字段）</h4><pre>These are all the images retained from one upper-GI endoscopy. Write the endoscopic findings, organised site by site.</pre></div>
 <div class="layer"><h4>实际送进模型的 prompt（<code>build_inference_prompt</code>）</h4><h5>open_ended</h5><pre>These are all the images retained from one upper-GI endoscopy. Write the endoscopic findings, organised site by site.</pre></div>
 <div class="layer"><h4>标准答案</h4><pre>&quot;Esophagus: The esophagus is patent, the mucosa is smooth and soft, the vascular pattern is clear, and peristalsis is normal.\nCardia: The Z-line is clear, the mucosa is congested, and opening and closing are normal.\nGastric fundus: The mucosa is mottled red and white, and the mucus lake is yellow and scanty.\nGastric body: The mucosa is congested, the mucosa of the lesser curvature is grayish-white, and a shallow ulcer is seen at the greater curvature of the antrum-body junction, measuring approximately 0.2 x 0.4 cm, biopsied.\nGastric angulus: The arch is present, the mucosa is grayish-white with scattered erythematous spots, biopsied.\nGastric antrum: The mucosa is congested and edematous, mottled red and white in color, the mucosa is mottled red and white, locally predominantly white; an ulcer is seen on the posterior wall of the gastric antrum near the gastric angulus, measuring approximately 0.5 x 0.5 cm, with obvious congestion and redness of the surrounding mucosa, biopsied.\nPylorus: It is round in shape, opening and closing are normal, and the mucosa is smooth.\nDuodenum: The morphology is normal, the mucosal color is normal, and no ulcers or tumors are seen. The descending duodenum is patent, and no abnormality is seen.&quot;</pre></div>
+
 <div class="layer"><h4>任务参数 task_payload</h4><pre>（空）</pre></div>
 <div class="layer"><h4>标签来源 provenance</h4><pre>{
   &quot;label_source&quot;: &quot;report_findings_verbatim&quot;
@@ -1757,6 +1811,7 @@ Reply with a single option letter only. Do not explain.</pre></div>
 <div class="layer"><h4>题干（条目里的 <code>question</code> 字段）</h4><pre>These are all the images retained from one upper-GI endoscopy. Write the endoscopic findings, organised site by site.</pre></div>
 <div class="layer"><h4>实际送进模型的 prompt（<code>build_inference_prompt</code>）</h4><h5>open_ended</h5><pre>These are all the images retained from one upper-GI endoscopy. Write the endoscopic findings, organised site by site.</pre></div>
 <div class="layer"><h4>标准答案</h4><pre>&quot;Esophagus: The esophagus is patent, the mucosa is smooth and soft, and patchy mucosal defects and erosions are seen in the lower segment near the Z-line, with a diameter of &lt;5 mm.\nCardia: The Z-line is clear, the mucosa is smooth, and opening and closing are normal.\nGastric fundus: The mucosa is rough, and the mucus lake is clear.\nGastric body: The mucosa is slightly edematous, and peristalsis is normal.\nGastric angulus: The arch is preserved, and the mucosa is not completely smooth.\nGastric antrum: The mucosa is rough and whitish, with scattered elevated erosions; biopsies were taken.\nPylorus: The pyloric orifice is deformed, opening and closing are normal, and the mucosa is congested and edematous.\nDuodenum: The duodenal bulb cavity is deformed. Multiple punctate and patchy ulcers are seen in the bulb and at the junction of the bulb and the descending portion, the larger ones being about 0.6 cm in diameter, covered with white fibrinous exudate, and surrounded by congestion and edema. The descending duodenum is patent, and no abnormality is seen.&quot;</pre></div>
+
 <div class="layer"><h4>任务参数 task_payload</h4><pre>（空）</pre></div>
 <div class="layer"><h4>标签来源 provenance</h4><pre>{
   &quot;label_source&quot;: &quot;report_findings_verbatim&quot;
@@ -1770,6 +1825,7 @@ Reply with a single option letter only. Do not explain.</pre></div>
 <div class="layer"><h4>题干（条目里的 <code>question</code> 字段）</h4><pre>These are all the images retained from one upper-GI endoscopy. Write the endoscopic findings, organised site by site.</pre></div>
 <div class="layer"><h4>实际送进模型的 prompt（<code>build_inference_prompt</code>）</h4><h5>open_ended</h5><pre>These are all the images retained from one upper-GI endoscopy. Write the endoscopic findings, organised site by site.</pre></div>
 <div class="layer"><h4>标准答案</h4><pre>&quot;Esophagus: The esophagus is patent, the mucosa is smooth and soft, the vascular pattern is clear, and peristalsis is normal.\nCardia: The Z-line is clear, the mucosa is smooth, and opening and closing are normal.\nGastric fundus: The mucosa is mottled red and white, the mucus lake is yellow, and the volume is small.\nGastric body: The mucosa along the greater curvature is diffusely congested, and the mucosa along the middle and lower lesser curvature is mottled.\nGastric angulus: The arch is present, and the mucosa is mottled.\nGastric antrum: The mucosa is congested and edematous, the color is mottled red and white, predominantly white in localized areas, and the mucosa along the lesser curvature is slightly elevated and reddened; biopsy taken.\nPylorus: Round in shape, opening and closing are normal, and the mucosa is smooth.\nDuodenum: The morphology is normal, the mucosal color is normal, and no ulcers or neoplasms are seen. The descending duodenum is patent, and no abnormality is seen.&quot;</pre></div>
+
 <div class="layer"><h4>任务参数 task_payload</h4><pre>（空）</pre></div>
 <div class="layer"><h4>标签来源 provenance</h4><pre>{
   &quot;label_source&quot;: &quot;report_findings_verbatim&quot;
@@ -1783,6 +1839,7 @@ Reply with a single option letter only. Do not explain.</pre></div>
 <div class="layer"><h4>题干（条目里的 <code>question</code> 字段）</h4><pre>These are all the images retained from one upper-GI endoscopy. Write the endoscopic findings, organised site by site.</pre></div>
 <div class="layer"><h4>实际送进模型的 prompt（<code>build_inference_prompt</code>）</h4><h5>open_ended</h5><pre>These are all the images retained from one upper-GI endoscopy. Write the endoscopic findings, organised site by site.</pre></div>
 <div class="layer"><h4>标准答案</h4><pre>&quot;Esophagus: A mucosal break (congestion and edema) is seen in the lower esophagus, confined to a single mucosal fold, greater than 5 mm.\nCardia: The Z-line is distinct, the mucosa is smooth, and closure is inadequate.\nGastric fundus: The mucosa is mottled red and white, the mucus lake is yellow, and the volume is scant; several polyps of approximately 0.2-0.3 cm are seen, all of which were removed with forceps.\nGastric body: The mucosa is smooth and intact, the color is mottled red and white, no ulcers or bleeding are seen, and peristalsis is normal; a polyp of approximately 0.5 cm is seen on the anterior wall and was removed with forceps.\nGastric angulus: The arch is present, and the mucosa is smooth and soft.\nGastric antrum: The mucosa is congested and edematous, the color is mottled red and white, the mucosa is mottled red and white, and it is predominantly red.\nPylorus: Round in shape, opens and closes normally, and the mucosa is smooth.\nDuodenum: The mucosa of the bulb is congested and edematous, and no ulcers or neoplasms are seen. The descending duodenum is patent, and no abnormality is seen.&quot;</pre></div>
+
 <div class="layer"><h4>任务参数 task_payload</h4><pre>（空）</pre></div>
 <div class="layer"><h4>标签来源 provenance</h4><pre>{
   &quot;label_source&quot;: &quot;report_findings_verbatim&quot;
@@ -1796,6 +1853,7 @@ Reply with a single option letter only. Do not explain.</pre></div>
 <div class="layer"><h4>题干（条目里的 <code>question</code> 字段）</h4><pre>These are all the images retained from one upper-GI endoscopy. Write the endoscopic findings, organised site by site.</pre></div>
 <div class="layer"><h4>实际送进模型的 prompt（<code>build_inference_prompt</code>）</h4><h5>open_ended</h5><pre>These are all the images retained from one upper-GI endoscopy. Write the endoscopic findings, organised site by site.</pre></div>
 <div class="layer"><h4>标准答案</h4><pre>&quot;Esophagus: The esophagus is patent. Four esophageal varices are seen starting from approximately 33 cm from the incisors, with the largest diameter being about 1.0 cm. No red color signs are seen. Wall peristalsis is normal.\nCardia: The Z-line is distinct. The mucosa is smooth. Opening and closing are normal.\nGastric fundus: A varix extending toward the greater curvature is seen, with a diameter of about 0.5 cm. The mucus lake is turbid and scanty.\nGastric body: The mucosa is smooth and intact, with multiple patches of congestion. Peristalsis is normal.\nGastric angulus: The angular arch is present. The mucosa is mottled red and white.\nGastric antrum: The mucosa is mottled red and white in color, predominantly red.\nPylorus: Round in shape, with normal opening and closing. The mucosa is smooth.\nDuodenum: Normal in morphology. The mucosal color is normal. No ulcers or tumors are seen. The descending duodenum is patent, and no abnormality is seen.&quot;</pre></div>
+
 <div class="layer"><h4>任务参数 task_payload</h4><pre>（空）</pre></div>
 <div class="layer"><h4>标签来源 provenance</h4><pre>{
   &quot;label_source&quot;: &quot;report_findings_verbatim&quot;
@@ -1809,6 +1867,7 @@ Reply with a single option letter only. Do not explain.</pre></div>
 <div class="layer"><h4>题干（条目里的 <code>question</code> 字段）</h4><pre>These are all the images retained from one upper-GI endoscopy. Write the endoscopic findings, organised site by site.</pre></div>
 <div class="layer"><h4>实际送进模型的 prompt（<code>build_inference_prompt</code>）</h4><h5>open_ended</h5><pre>These are all the images retained from one upper-GI endoscopy. Write the endoscopic findings, organised site by site.</pre></div>
 <div class="layer"><h4>标准答案</h4><pre>&quot;Esophagus: Mucosa is smooth. A mung bean-sized papilloma is seen in the upper segment, 23 cm from the incisors, and was removed with forceps.\nCardia: Z-line is clear, mucosa is smooth.\nGastric fundus: Mucosa is smooth.\nGastric body: Mucosa is smooth and intact, RAC is visible.\nGastric angulus: Arch is present, mucosa is smooth.\nGastric antrum: Mucosa is smooth, mottled red and white, predominantly red.\nPylorus: Round, with normal opening and closing.\nDuodenum: No abnormality seen in the bulb and descending portion.&quot;</pre></div>
+
 <div class="layer"><h4>任务参数 task_payload</h4><pre>（空）</pre></div>
 <div class="layer"><h4>标签来源 provenance</h4><pre>{
   &quot;label_source&quot;: &quot;report_findings_verbatim&quot;
@@ -1822,6 +1881,7 @@ Reply with a single option letter only. Do not explain.</pre></div>
 <div class="layer"><h4>题干（条目里的 <code>question</code> 字段）</h4><pre>These are all the images retained from one upper-GI endoscopy. Write the endoscopic findings, organised site by site.</pre></div>
 <div class="layer"><h4>实际送进模型的 prompt（<code>build_inference_prompt</code>）</h4><h5>open_ended</h5><pre>These are all the images retained from one upper-GI endoscopy. Write the endoscopic findings, organised site by site.</pre></div>
 <div class="layer"><h4>标准答案</h4><pre>&quot;Esophagus: The mucosa is smooth and soft, the vascular pattern is clear, distensibility is good, and the Z-line is clear.\nCardia: The mucosa is smooth, and no abnormality is seen.\nGastric fundus: The mucosa is mottled red and white, the mucus lake is clear, and no abnormality is seen.\nGastric body: The mucosa is smooth and flushed in color, and no ulcer or bleeding is seen.\nGastric angulus: The mucosa is mottled red and white, smooth and soft, and peristalsis is adequate.\nGastric antrum: The mucosa is smooth, mottled red and white, and predominantly red; no bleeding or ulcer is seen, and peristalsis is fair.\nPylorus: Round in shape, with fair opening and closing; the mucosal folds are smooth and light red in color, and no bleeding or ulcer is seen.\nDuodenum: No abnormality is seen in the bulb or the descending portion.&quot;</pre></div>
+
 <div class="layer"><h4>任务参数 task_payload</h4><pre>（空）</pre></div>
 <div class="layer"><h4>标签来源 provenance</h4><pre>{
   &quot;label_source&quot;: &quot;report_findings_verbatim&quot;
@@ -1835,6 +1895,7 @@ Reply with a single option letter only. Do not explain.</pre></div>
 <div class="layer"><h4>题干（条目里的 <code>question</code> 字段）</h4><pre>These are all the images retained from one upper-GI endoscopy. Write the endoscopic findings, organised site by site.</pre></div>
 <div class="layer"><h4>实际送进模型的 prompt（<code>build_inference_prompt</code>）</h4><h5>open_ended</h5><pre>These are all the images retained from one upper-GI endoscopy. Write the endoscopic findings, organised site by site.</pre></div>
 <div class="layer"><h4>标准答案</h4><pre>&quot;Esophagus: The mucosa is smooth and soft, the vascular pattern is clear, distensibility is good, and the Z-line is clear.\nCardia: The mucosa is smooth, and no abnormality is seen.\nGastric fundus: The mucosa is mottled red and white, the mucus lake is clear, and no abnormality is seen.\nGastric body: The mucosa is smooth and flushed in color, and no ulcer or bleeding is seen.\nGastric angulus: The mucosa is mottled red and white, smooth and soft, and peristalsis is adequate.\nGastric antrum: The mucosa is smooth, mottled red and white, and predominantly red; no bleeding or ulcer is seen, and peristalsis is fair.\nPylorus: Round in shape, with fair opening and closing; the mucosal folds are smooth and light red in color, and no bleeding or ulcer is seen.\nDuodenum: No abnormality is seen in the bulb or the descending portion.&quot;</pre></div>
+
 <div class="layer"><h4>任务参数 task_payload</h4><pre>（空）</pre></div>
 <div class="layer"><h4>标签来源 provenance</h4><pre>{
   &quot;label_source&quot;: &quot;report_findings_verbatim&quot;
@@ -1865,6 +1926,7 @@ Reply with a single option letter only. Do not explain.</pre></div>
     &quot;label&quot;: &quot;gastric polyp(s)&quot;
   }
 ]</pre></div>
+
 <div class="layer"><h4>任务参数 task_payload</h4><pre>（空）</pre></div>
 <div class="layer"><h4>标签来源 provenance</h4><pre>{
   &quot;label_source&quot;: &quot;report_impression&quot;,
@@ -1899,6 +1961,7 @@ Reply with a single option letter only. Do not explain.</pre></div>
     &quot;label&quot;: &quot;Helicobacter pylori infection&quot;
   }
 ]</pre></div>
+
 <div class="layer"><h4>任务参数 task_payload</h4><pre>（空）</pre></div>
 <div class="layer"><h4>标签来源 provenance</h4><pre>{
   &quot;label_source&quot;: &quot;report_impression&quot;,
@@ -1930,6 +1993,7 @@ Reply with a single option letter only. Do not explain.</pre></div>
     &quot;label&quot;: &quot;duodenal submucosal tumor&quot;
   }
 ]</pre></div>
+
 <div class="layer"><h4>任务参数 task_payload</h4><pre>（空）</pre></div>
 <div class="layer"><h4>标签来源 provenance</h4><pre>{
   &quot;label_source&quot;: &quot;report_impression&quot;,
@@ -1961,6 +2025,7 @@ Reply with a single option letter only. Do not explain.</pre></div>
     &quot;label&quot;: &quot;duodenal ulcer&quot;
   }
 ]</pre></div>
+
 <div class="layer"><h4>任务参数 task_payload</h4><pre>（空）</pre></div>
 <div class="layer"><h4>标签来源 provenance</h4><pre>{
   &quot;label_source&quot;: &quot;report_impression&quot;,
@@ -1992,6 +2057,7 @@ Reply with a single option letter only. Do not explain.</pre></div>
     &quot;label&quot;: &quot;stomal gastritis&quot;
   }
 ]</pre></div>
+
 <div class="layer"><h4>任务参数 task_payload</h4><pre>（空）</pre></div>
 <div class="layer"><h4>标签来源 provenance</h4><pre>{
   &quot;label_source&quot;: &quot;report_impression&quot;,
@@ -2020,6 +2086,7 @@ Reply with a single option letter only. Do not explain.</pre></div>
     &quot;label&quot;: &quot;anastomotic ulcer&quot;
   }
 ]</pre></div>
+
 <div class="layer"><h4>任务参数 task_payload</h4><pre>（空）</pre></div>
 <div class="layer"><h4>标签来源 provenance</h4><pre>{
   &quot;label_source&quot;: &quot;report_impression&quot;,
@@ -2048,6 +2115,7 @@ Reply with a single option letter only. Do not explain.</pre></div>
     &quot;label&quot;: &quot;gastric ulcer&quot;
   }
 ]</pre></div>
+
 <div class="layer"><h4>任务参数 task_payload</h4><pre>（空）</pre></div>
 <div class="layer"><h4>标签来源 provenance</h4><pre>{
   &quot;label_source&quot;: &quot;report_impression&quot;,
@@ -2075,6 +2143,7 @@ Reply with a single option letter only. Do not explain.</pre></div>
     &quot;label&quot;: &quot;reflux esophagitis&quot;
   }
 ]</pre></div>
+
 <div class="layer"><h4>任务参数 task_payload</h4><pre>（空）</pre></div>
 <div class="layer"><h4>标签来源 provenance</h4><pre>{
   &quot;label_source&quot;: &quot;report_impression&quot;,
@@ -2109,6 +2178,7 @@ Reply with a single option letter only. Do not explain.</pre></div>
     &quot;label&quot;: &quot;duodenal ulcer&quot;
   }
 ]</pre></div>
+
 <div class="layer"><h4>任务参数 task_payload</h4><pre>（空）</pre></div>
 <div class="layer"><h4>标签来源 provenance</h4><pre>{
   &quot;label_source&quot;: &quot;report_impression&quot;,
@@ -2134,6 +2204,7 @@ Reply with a single option letter only. Do not explain.</pre></div>
     &quot;label&quot;: &quot;bile reflux&quot;
   }
 ]</pre></div>
+
 <div class="layer"><h4>任务参数 task_payload</h4><pre>（空）</pre></div>
 <div class="layer"><h4>标签来源 provenance</h4><pre>{
   &quot;label_source&quot;: &quot;report_impression&quot;,
@@ -2157,6 +2228,45 @@ This case has 9 frames, labelled F1-F9; cite only these. Answer in the following
 <div class="layer"><h4>标准答案</h4><pre>{
   &quot;score_or_grade&quot;: &quot;IIa&quot;
 }</pre></div>
+<div class="layer"><h4>金标准推理链（CoT engine 生成，judge 比对用）</h4><p class="meta">金标准链来自 <code>bleeding_peptic_ulcer_r2_en.jsonl</code> · 模型 <code>qwen3.7-plus</code> · 机制 <code>R2</code> · rollouts <code>1</code> · 锚定答案 <code>IIa</code>（<code>physician_stated_grade</code>） · 过闸 <code>True</code> · 核验状态 <code>pending</code><br><b>这条链是 judge 打分时比对的金标准，不随题面下发给模型。</b>源文件里的帧绝对路径（文件名含姓名）已删除。</p><h5>L1 可见描述（逐帧所见）</h5><pre>F1: The image shows gastric folds. On the right side, there is a reddish, irregular lesion that appears to be an erosion or small ulcer with a red base, suggestive of active or recent bleeding.</pre><pre>F2-F5: These frames show gastric mucosa with folds. There are some reddish streaks and areas of hyperemia, particularly in F5 where linear red marks are visible.</pre><pre>F6: A linear area of mucosal break is visible with significant redness and what appears to be fresh blood or oozing along the fold.</pre><pre>F7-F9: These frames focus on a distinct ulcer crater in the gastric body. The base of the ulcer is covered with whitish-yellow exudate (fibrin). In the center/edge of this base, there is a small, distinct dark red/black spot (a protruding vessel). There is no active flow of blood from this spot in these frames.</pre><h5>L2 征象映射</h5><pre>{
+  &quot;spurting&quot;: {
+    &quot;present&quot;: false,
+    &quot;supporting_af&quot;: [],
+    &quot;frames&quot;: []
+  },
+  &quot;oozing&quot;: {
+    &quot;present&quot;: true,
+    &quot;supporting_af&quot;: [],
+    &quot;frames&quot;: [
+      &quot;F1&quot;,
+      &quot;F6&quot;
+    ]
+  },
+  &quot;visible_vessel&quot;: {
+    &quot;present&quot;: true,
+    &quot;supporting_af&quot;: [],
+    &quot;frames&quot;: [
+      &quot;F7&quot;,
+      &quot;F8&quot;,
+      &quot;F9&quot;
+    ]
+  },
+  &quot;adherent_clot&quot;: {
+    &quot;present&quot;: false,
+    &quot;supporting_af&quot;: [],
+    &quot;frames&quot;: []
+  },
+  &quot;flat_pigmented_spot&quot;: {
+    &quot;present&quot;: false,
+    &quot;supporting_af&quot;: [],
+    &quot;frames&quot;: []
+  },
+  &quot;clean_base&quot;: {
+    &quot;present&quot;: false,
+    &quot;supporting_af&quot;: [],
+    &quot;frames&quot;: []
+  }
+}</pre><h5>L3 规则推理（评分/分级依据）</h5><pre>&quot;The case involves a 10.0 mm break in the gastric body. While oozing bleeding is observed in the periphery (F1, F6), the detailed examination of the main ulcer crater (F7-F9) reveals a specific stigma: a dark spot protruding from the ulcer base without active bleeding. According to the guideline, a \&quot;Non-bleeding visible vessel\&quot; corresponds to Forrest classification IIa. This stigma indicates a high rebleeding risk. Although oozing (Ib) was noted, the definitive characterization of the main ulcer&#x27;s base, once cleared or viewed closely, shows the visible vessel, which dictates the classification of the ulcer stigma itself as IIa in this context (often representing the state after initial bleeding has ceased or been washed away to reveal the underlying vessel).&quot;</pre><h5>L4 结论</h5><pre>&quot;IIa&quot;</pre><h5>L5 建议</h5><pre>&quot;Endoscopic treatment is indicated due to the high rebleeding risk associated with a non-bleeding visible vessel. High-dose PPI therapy should be administered. (Note: While IIb/IIc/III usually require less intervention, IIa specifically mandates endoscopic treatment and high-dose PPI similar to active bleeding, though ICU monitoring is explicitly listed for Ia/Ib, IIa also carries high risk). Based on the guideline: \&quot;Endoscopic treatment indicated; high-dose PPI.\&quot;&quot;</pre></div>
 <div class="layer"><h4>任务参数 task_payload</h4><pre>{
   &quot;guideline&quot;: &quot;forrest&quot;,
   &quot;guideline_name&quot;: &quot;Forrest 分级（溃疡出血风险）&quot;,
@@ -2261,6 +2371,50 @@ This case has 9 frames, labelled F1-F9; cite only these. Answer in the following
 <div class="layer"><h4>标准答案</h4><pre>{
   &quot;score_or_grade&quot;: &quot;IIb&quot;
 }</pre></div>
+<div class="layer"><h4>金标准推理链（CoT engine 生成，judge 比对用）</h4><p class="meta">金标准链来自 <code>bleeding_peptic_ulcer_r2_en.jsonl</code> · 模型 <code>qwen3.7-plus</code> · 机制 <code>R2</code> · rollouts <code>1</code> · 锚定答案 <code>IIb</code>（<code>physician_stated_grade</code>） · 过闸 <code>True</code> · 核验状态 <code>pending</code><br><b>这条链是 judge 打分时比对的金标准，不随题面下发给模型。</b>源文件里的帧绝对路径（文件名含姓名）已删除。</p><h5>L1 可见描述（逐帧所见）</h5><pre>F1: A large, irregular area of dark blackish-brown discoloration on the mucosal surface. The discoloration appears flat and covers a significant portion of the visible tissue, consistent with a large patch of hematin or old blood.</pre><pre>F2: Gastric folds are visible with small, scattered dark specks and debris.</pre><pre>F3: The endoscope tip is positioned near a pool of dark material, likely old blood or clot, within the gastric lumen.</pre><pre>F4: A gastric fold shows a distinct linear, dark brown streak running along its length.</pre><pre>F5: Close-up view of a fold with a linear dark streak and some white reflections (light glare).</pre><pre>F6: Similar to F4 and F5, showing linear dark brown streaks on the mucosal fold.</pre><pre>F7: Relatively normal-appearing mucosa with mild erythema and some mucus.</pre><pre>F8: A view of the gastric lumen showing concentric folds, appearing largely normal.</pre><pre>F9: A distinct focal lesion is visible. There is a raised, round, dark brown/black mass attached to the pink mucosa. The mass appears solid and adherent, surrounded by a rim of erythema.</pre><h5>L2 征象映射</h5><pre>{
+  &quot;spurting&quot;: {
+    &quot;present&quot;: false,
+    &quot;supporting_af&quot;: [],
+    &quot;frames&quot;: []
+  },
+  &quot;oozing&quot;: {
+    &quot;present&quot;: false,
+    &quot;supporting_af&quot;: [],
+    &quot;frames&quot;: []
+  },
+  &quot;visible_vessel&quot;: {
+    &quot;present&quot;: false,
+    &quot;supporting_af&quot;: [],
+    &quot;frames&quot;: [
+      &quot;F9&quot;
+    ]
+  },
+  &quot;adherent_clot&quot;: {
+    &quot;present&quot;: true,
+    &quot;supporting_af&quot;: [],
+    &quot;frames&quot;: [
+      &quot;F9&quot;
+    ]
+  },
+  &quot;flat_pigmented_spot&quot;: {
+    &quot;present&quot;: true,
+    &quot;supporting_af&quot;: [],
+    &quot;frames&quot;: [
+      &quot;F1&quot;,
+      &quot;F4&quot;,
+      &quot;F5&quot;,
+      &quot;F6&quot;
+    ]
+  },
+  &quot;clean_base&quot;: {
+    &quot;present&quot;: false,
+    &quot;supporting_af&quot;: [],
+    &quot;frames&quot;: [
+      &quot;F1&quot;,
+      &quot;F9&quot;
+    ]
+  }
+}</pre><h5>L3 规则推理（评分/分级依据）</h5><pre>&quot;1.  **Rule out Active Bleeding (Forrest I)**: There is no spurting (Ia) or oozing (Ib) visible in the frames. The blood is static.\n2.  **Evaluate High-Risk Stigmata (Forrest II)**:\n    *   **IIa (Non-bleeding visible vessel)**: I do not see a clear, protruding vessel without a clot. The lesion in F9 is a clot.\n    *   **IIb (Adherent clot)**: The lesion in **F9** is a raised, dark mass attached to the wall. This matches the guideline definition of \&quot;Adherent clot (sentinel clot)\&quot;. The guideline states this carries an \&quot;intermediate rebleeding risk\&quot;.\n    *   **IIc (Flat pigmented spot)**: The large dark area in **F1** and streaks in **F4-F6** match \&quot;Flat pigmented spot\&quot;. The guideline states this indicates \&quot;Recent bleeding signs only\&quot;.\n3.  **Determine Classification**: The classification is determined by the highest risk stigma present. An adherent clot (IIb) represents a higher risk of rebleeding than a flat pigmented spot (IIc). Therefore, the case is classified based on the adherent clot.\n4.  **Apply Management Rule**: The guideline for IIb states: \&quot;Consider clot removal and treatment of the underlying stigma.\&quot;&quot;</pre><h5>L4 结论</h5><pre>&quot;Forrest IIb&quot;</pre><h5>L5 建议</h5><pre>&quot;**Management**: Consider endoscopic clot removal and treatment of the underlying stigma (e.g., if a visible vessel is found underneath).\n**Reason**: The presence of an adherent clot (sentinel clot) indicates an intermediate rebleeding risk (Forrest IIb), which warrants endoscopic intervention to secure haemostasis, unlike lower-risk lesions (IIc/III) which usually only require medical therapy.&quot;</pre></div>
 <div class="layer"><h4>任务参数 task_payload</h4><pre>{
   &quot;guideline&quot;: &quot;forrest&quot;,
   &quot;guideline_name&quot;: &quot;Forrest 分级（溃疡出血风险）&quot;,
@@ -2359,6 +2513,51 @@ This case has 10 frames, labelled F1-F10; cite only these. Answer in the followi
 <div class="layer"><h4>标准答案</h4><pre>{
   &quot;score_or_grade&quot;: &quot;C-2&quot;
 }</pre></div>
+<div class="layer"><h4>金标准推理链（CoT engine 生成，judge 比对用）</h4><p class="meta">金标准链来自 <code>chronic_atrophic_gastritis_r2_en.jsonl</code> · 模型 <code>qwen3.7-plus</code> · 机制 <code>R2</code> · rollouts <code>1</code> · 锚定答案 <code>C-2</code>（<code>physician_stated_grade</code>） · 过闸 <code>True</code> · 核验状态 <code>pending</code><br><b>这条链是 judge 打分时比对的金标准，不随题面下发给模型。</b>源文件里的帧绝对路径（文件名含姓名）已删除。</p><h5>L1 可见描述（逐帧所见）</h5><pre>F1-F2: The images show the gastric mucosa which appears reddish-brown. In F1, there is a transition from a lighter, pale area on the left to a darker area on the right.</pre><pre>F3-F5: These frames display the gastric body with prominent, thick rugal folds. The mucosa is reddish-brown. In F5, there are some yellowish/whitish patches on the mucosal surface.</pre><pre>F6: This frame (likely using a specialized light mode) shows a sharp demarcation line. The left side is dark with a visible vascular network (greenish pattern), while the right side is pale yellow/white and smooth.</pre><pre>F7: This frame shows the lesser curvature. The mucosa in the lower/central part is pale and whitish with a mottled texture, contrasting with the darker reddish mucosa in the upper left.</pre><pre>F8-F10: These frames show the antrum and pylorus. The mucosa in F8 is reddish-brown. In F9 and F10, the mucosa appears notably pale, whitish, and smooth, with a mottled or patchy appearance (F9).</pre><h5>L2 征象映射</h5><pre>{
+  &quot;pale_mucosa&quot;: {
+    &quot;present&quot;: true,
+    &quot;supporting_af&quot;: [],
+    &quot;frames&quot;: [
+      &quot;F6&quot;,
+      &quot;F7&quot;,
+      &quot;F9&quot;,
+      &quot;F10&quot;
+    ]
+  },
+  &quot;visible_vessels&quot;: {
+    &quot;present&quot;: null,
+    &quot;supporting_af&quot;: [],
+    &quot;frames&quot;: [
+      &quot;F6&quot;,
+      &quot;F7&quot;,
+      &quot;F9&quot;
+    ]
+  },
+  &quot;fold_loss&quot;: {
+    &quot;present&quot;: true,
+    &quot;supporting_af&quot;: [],
+    &quot;frames&quot;: [
+      &quot;F3&quot;,
+      &quot;F4&quot;,
+      &quot;F9&quot;,
+      &quot;F10&quot;
+    ]
+  },
+  &quot;mottled_appearance&quot;: {
+    &quot;present&quot;: true,
+    &quot;supporting_af&quot;: [],
+    &quot;frames&quot;: [
+      &quot;F7&quot;,
+      &quot;F9&quot;,
+      &quot;F10&quot;
+    ]
+  },
+  &quot;atrophy_stated&quot;: {
+    &quot;present&quot;: false,
+    &quot;supporting_af&quot;: [],
+    &quot;frames&quot;: []
+  }
+}</pre><h5>L3 规则推理（评分/分级依据）</h5><pre>&quot;1.  **Identification of Atrophy:** The presence of pale/whitish mucosa and mottled/patchy texture (F7, F9, F10) indicates atrophic changes. The smooth appearance in F9/F10 suggests thinning of the mucosa and loss of glandular tissue.\n2.  **Locating the Atrophic Border:** The Kimura-Takemoto classification relies on the extent of the atrophic border (the line between atrophic pale mucosa and non-atrophic reddish mucosa).\n    *   The antrum (F8-F10) shows clear signs of atrophy (pale, mottled).\n    *   The gastric body (F3-F5) shows prominent rugal folds and reddish color, indicating it is largely non-atrophic.\n    *   F7 shows the lesser curvature. The pale, atrophic mucosa extends from the antrum up along the lesser curvature.\n    *   F6 shows a sharp demarcation, likely representing this border.\n3.  **Applying the Grade:**\n    *   The atrophy is not confined to the antrum (ruling out C-1) because the pale mucosa extends up the lesser curvature (F7).\n    *   The atrophy has not reached the upper gastric body or cardia (ruling out C-3) because the upper body frames (F3-F4) still show thick, healthy rugal folds and reddish mucosa.\n    *   The atrophic border lies on the lesser curvature of the lower gastric body. This matches the definition for Grade C-2.&quot;</pre><h5>L4 结论</h5><pre>&quot;C-2&quot;</pre><h5>L5 建议</h5><p class="meta">该族 <code>layer_config</code> 不含此步。</p></div>
 <div class="layer"><h4>任务参数 task_payload</h4><pre>{
   &quot;guideline&quot;: &quot;kimura_takemoto&quot;,
   &quot;guideline_name&quot;: &quot;木村-竹本分级（胃黏膜萎缩范围）&quot;,
@@ -2452,6 +2651,60 @@ This case has 12 frames, labelled F1-F12; cite only these. Answer in the followi
 <div class="layer"><h4>标准答案</h4><pre>{
   &quot;score_or_grade&quot;: &quot;C-2&quot;
 }</pre></div>
+<div class="layer"><h4>金标准推理链（CoT engine 生成，judge 比对用）</h4><p class="meta">金标准链来自 <code>chronic_atrophic_gastritis_r2_en.jsonl</code> · 模型 <code>qwen3.7-plus</code> · 机制 <code>R2</code> · rollouts <code>1</code> · 锚定答案 <code>C-2</code>（<code>physician_stated_grade</code>） · 过闸 <code>True</code> · 核验状态 <code>pending</code><br><b>这条链是 judge 打分时比对的金标准，不随题面下发给模型。</b>源文件里的帧绝对路径（文件名含姓名）已删除。</p><h5>L1 可见描述（逐帧所见）</h5><pre>F1: The mucosa appears reddish-pink but exhibits a mottled, granular texture with patchy whitish areas.</pre><pre>F2: A view of the gastric body/lesser curvature showing reddish mucosa with some darker areas; rugal folds are visible.</pre><pre>F3: Deep rugal folds are visible in the gastric body; the mucosa is dark reddish-brown.</pre><pre>F4: A clear demarcation is visible. On the left, the mucosa is dark red with thick folds. On the right, the mucosa is pale, whitish, and mottled. The endoscope tip is near the boundary.</pre><pre>F5: Similar to F4, showing the boundary between the dark red, thick mucosa (left) and the pale, mottled mucosa (right).</pre><pre>F6: The mucosa is extensively pale with a fine, mottled, &quot;mosaic-like&quot; pattern of red and white, suggesting thinning.</pre><pre>F7: A view of the lesser curvature (the ridge running diagonally). The mucosa on the ridge is pale pink/whitish.</pre><pre>F8: Close-up of the lesser curvature/angulus area. The mucosa is pale and smooth.</pre><pre>F9: Similar to F8, showing the pale mucosa along the lesser curvature fold.</pre><pre>F10: A view looking down a lumen (likely antrum or lower body). The mucosa is pale orange-pink with a mottled texture.</pre><pre>F11: Close-up of pale mucosa with a distinct mottled/patchy appearance and fine granularity.</pre><pre>F12: A view of the antrum/pylorus with concentric rugal folds. The mucosa is pinkish-red.</pre><h5>L2 征象映射</h5><pre>{
+  &quot;pale_mucosa&quot;: {
+    &quot;present&quot;: true,
+    &quot;supporting_af&quot;: [],
+    &quot;frames&quot;: [
+      &quot;F3&quot;,
+      &quot;F4&quot;,
+      &quot;F5&quot;,
+      &quot;F6&quot;,
+      &quot;F7&quot;,
+      &quot;F8&quot;,
+      &quot;F9&quot;,
+      &quot;F10&quot;,
+      &quot;F11&quot;
+    ]
+  },
+  &quot;visible_vessels&quot;: {
+    &quot;present&quot;: null,
+    &quot;supporting_af&quot;: [],
+    &quot;frames&quot;: [
+      &quot;F6&quot;,
+      &quot;F11&quot;
+    ]
+  },
+  &quot;fold_loss&quot;: {
+    &quot;present&quot;: true,
+    &quot;supporting_af&quot;: [],
+    &quot;frames&quot;: [
+      &quot;F3&quot;,
+      &quot;F4&quot;,
+      &quot;F6&quot;,
+      &quot;F10&quot;,
+      &quot;F11&quot;,
+      &quot;F12&quot;
+    ]
+  },
+  &quot;mottled_appearance&quot;: {
+    &quot;present&quot;: true,
+    &quot;supporting_af&quot;: [],
+    &quot;frames&quot;: [
+      &quot;F1&quot;,
+      &quot;F4&quot;,
+      &quot;F5&quot;,
+      &quot;F6&quot;,
+      &quot;F10&quot;,
+      &quot;F11&quot;
+    ]
+  },
+  &quot;atrophy_stated&quot;: {
+    &quot;present&quot;: false,
+    &quot;supporting_af&quot;: [],
+    &quot;frames&quot;: []
+  }
+}</pre><h5>L3 规则推理（评分/分级依据）</h5><pre>&quot;1.  **Identify Atrophy:** The presence of pale/whitish discolouration and mottled/patchy mucosa (seen in F1, F4-F6, F10, F11) confirms the presence of atrophic gastritis. The thinning of folds further supports this.\n2.  **Locate the Atrophic Border:** The Kimura-Takemoto classification relies on the extent of the atrophic border.\n    *   In **F4 and F5**, we see a sharp transition between the non-atrophic mucosa (dark red, thick folds) and the atrophic mucosa (pale, mottled). This represents the atrophic border.\n    *   In **F7, F8, and F9**, the lesser curvature is visualized. The mucosa here is pale and smooth, indicating that the atrophy has extended up the lesser curvature from the antrum.\n3.  **Determine the Grade:**\n    *   **Grade C-1** is confined to the antrum. The findings in F7-F9 show atrophy on the lesser curvature of the body, ruling out C-1.\n    *   **Grade C-2** is defined as the atrophic border lying on the lesser curvature of the lower gastric body. The images (specifically F4, F5, F7-F9) show the atrophic change (pale, mottled mucosa) extending along the lesser curvature but the non-atrophic mucosa (red, thick folds) is still prominent in the upper parts of the body (seen on the left of F4/F5 and in F3). The border has not reached the cardia (upper body).\n    *   **Grade C-3** would require the border to reach the upper gastric body near the cardia. The extensive red, non-atrophic mucosa seen in F3 and the left side of F4 suggests the upper body is largely spared.\n    *   **Open types (O-1 to O-3)** involve the border opening to the anterior/posterior walls or greater curvature. The atrophy here appears confined to the lesser curvature track (Closed type).\n\nTherefore, the atrophic border is located on the lesser curvature of the lower gastric body.&quot;</pre><h5>L4 结论</h5><pre>&quot;C-2&quot;</pre><h5>L5 建议</h5><p class="meta">该族 <code>layer_config</code> 不含此步。</p></div>
 <div class="layer"><h4>任务参数 task_payload</h4><pre>{
   &quot;guideline&quot;: &quot;kimura_takemoto&quot;,
   &quot;guideline_name&quot;: &quot;木村-竹本分级（胃黏膜萎缩范围）&quot;,
@@ -2546,6 +2799,7 @@ This case has 3 frames, labelled F1-F3; cite only these. Answer in the following
 <div class="layer"><h4>标准答案</h4><pre>{
   &quot;score_or_grade&quot;: &quot;A&quot;
 }</pre></div>
+<div class="layer"><h4>金标准推理链（CoT engine 生成，judge 比对用）</h4><p class="meta">金标准链来自 <code>reflux_esophagitis_r2_en.jsonl</code> · 模型 <code>qwen3.7-plus</code> · 机制 <code>R2</code> · rollouts <code>1</code> · 锚定答案 <code>A</code>（<code>physician_stated_grade</code>） · 过闸 <code>True</code> · 核验状态 <code>pending</code><br><b>这条链是 judge 打分时比对的金标准，不随题面下发给模型。</b>源文件里的帧绝对路径（文件名含姓名）已删除。</p><h5>L1 可见描述（逐帧所见）</h5><pre>F1: The image shows the distal esophagus approaching the gastroesophageal junction. There are small, linear reddish areas (mucosal breaks) visible at the squamocolumnar junction, particularly at the 6 o&#x27;clock and 10 o&#x27;clock positions.</pre><pre>F2: This is a closer view of the Z-line (squamocolumnar junction). Several small, red mucosal breaks (erosions) are visible. Specifically, there are reddish patches at the tops of the mucosal folds around the 7-9 o&#x27;clock and 10-11 o&#x27;clock positions. These breaks appear short and localized.</pre><pre>F3: This frame shows the esophageal lumen further proximal. The mucosa appears relatively normal with some bubbles and light reflection, showing no significant breaks in this section.</pre><h5>L2 征象映射</h5><pre>（空）</pre><h5>L3 规则推理（评分/分级依据）</h5><pre>&quot;1.  **Identify abnormalities**: The images (specifically F1 and F2) show mucosal breaks (erosions) characterized by red, linear defects in the mucosa at the distal esophagus.\n2.  **Assess length**: According to the Los Angeles Classification, the first step is to measure the length of the mucosal breaks. In F1 and F2, the red erosions appear small, visually estimated to be no longer than 5 mm.\n3.  **Assess continuity between folds**: The guideline distinguishes grades based on whether breaks extend between the tops of mucosal folds. In the images, the mucosal breaks are localized to specific areas (likely fold tops) and do not appear to be continuous between the tops of two mucosal folds.\n4.  **Apply criteria**: The findings fit the description for Grade A: \&quot;One or more mucosal breaks, each no longer than 5 mm, none extending between the tops of two mucosal folds.\&quot; They are not long enough for Grade B (&gt;5mm), nor do they connect folds for Grade C.&quot;</pre><h5>L4 结论</h5><pre>&quot;Grade A&quot;</pre><h5>L5 建议</h5><p class="meta">该族 <code>layer_config</code> 不含此步。</p></div>
 <div class="layer"><h4>任务参数 task_payload</h4><pre>{
   &quot;guideline&quot;: &quot;la&quot;,
   &quot;guideline_name&quot;: &quot;洛杉矶分级（反流性食管炎）&quot;,
@@ -2610,6 +2864,7 @@ This case has 3 frames, labelled F1-F3; cite only these. Answer in the following
 <div class="layer"><h4>标准答案</h4><pre>{
   &quot;score_or_grade&quot;: &quot;A&quot;
 }</pre></div>
+<div class="layer"><h4>金标准推理链（CoT engine 生成，judge 比对用）</h4><p class="meta">金标准链来自 <code>reflux_esophagitis_r2_en.jsonl</code> · 模型 <code>qwen3.7-plus</code> · 机制 <code>R2</code> · rollouts <code>1</code> · 锚定答案 <code>A</code>（<code>physician_stated_grade</code>） · 过闸 <code>True</code> · 核验状态 <code>pending</code><br><b>这条链是 judge 打分时比对的金标准，不随题面下发给模型。</b>源文件里的帧绝对路径（文件名含姓名）已删除。</p><h5>L1 可见描述（逐帧所见）</h5><pre>In frames F1 and F3, the distal esophagus and gastroesophageal junction are visible. There are small, linear, whitish mucosal breaks (erosions) present on the mucosal folds. These lesions appear short and isolated. In frame F2, looking down the esophageal lumen, a small, discrete mucosal break is visible near the bottom of the field (around the 6 o&#x27;clock position). The surrounding mucosa appears relatively normal with some erythema, but the primary abnormalities are these small breaks.</pre><h5>L2 征象映射</h5><pre>（空）</pre><h5>L3 规则推理（评分/分级依据）</h5><pre>&quot;1.  **Identify Abnormalities:** The images show mucosal breaks (erosions), as confirmed by the signs.\n2.  **Assess Length:** The confirmed criteria state that the break length is less than 5.0 mm. This aligns with the visual evidence of short, linear lesions.\n3.  **Apply Los Angeles Classification Rules:**\n    *   **Grade A:** Requires one or more mucosal breaks, each no longer than 5 mm, and none extending between the tops of two mucosal folds.\n    *   **Grade B:** Requires a break longer than 5 mm. (Ruled out by confirmed criteria &lt; 5.0 mm).\n    *   **Grade C:** Requires continuity between the tops of two or more mucosal folds. The observed breaks are small and isolated, not bridging the tops of folds.\n    *   **Grade D:** Requires involvement of at least 75% of the circumference. The breaks are focal and small.\n4.  **Synthesis:** Since the mucosal breaks are present, are less than 5 mm in length (per confirmed criteria), and do not extend between the tops of two mucosal folds (visual inspection shows they are localized to the folds without bridging them), the findings satisfy the definition for Grade A.&quot;</pre><h5>L4 结论</h5><pre>&quot;Grade A&quot;</pre><h5>L5 建议</h5><p class="meta">该族 <code>layer_config</code> 不含此步。</p></div>
 <div class="layer"><h4>任务参数 task_payload</h4><pre>{
   &quot;guideline&quot;: &quot;la&quot;,
   &quot;guideline_name&quot;: &quot;洛杉矶分级（反流性食管炎）&quot;,
@@ -2683,6 +2938,47 @@ This case has 12 frames, labelled F1-F12; cite only these. Answer in the followi
 <div class="layer"><h4>标准答案</h4><pre>{
   &quot;score_or_grade&quot;: &quot;0-IIc&quot;
 }</pre></div>
+<div class="layer"><h4>金标准推理链（CoT engine 生成，judge 比对用）</h4><p class="meta">金标准链来自 <code>egc_neoplasia_r2_en.jsonl</code> · 模型 <code>qwen3.7-plus</code> · 机制 <code>R2</code> · rollouts <code>2</code> · 锚定答案 <code>0-IIc</code>（<code>physician_stated_grade</code>） · 过闸 <code>True</code> · 核验状态 <code>pending</code><br><b>这条链是 judge 打分时比对的金标准，不随题面下发给模型。</b>源文件里的帧绝对路径（文件名含姓名）已删除。</p><h5>L1 可见描述（逐帧所见）</h5><pre>F1-F3: Views of the distal esophagus and gastroesophageal junction (Z-line). The mucosa appears generally smooth with some vascular visibility.</pre><pre>F4-F5: Views of the gastric cardia and upper body as the scope enters. The mucosa is reddish.</pre><pre>F6: A focal area of reddish mucosa on the gastric wall (likely lesser curvature or body). This area appears slightly depressed compared to the surrounding tissue. There is a small, focal red spot (erosion/hemorrhage) within this area.</pre><pre>F7-F9: Views of the gastric body showing folds. The mucosa appears somewhat pale with visible submucosal vessels in areas.</pre><pre>F10-F12: Views of the gastric antrum. In F12, there is a broad area of mucosa that appears reddish and slightly depressed relative to the adjacent folds. The surface texture in F11 and F12 appears granular and irregular compared to the smoother surrounding mucosa. The border of this reddish area is indistinct.</pre><h5>L2 征象映射</h5><pre>{
+  &quot;irregular_gland_pattern&quot;: {
+    &quot;present&quot;: true,
+    &quot;supporting_af&quot;: [],
+    &quot;frames&quot;: [
+      &quot;F11&quot;,
+      &quot;F12&quot;
+    ]
+  },
+  &quot;irregular_vascular_pattern&quot;: {
+    &quot;present&quot;: true,
+    &quot;supporting_af&quot;: [],
+    &quot;frames&quot;: [
+      &quot;F6&quot;,
+      &quot;F12&quot;
+    ]
+  },
+  &quot;background_atrophy&quot;: {
+    &quot;present&quot;: true,
+    &quot;supporting_af&quot;: [],
+    &quot;frames&quot;: [
+      &quot;F7&quot;,
+      &quot;F8&quot;,
+      &quot;F9&quot;
+    ]
+  },
+  &quot;background_intestinal_metaplasia&quot;: {
+    &quot;present&quot;: true,
+    &quot;supporting_af&quot;: [],
+    &quot;frames&quot;: [
+      &quot;F11&quot;
+    ]
+  },
+  &quot;unclear_border&quot;: {
+    &quot;present&quot;: true,
+    &quot;supporting_af&quot;: [],
+    &quot;frames&quot;: [
+      &quot;F12&quot;
+    ]
+  }
+}</pre><h5>L3 规则推理（评分/分级依据）</h5><pre>&quot;1.  **Assessment of Elevation/Depression:** The lesion observed in **F6** and **F12** is not protruding above the surrounding mucosa (ruling out 0-I and 0-IIa). It is not completely flat/level (ruling out 0-IIb). Instead, it exhibits a shallow depression relative to the surrounding tissue.\n2.  **Assessment of Excavation:** While there is a small red spot in **F6**, it represents a superficial erosion rather than a deep excavation or ulcer crater with a white base and raised margins. Therefore, it does not meet the criteria for 0-III (deep excavation).\n3.  **Classification:** The lesion is a shallow depression without deep ulceration. According to the Paris Classification, a slightly depressed lesion (height &lt; surrounding mucosa, but shallow) is classified as 0-IIc. The presence of background atrophy and intestinal metaplasia supports the context of a neoplastic field, but the morphology of the specific lesion dictates the 0-IIc classification.&quot;</pre><h5>L4 结论</h5><pre>&quot;0-IIc (Slightly depressed lesion).&quot;</pre><h5>L5 建议</h5><pre>&quot;Biopsy of the lesion for histological confirmation is recommended. Given the endoscopic appearance suggestive of early gastric neoplasia (0-IIc type), if histology confirms adenoma or carcinoma, Endoscopic Submucosal Dissection (ESD) or Endoscopic Mucosal Resection (EMR) should be considered for curative treatment, as these lesions are typically confined to the mucosa or shallow submucosa and have a low risk of lymph node metastasis. Close surveillance is required due to the background of atrophy and intestinal metaplasia.&quot;</pre></div>
 <div class="layer"><h4>任务参数 task_payload</h4><pre>{
   &quot;guideline&quot;: &quot;paris&quot;,
   &quot;guideline_name&quot;: &quot;巴黎分型（表浅病变形态）&quot;,
@@ -2753,6 +3049,47 @@ This case has 10 frames, labelled F1-F10; cite only these. Answer in the followi
 <div class="layer"><h4>标准答案</h4><pre>{
   &quot;score_or_grade&quot;: &quot;0-IIa&quot;
 }</pre></div>
+<div class="layer"><h4>金标准推理链（CoT engine 生成，judge 比对用）</h4><p class="meta">金标准链来自 <code>egc_neoplasia_r2_en.jsonl</code> · 模型 <code>qwen3.7-plus</code> · 机制 <code>R2</code> · rollouts <code>2</code> · 锚定答案 <code>0-IIa</code>（<code>physician_stated_grade</code>） · 过闸 <code>True</code> · 核验状态 <code>pending</code><br><b>这条链是 judge 打分时比对的金标准，不随题面下发给模型。</b>源文件里的帧绝对路径（文件名含姓名）已删除。</p><h5>L1 可见描述（逐帧所见）</h5><pre>F1-F3: General views of the gastric body showing rugal folds. The mucosa appears reddish and somewhat thinned. In F3, a small reddish spot is visible on a fold intersection.</pre><pre>F4: A slightly elevated, reddish area is visible on the upper left mucosal wall. The color is distinct from the surrounding pale mucosa.</pre><pre>F5-F7: Views of the gastric antrum and pylorus. The mucosa appears relatively smooth with some redness.</pre><pre>F8: A close-up view showing a patch of mucosa with whitish, slightly granular changes, distinct from the surrounding reddish mucosa.</pre><pre>F9: A clear view of a distinct, slightly elevated, reddish lesion on the left wall. It appears as a small, rounded mound with a somewhat lobulated surface and visible fine vessels.</pre><pre>F10: View of the pyloric channel/antrum with concentric folds.</pre><h5>L2 征象映射</h5><pre>{
+  &quot;irregular_gland_pattern&quot;: {
+    &quot;present&quot;: true,
+    &quot;supporting_af&quot;: [],
+    &quot;frames&quot;: [
+      &quot;F9&quot;
+    ]
+  },
+  &quot;irregular_vascular_pattern&quot;: {
+    &quot;present&quot;: true,
+    &quot;supporting_af&quot;: [],
+    &quot;frames&quot;: [
+      &quot;F9&quot;
+    ]
+  },
+  &quot;background_atrophy&quot;: {
+    &quot;present&quot;: true,
+    &quot;supporting_af&quot;: [],
+    &quot;frames&quot;: [
+      &quot;F1&quot;,
+      &quot;F2&quot;,
+      &quot;F3&quot;,
+      &quot;F4&quot;
+    ]
+  },
+  &quot;background_intestinal_metaplasia&quot;: {
+    &quot;present&quot;: true,
+    &quot;supporting_af&quot;: [],
+    &quot;frames&quot;: [
+      &quot;F8&quot;
+    ]
+  },
+  &quot;unclear_border&quot;: {
+    &quot;present&quot;: null,
+    &quot;supporting_af&quot;: [],
+    &quot;frames&quot;: [
+      &quot;F4&quot;,
+      &quot;F9&quot;
+    ]
+  }
+}</pre><h5>L3 规则推理（评分/分级依据）</h5><pre>&quot;- The primary finding is a lesion that is elevated above the surrounding mucosa (visible in F4 and clearly in F9).\n- According to the **Paris Classification**, a protruding lesion with height &gt; 2.5 mm is 0-I. A slightly elevated lesion with height &lt;= 2.5 mm is 0-IIa.\n- The lesion in F9 appears as a small mound. It lacks the tall, polypoid structure typical of a 0-I lesion (height &gt; 2.5 mm). It is clearly elevated, ruling out 0-IIb (flat) and 0-IIc (depressed).\n- There is no deep excavation or ulceration, ruling out 0-III.\n- The lesion is a simple elevation without significant depression, fitting the criteria for **0-IIa**.\n- The presence of background atrophy and intestinal metaplasia (F8) supports the context of a high-risk stomach for neoplasia, consistent with early gastric cancer guidelines (MESDA-G).&quot;</pre><h5>L4 结论</h5><pre>&quot;0-IIa (Slightly elevated lesion).&quot;</pre><h5>L5 建议</h5><pre>&quot;Endoscopic resection (EMR or ESD) is recommended for definitive histological diagnosis and treatment, as 0-IIa lesions are suspicious for early gastric neoplasia (adenoma or early carcinoma). Biopsy should be performed if resection is not immediately feasible. The background of atrophy and intestinal metaplasia warrants surveillance of the remaining stomach.&quot;</pre></div>
 <div class="layer"><h4>任务参数 task_payload</h4><pre>{
   &quot;guideline&quot;: &quot;paris&quot;,
   &quot;guideline_name&quot;: &quot;巴黎分型（表浅病变形态）&quot;,
@@ -2813,6 +3150,7 @@ This case has 3 frames, labelled F1-F3; cite only these. Answer in the following
 <div class="layer"><h4>标准答案</h4><pre>{
   &quot;score_or_grade&quot;: &quot;C0M3&quot;
 }</pre></div>
+<div class="layer"><h4>金标准推理链（CoT engine 生成，judge 比对用）</h4><p class="meta">金标准链来自 <code>barrett_esophagus_r2_en.jsonl</code> · 模型 <code>qwen3.7-plus</code> · 机制 <code>R2</code> · rollouts <code>1</code> · 锚定答案 <code>C0M3</code>（<code>physician_stated_grade</code>） · 过闸 <code>True</code> · 核验状态 <code>pending</code><br><b>这条链是 judge 打分时比对的金标准，不随题面下发给模型。</b>源文件里的帧绝对路径（文件名含姓名）已删除。</p><h5>L1 可见描述（逐帧所见）</h5><pre>F1: The image shows the distal esophageal lumen lined by pale pink, smooth squamous mucosa with visible vascular patterns. There is no obvious reddish discoloration surrounding the entire circumference.</pre><pre>F2: This frame shows a close-up view of the distal esophagus/GEJ area. There is a distinct, large area of salmon-colored (reddish) mucosa on the right side, which contrasts sharply with the pale pink squamous mucosa on the left. This reddish area appears to be a tongue-like extension of columnar-appearing mucosa projecting proximally.</pre><pre>F3: The image displays the gastroesophageal junction (GEJ). The mucosa surrounding the lumen is predominantly pale pink squamous epithelium. While the Z-line (squamocolumnar junction) is visible as a slightly irregular ring at the bottom, there is no continuous band of reddish columnar mucosa extending upwards around the entire circumference of the esophagus.</pre><h5>L2 征象映射</h5><pre>（空）</pre><h5>L3 规则推理（评分/分级依据）</h5><pre>&quot;*   **Circumferential extent (C):** The Prague criteria define &#x27;C&#x27; as the maximum length of circumferential columnar-lined esophagus above the GEJ. In frames F1 and F3, the esophageal wall is largely lined by pale squamous mucosa. There is no continuous ring of columnar (salmon-colored) mucosa extending above the GEJ. The columnar mucosa does not form a complete circle. Therefore, the circumferential extent is 0 cm (C0).\n*   **Maximum extent (M):** The criteria define &#x27;M&#x27; as the maximum length of any columnar-appearing mucosa above the GEJ, specifically including tongue-like extensions. In frame F2, a significant tongue of salmon-colored, columnar-appearing mucosa is clearly visible extending up the esophageal wall. This represents the maximum proximal extent of the Barrett&#x27;s segment. Based on the visual evidence of this long tongue extension (and consistent with the provided case parameters), this defines the maximum extent.&quot;</pre><h5>L4 结论</h5><pre>&quot;C0M3&quot;</pre><h5>L5 建议</h5><p class="meta">该族 <code>layer_config</code> 不含此步。</p></div>
 <div class="layer"><h4>任务参数 task_payload</h4><pre>{
   &quot;guideline&quot;: &quot;prague&quot;,
   &quot;guideline_name&quot;: &quot;布拉格 C&amp;M 分级（Barrett 食管）&quot;,
@@ -2860,6 +3198,7 @@ This case has 11 frames, labelled F1-F11; cite only these. Answer in the followi
 <div class="layer"><h4>标准答案</h4><pre>{
   &quot;score_or_grade&quot;: &quot;A1&quot;
 }</pre></div>
+<div class="layer"><h4>金标准推理链（CoT engine 生成，judge 比对用）</h4><p class="meta">金标准链来自 <code>gastric_ulcer_r2_en.jsonl</code> · 模型 <code>qwen3.7-plus</code> · 机制 <code>R2</code> · rollouts <code>1</code> · 锚定答案 <code>A1</code>（<code>physician_stated_grade</code>） · 过闸 <code>True</code> · 核验状态 <code>pending</code><br><b>这条链是 judge 打分时比对的金标准，不随题面下发给模型。</b>源文件里的帧绝对路径（文件名含姓名）已删除。</p><h5>L1 可见描述（逐帧所见）</h5><pre>F1: The gastric mucosa appears erythematous with a visible vascular pattern and a linear reddish area.</pre><pre>F2-F3: There are gastric folds showing adherent whitish-yellowish exudate (coating). The surrounding mucosa is markedly erythematous and appears swollen (oedematous). The exudate looks somewhat irregular and &quot;dirty&quot; rather than a clean white base.</pre><pre>F4-F6: The endoscope is visible. The surrounding gastric mucosa is diffusely erythematous and granular, indicating significant inflammation and oedema.</pre><pre>F7: The mucosa shows diffuse redness with scattered white spots (likely bubbles or small exudates).</pre><pre>F8: The pyloric channel is visible; the mucosa appears relatively smooth but slightly erythematous.</pre><pre>F9: Close-up of mucosa showing erythema and a granular texture.</pre><pre>F10-F11: The antral mucosa and pyloric area show erythema and some white specks/exudate on the folds.</pre><h5>L2 征象映射</h5><pre>（空）</pre><h5>L3 规则推理（评分/分级依据）</h5><pre>&quot;- The guideline defines stage **A1** as having a \&quot;Thick dirty coating with surrounding oedema\&quot;.\n- In frames **F2** and **F3**, there is a visible lesion on the gastric folds characterized by a whitish-yellowish exudate. This corresponds to the \&quot;thick dirty coating\&quot; (necrotic base/exudate).\n- The mucosa surrounding this area, particularly in **F2-F3** and the general erythema seen in **F4-F6**, is red and swollen, which corresponds to \&quot;surrounding oedema\&quot;.\n- The coating is not \&quot;clean\&quot; (which would suggest A2), nor is there a red halo of regenerating epithelium (which would suggest H1). The presence of the dirty coating and marked oedema fits the criteria for an Active ulcer, specifically stage A1.&quot;</pre><h5>L4 结论</h5><pre>&quot;A1&quot;</pre><h5>L5 建议</h5><pre>&quot;Full-dose acid suppression; Hp testing and eradication if positive. This is because the guideline states that for A1/A2 (Active ulcer), full-dose acid suppression is required, along with Helicobacter pylori testing and eradication if the test is positive.&quot;</pre></div>
 <div class="layer"><h4>任务参数 task_payload</h4><pre>{
   &quot;guideline&quot;: &quot;ulcer_ahs&quot;,
   &quot;guideline_name&quot;: &quot;Sakita 分期（溃疡活动性）&quot;,

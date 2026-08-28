@@ -1,6 +1,6 @@
 {
-  "title": "release_v4_1（英文）分层抽样 · 含真 prompt",
-  "generated_at": "2026-08-28T03:55:21+00:00",
+  "title": "release_v4_1（英文）分层抽样 · 含真 prompt 与 T6 金标准链",
+  "generated_at": "2026-08-28T05:29:19+00:00",
   "cases": 79,
   "frames": 320,
   "groups": [
