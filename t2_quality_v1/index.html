@@ -40,6 +40,19 @@ font-size:.78em;line-height:1.4;white-space:pre;resize:vertical;background:#fff;
 .gloss{border-collapse:collapse;margin:6px 0;width:100%}.gloss th,.gloss td{border:1px solid #cbd5e1;padding:5px 9px;text-align:left;vertical-align:top}
 .gloss th{background:#e8eff7}.gloss td b{color:#0f172a}
 .opt{display:inline-block;margin:2px 14px 2px 0}.opt small{display:block;color:#4b5563;margin-left:19px;max-width:430px}
+.alias{font-size:1.15em;color:#0f172a}
+.badge{display:inline-block;background:#e8eefc;border:1px solid #b9c9ea;border-radius:3px;padding:0 5px;margin:1px 3px 0 0;
+font-size:.75em;color:#1f3d74;white-space:nowrap}
+.frameline{color:#4b5563;font-size:.9em}.tile small{line-height:1.45}
+.step{display:inline-block;background:#2f6fb5;color:#fff;border-radius:3px;padding:1px 9px;margin:0 8px 2px 0;
+font-size:.72em;font-weight:700;vertical-align:middle;letter-spacing:.02em}
+.step.ref{background:#94a3b8}
+h3 .step,h2 .step{vertical-align:2px}
+.state{font-weight:700;font-size:.8em;border-radius:3px;padding:1px 8px;margin-left:8px;white-space:nowrap}
+.state.ok{background:#dcfce7;color:#15803d}.state.part{background:#fff4e5;color:#9a3412}
+.state.idle{background:#eef2f7;color:#475569}
+.todo{background:#fff8e1;border:1px solid #f1c36d;border-radius:5px;padding:8px 11px;margin:10px 0;color:#7c4a03}
+.case.done>.todo{background:#f0fdf4;border-color:#a7d9b4;color:#15803d}
 </style></head><body>
 <div id="__gate_lock__" style="position:fixed;inset:0;z-index:99999;background:#f5f5f7;display:flex;align-items:center;justify-content:center;font-family:-apple-system,'PingFang SC',sans-serif;">
 <div style="text-align:center;background:#fff;padding:40px 48px;border-radius:12px;box-shadow:0 4px 24px rgba(0,0,0,.08);">
@@ -74,24 +87,32 @@ font-size:.78em;line-height:1.4;white-space:pre;resize:vertical;background:#fff;
 有无效判定时整体拒绝。浏览器记录只存在本机本浏览器（按 batch digest 保存），换设备前务必复制或下载导出。</div><details class="legend" open><summary>怎么看这一页（流程 · 术语 · 每个选项的后果）</summary>
 <p class="hint"><b>T2 Grounding 复核判的不是题目对错</b>：题干和答案文字都已冻结，你要判的是
 「答案里的每一条，在选定的图像上<b>到底看不看得到</b>」。流水线已自动判过一轮并给出倾向，你做的是确认或推翻。</p>
-<h4>流程（按顺序）</h4><ol>
-<li>读<b>英文 Question + Gold</b>：知道这道题在问什么、答案里有几条。</li>
-<li>看<b>源图</b>：题目原本用的帧。</li>
-<li><b>逐 Element 裁决</b>：答案里的每一条都要单独四选一（<b>漏一条就不能批准</b>）。</li>
-<li>判「接受视觉支持」的要素，再勾出它的 <b>supported evidence</b> 和对应<b>帧</b>。</li>
-<li>整题做 <b>Item decision</b> 三选一；选「批准 grounded frames」时勾<b>最终帧</b>（＝下版给模型看的 panel）。</li>
-<li>页面顶部「复核结果」框复制或下载，交给 CLI validate（<b>最终门禁</b>）。</li>
+<h4>流程（每页病例的分区标题都带同样的步骤号）</h4><ol>
+<li><span class="step">第 1 步</span>读<b>英文 Question + Gold</b>：知道这道题在问什么、答案里有几条。</li>
+<li><span class="step">第 2 步</span>看<b>源图</b>：题目当前用的帧。<b>「参考」那块（报告片段与候选帧）只读，不用勾</b>，默认折起。</li>
+<li><span class="step">第 3 步</span><b>逐条 Element 裁决</b>：答案里的每一条单独四选一（<b>漏一条就不能批准</b>）。
+判「接受视觉支持」的要素，在<b>该要素下面那排图</b>里勾「作为本条图证」（只有 <span class="badge">交集✓</span> 的帧能勾），
+并按需在证据明细里勾「这条证据算数」。每条标题右侧的状态会写明它<b>还差什么</b>。</li>
+<li><span class="step">第 4 步</span>整题做 <b>Item decision</b> 三选一；选「批准」后用<b>勾入本例全部已接受帧</b>一次带入最终 panel。</li>
+<li>第 5 步＝提交：页面顶部「复核结果」框复制或导出，交给 CLI validate（<b>最终门禁</b>）。</li>
 </ol>
+<p class="hint"><b>状态颜色怎么看</b>：
+<span class="state idle">还没开始</span> ＝ 这一例你还没动；
+<span class="state part">待办 N 项</span> ＝ 已开始但还差几步，差什么写在病例开头的黄色「本例还差」那一行；
+<span class="state ok">✓ 完成</span> ＝ 页面校验通过（左边框变绿），可以导出。病例折叠时也能在标题上看到这个状态。</p>
+<p class="hint"><b>帧号怎么读</b>：帧1…帧N 是<b>本例内部</b>的短号，同一条报告里反复出现的同一张图<b>只有一张卡片、只勾一次</b>；
+短号只在本例内有意义，导出文件里仍是完整 <code>T2F_…</code> ID（帧卡片下方灰色小字即原 ID）。
+不同要素里同一帧各勾一次是有意的——每条答案要各自有图证，整题批准时用一个按钮统一带入。</p>
 <h4>本批题型与流水线倾向</h4><table class="gloss"><tr><th>代码</th><th>含义</th><th>本批</th></tr>
 <tr><td><code>finding_presence</code></td><td><b>存在判断题</b><br>答案只判某个发现在不在</td><td>7 例</td></tr><tr><td><code>findings</code></td><td><b>列举发现题</b><br>答案是一组报告发现／编码，每条都要单独判</td><td>52 例</td></tr><tr><td><code>normal_state</code></td><td><b>正常状态题</b><br>答案判该部位是否正常</td><td>5 例</td></tr><tr><td><code>grounded_ready</code></td><td><b>自检已通过</b><br>本页只做抽样确认</td><td>4 例</td></tr><tr><td><code>review_required</code></td><td><b>需人工裁决</b><br>流水线自检没通过，等你定</td><td>60 例</td></tr></table>
 <h4>为什么这些例子被挑出来（橙签）</h4><table class="gloss"><tr><th>代码</th><th>含义</th><th>次数</th></tr><tr><td><code>blind_only_extra_abnormal</code></td><td>盲读看到了报告没写的异常</td><td>46 次</td></tr><tr><td><code>ambiguous_or_compare_conflict</code></td><td>盲读与对照冲突，或指代不清</td><td>41 次</td></tr><tr><td><code>target_evidence_requires_review</code></td><td>目标答案自身的证据需确认</td><td>5 次</td></tr></table>
 <h4>证据卡上的两组标签</h4><p class="hint"><b>mode</b> 决定证据强弱：<code>blind</code> 是模型<b>只看图</b>时写下的观察（独立证据）；
 <code>compare</code> 是<b>给了报告之后</b>的对齐结果（容易被报告带话，单独不足以证明）。<b>status</b> 说明两侧是否指向同一帧：</p>
 <table class="gloss"><tr><th>mode + status</th><th>含义</th></tr><tr><td><code>blind</code> + <code>blind_only_observation</code></td><td>盲读观察·只有盲读提出（需你看图定）</td></tr><tr><td><code>blind</code> + <code>blind_supported_observation</code></td><td>盲读观察·已被对照在同一帧上印证（较强）</td></tr><tr><td><code>compare</code> + <code>compare_only_candidate</code></td><td>对照候选·只在对照阶段出现（最弱，单独不能批准）</td></tr><tr><td><code>compare</code> + <code>blind_supported_match</code></td><td>对照结论·盲读在同一帧也看到（最强，可视觉批准）</td></tr><tr><td><code>compare</code> + <code>conflict_review</code></td><td>两侧冲突·待人工</td></tr></table>
-<p class="hint">每张证据卡下方的帧分四堆，只有最后一堆能勾为视觉证据：</p>
-<table class="gloss"><tr><th>帧堆</th><th>含义</th></tr><tr><td><code>frame_ids</code></td><td>盲读观察帧</td></tr><tr><td><code>blind_frame_ids</code></td><td>盲读帧</td></tr><tr><td><code>compare_frame_ids</code></td><td>对照帧</td></tr><tr><td><code>supported_frame_ids</code></td><td>交集·可批准帧（只有这些能勾）</td></tr></table>
-<p class="hint">卡片末尾的 <b>supported</b> ＝ 这条证据在系统里已被列为该要素的可批准证据；
-<b>context/risk</b> ＝ 只作参考，<b>勾了会报「evidence 不属于 binding」</b>。</p>
+<p class="hint">本要素那排图卡片上的 chip，就是这张图在各证据里属于哪几堆（同一张图在一条要素里只出现一次）：</p>
+<table class="gloss"><tr><th>帧堆（内部键）</th><th>卡片上的 chip</th><th>含义</th></tr><tr><td><code>frame_ids</code></td><td><span class="badge">盲读观察</span></td><td>盲读观察帧</td></tr><tr><td><code>blind_frame_ids</code></td><td><span class="badge">盲读</span></td><td>盲读帧</td></tr><tr><td><code>compare_frame_ids</code></td><td><span class="badge">对照</span></td><td>对照帧</td></tr><tr><td><code>supported_frame_ids</code></td><td><span class="badge">交集✓</span></td><td>交集·可批准帧（只有这些能勾）</td></tr></table>
+<p class="hint">证据卡上的「<b>supported·可批准证据</b>」＝ 这条证据在系统里已被列为该要素的可批准证据（它的交集帧才允许勾）；
+「<b>context/risk·仅供参考</b>」＝ 只作参考，<b>勾了会报「evidence 不属于 binding」</b>。</p>
 <h4>四个 Element 裁决的后果</h4><table class="gloss"><tr><th>选项</th><th>选了之后会发生什么</th></tr><tr><td><b>接受视觉支持</b><br><code>accept_visual_support</code></td><td>图上确实看得到。必须再勾 supported evidence 和对应帧，这些帧才可能进最终 panel。</td></tr><tr><td><b>仅保留报告标签</b><br><code>keep_report_only</code></td><td>报告写了、但图上无法独立确认。题目保留，但不声称有图证。</td></tr><tr><td><b>拒绝证据</b><br><code>reject_evidence</code></td><td>图与报告不符，或证据绑错了要素。用于剔除这一条。</td></tr><tr><td><b>冲突未解决</b><br><code>conflict_unresolved</code></td><td>盲读与对照矛盾且你无法判断。选它＝整题不能批准（approve 会被拦）。</td></tr></table>
 <h4>三个 Item decision 的后果</h4><table class="gloss"><tr><th>选项</th><th>选了之后会发生什么</th></tr><tr><td><b>批准 grounded frames</b><br><code>approve_grounded_frames</code></td><td>每个要素都判「接受视觉支持」，最终帧全部来自已接受的证据帧、且覆盖每个已接受要素。</td></tr><tr><td><b>保留原题/原图</b><br><code>keep_source_item</code></td><td>不改图，整题按现状保留。要求源图可读、且不勾任何最终帧。</td></tr><tr><td><b>下版排除</b><br><code>exclude_from_next_release</code></td><td>整题下版不要。不勾最终帧。</td></tr></table>
 <h4>校验提示对照表</h4><p class="hint">病例没变绿＝有地方没过校验。提示（顶部框、以及「导出 JSONL」的弹窗）里就是下面这些句子：</p>
