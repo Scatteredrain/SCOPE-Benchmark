@@ -1,0 +1,48 @@
+{
+  "title": "T6 CoT 人工证据复核（canary，10 例）",
+  "generated_at": "2026-09-04T09:13:14+00:00",
+  "cases": 10,
+  "frames": 118,
+  "groups": [
+    {
+      "title": "仅等级确认",
+      "frames": 21,
+      "cases": [
+        "L7_00d26527_kimura_takemoto",
+        "L7_00e01b62_kimura_takemoto"
+      ]
+    },
+    {
+      "title": "Compare-only 证据",
+      "frames": 26,
+      "cases": [
+        "L7_3aa0d5d7_forrest",
+        "L7_4b77105e_forrest"
+      ]
+    },
+    {
+      "title": "Grounding 冲突/无 blind 支持",
+      "frames": 24,
+      "cases": [
+        "L7_331e4576_forrest",
+        "L7_a058af44_forrest"
+      ]
+    },
+    {
+      "title": "多病灶/Paris 病灶绑定",
+      "frames": 32,
+      "cases": [
+        "L7_2ad65aad_forrest",
+        "L7_928d7813_forrest"
+      ]
+    },
+    {
+      "title": "部位或 panel 补足",
+      "frames": 15,
+      "cases": [
+        "L7_05635461_kimura_takemoto",
+        "L7_082d98cc_kimura_takemoto"
+      ]
+    }
+  ]
+}

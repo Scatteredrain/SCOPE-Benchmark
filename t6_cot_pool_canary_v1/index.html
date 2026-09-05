@@ -1,6 +1,5 @@
-<!DOCTYPE html>
-<html lang="zh"><head><meta charset="utf-8">
-<title>SCOPE 复核批次</title><style>
+<!DOCTYPE html><html lang="zh"><head><meta charset="utf-8">
+<title>T6 CoT 人工证据复核（canary，10 例）</title><style>
 body { font-family: -apple-system, "Helvetica Neue", "PingFang SC", sans-serif;
        margin: 0 auto; max-width: 1180px; padding: 24px; color: #1a1a1a; line-height: 1.6; }
 h1 { border-bottom: 2px solid #1a1a1a; padding-bottom: 8px; }
@@ -24,6 +23,18 @@ th { background: #f6f6f6; }
 .frame { width: 210px; }
 .frame img { width: 210px; border: 1px solid #ccc; border-radius: 4px; display: block; }
 .frame span { font-size: .82em; color: #666; }
+
+body{max-width:1420px}.toolbar{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid #ddd;
+padding:10px 0;display:flex;gap:14px;align-items:center;flex-wrap:wrap}.toolbar input,.toolbar select{padding:5px}
+.case{padding:0 18px 18px}.case[hidden]{display:none}.reason{display:inline-block;background:#fff4e5;border:1px solid #f3c77c;
+border-radius:4px;padding:2px 7px;margin:2px;font-size:.86em}.hard{background:#fee2e2;border-color:#ef4444}
+.control{background:#f8fafc;border:1px solid #d8dee4;border-radius:6px;padding:10px 12px;margin:12px 0}
+.control h3{margin:0 0 8px}.job{border-left:4px solid #64748b;padding-left:12px;margin:18px 0}
+.gallery,.panel-grid{display:flex;flex-wrap:wrap;gap:10px}.tile{width:180px;border:1px solid #ddd;border-radius:5px;padding:6px}
+.tile img{width:180px;height:135px;object-fit:contain;background:#111;display:block}.tile .caption{font-size:.78em;line-height:1.35}
+.finding{border:1px solid #ddd;border-radius:5px;padding:9px;margin:8px 0}.finding label{margin-right:12px}
+.binding{width:250px}.notes{width:100%;min-height:58px}.done{border-left:5px solid #15803d}.incomplete{border-left:5px solid #d97706}
+.page-nav{display:flex;gap:12px;margin:16px 0}.small{font-size:.82em;color:#555}.frame-list label{display:inline-block;margin:3px 10px 3px 0}
 </style></head><body>
 <div id="__gate_lock__" style="position:fixed;inset:0;z-index:99999;background:#f5f5f7;display:flex;align-items:center;justify-content:center;font-family:-apple-system,'PingFang SC',sans-serif;">
 <div style="text-align:center;background:#fff;padding:40px 48px;border-radius:12px;box-shadow:0 4px 24px rgba(0,0,0,.08);">
@@ -50,17 +61,9 @@ th { background: #f6f6f6; }
   if(sessionStorage.getItem("__gate_auth__")==="1")show();
 })();
 </script>
-
-<h1>SCOPE 复核批次</h1>
-<p class="meta">每个批次是一个独立子目录，自带 <code>index.html</code>、<code>images/</code> 与
-<code>manifest.json</code>；批次一经发布不再改动，新的复核开新目录。</p>
-<div class="warn"><b>两类批次的性质不同，不要混读。</b>CoT 链是<b>构造</b>产物，结论作为既定事实给出，
-只有核验状态为 <code>verified</code>/<code>corrected</code> 的可用于对外报数；基准条目是从报告自动
-派生的<b>题目与标签</b>，其正确性取决于报告本身与抽取规则，同样未经人工逐条确认。</div>
-<table><tr><th>批次</th><th>说明</th><th>例数</th><th>帧数</th><th>分组</th><th>生成时间</th></tr>
-<tr><td><a href="2026-08-25-gold60/">2026-08-25-gold60</a></td><td>金标准链人工核验 · 全 60 例（三疾病）</td><td>60</td><td>459</td><td>HP感染（hp_infection） 20、反流性食管炎（reflux_esophagitis） 20、慢性萎缩性胃炎（chronic_atrophic_gastritis） 20</td><td>2026-08-25T06:04</td></tr><tr><td><a href="2026-08-25-release-v3-sample/">2026-08-25-release-v3-sample</a></td><td>v3 基准条目分层抽样查看 · 8 个任务层各 8 条</td><td>64</td><td>273</td><td>部位识别 8、异常发现列举 8、单发现有无 8、部位是否正常 8、病灶属性 8、所见报告生成 8、诊断印象 8、指南推理 8</td><td>2026-08-25T06:30</td></tr><tr><td><a href="2026-08-28-release-v4_1-en-sample/">2026-08-28-release-v4_1-en-sample</a></td><td>release_v4_1（英文）分层抽样 · 含真 prompt 与 T6 金标准链</td><td>79</td><td>320</td><td>部位识别 10、异常发现列举 10、部位是否正常 10、单发现有无 10、病灶属性 10、所见报告生成 9、诊断印象 10、指南推理链 10</td><td>2026-08-28T05:29</td></tr>
-<tr><td><a href="video_review_batch1/">video_review_batch1</a></td><td>v2 视频复核批次 1</td><td>-</td><td>206</td><td>-</td><td>2026-08-26</td></tr>
-<tr><td><a href="video_review_batch3/">video_review_batch3</a></td><td>v2 视频复核批次 3</td><td>-</td><td>200</td><td>-</td><td>2026-08-27</td></tr>
-<tr><td><a href="t6_cot_pool_canary_v1/">t6_cot_pool_canary_v1</a></td><td>T6 CoT 人工证据复核（canary，10 例）</td><td>10</td><td>118</td><td>仅等级确认 2、Compare-only 证据 2、Grounding 冲突/无 blind 支持 2、多病灶/Paris 病灶绑定 2、部位或 panel 补足 2</td><td>2026-09-04T09:13</td></tr>
-</table>
+<p><a href="../">&larr; 返回总览</a></p><h1>T6 CoT 人工证据复核（canary，10 例）</h1>
+<p>本页面使用已冻结的版本化复核快照；页面与导出决定均不包含原始患者文件名或绝对路径。</p>
+<div class="warn">浏览器按批次自动保存。先填 reviewer；完成后下载 JSONL，并用严格 validate 命令检查，未经校验不会进入 engine input。</div>
+<h2>分页</h2><ul><li><a href="page_001.html">第 1 页</a>（10 例）</li></ul><h2>原因计数</h2><table><tr><th>原因</th><th>例数</th></tr>
+<tr><td>仅 compare 路径找到候选证据</td><td>6</td></tr><tr><td>blind 与 compare 证据冲突</td><td>1</td></tr><tr><td>需医生确认报告等级</td><td>8</td></tr><tr><td>缺少必需部位帧：胃角</td><td>2</td></tr><tr><td>多个病灶尚未绑定到同一目标</td><td>2</td></tr><tr><td>没有 blind 支持帧</td><td>2</td></tr></table>
 </body></html>
