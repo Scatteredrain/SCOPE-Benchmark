@@ -35,6 +35,10 @@ border-radius:4px;padding:2px 7px;margin:2px;font-size:.86em}.hard{background:#f
 .finding{border:1px solid #ddd;border-radius:5px;padding:9px;margin:8px 0}.finding label{margin-right:12px}
 .binding{width:250px}.notes{width:100%;min-height:58px}.done{border-left:5px solid #15803d}.incomplete{border-left:5px solid #d97706}
 .page-nav{display:flex;gap:12px;margin:16px 0}.small{font-size:.82em;color:#555}.frame-list label{display:inline-block;margin:3px 10px 3px 0}
+.export{border:1px solid #d8dee4;border-radius:6px;padding:8px 12px;margin:12px 0;background:#f6f8fa}
+.export summary{cursor:pointer;font-weight:600}
+.export textarea{width:100%;height:170px;margin-top:8px;padding:8px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+font-size:.78em;line-height:1.4;white-space:pre;resize:vertical;background:#fff;border:1px solid #d8dee4;border-radius:4px}
 </style></head><body>
 <div id="__gate_lock__" style="position:fixed;inset:0;z-index:99999;background:#f5f5f7;display:flex;align-items:center;justify-content:center;font-family:-apple-system,'PingFang SC',sans-serif;">
 <div style="text-align:center;background:#fff;padding:40px 48px;border-radius:12px;box-shadow:0 4px 24px rgba(0,0,0,.08);">
@@ -61,6 +65,7 @@ border-radius:4px;padding:2px 7px;margin:2px;font-size:.86em}.hard{background:#f
   if(sessionStorage.getItem("__gate_auth__")==="1")show();
 })();
 </script>
+
 <p><a href="./">&larr; 返回批次首页</a> · <a href="../">返回总览</a></p>
 <h1>T6 CoT 人工证据复核（canary，10 例） · 第 1/1 页</h1>
 <div class="warn"><b>批准不是总开关。</b>Compare-only、冲突和多病灶病例必须逐 finding 选择支持帧；
@@ -71,6 +76,10 @@ border-radius:4px;padding:2px 7px;margin:2px;font-size:.86em}.hard{background:#f
 <select id="familyFilter" onchange="applyFilters()"><option value="">全部 family</option><option>forrest</option><option>kimura_takemoto</option></select>
 <select id="reasonFilter" onchange="applyFilters()"><option value="">全部原因</option><option value="compare_only_grounding">仅 compare 路径找到候选证据</option><option value="grounding_conflict_review">blind 与 compare 证据冲突</option><option value="human_review_required">需医生确认报告等级</option><option value="missing_required_site:胃角">缺少必需部位帧：胃角</option><option value="multiple_unbound_lesions">多个病灶尚未绑定到同一目标</option><option value="no_blind_supported_frame">没有 blind 支持帧</option></select>
 <button onclick="exportDecisions()">下载 JSONL</button><label>导入 JSONL <input type="file" accept=".jsonl" onchange="importDecisions(this)"></label></div>
+<details class="export" id="exportBoxWrap" open ontoggle="renderExportBox()"><summary>复核结果（可直接复制）· 校验通过 <b id="exportN">0</b> 条 / 全批 10 例</summary>
+<p><button id="copyBtn" onclick="copyExport()">复制到剪贴板</button>
+<span id="exportHint" class="small"></span></p>
+<textarea id="exportBox" readonly spellcheck="false" placeholder="为病例选好「最终判定」并通过校验后，这里会自动出现可复制的 JSONL；也可以直接在框内全选复制。"></textarea></details>
 <div class="page-nav">页码：<a href="page_001.html">1</a></div>
 <details class="case incomplete" id="case_L7_00d26527_kimura_takemoto" data-family="kimura_takemoto">
 <summary><code>L7_00d26527_kimura_takemoto</code> · kimura_takemoto · O1 · <span class="reason ">需医生确认报告等级</span></summary>
@@ -345,13 +354,40 @@ function syncAll(){
   CASES.forEach(c=>{const el=document.getElementById('case_'+c.sample_id),done=isComplete(ALL_CASE_MAP[c.sample_id],STORE.decisions[c.sample_id]);el.classList.toggle('done',done);el.classList.toggle('incomplete',!done)});
   renderProgress();applyFilters();
 }
-function renderProgress(){const n=CASES.filter(c=>isComplete(ALL_CASE_MAP[c.sample_id],STORE.decisions[c.sample_id])).length;document.getElementById('done').textContent=n;document.getElementById('reviewer').value=STORE.reviewer||''}
+function renderProgress(){const n=CASES.filter(c=>isComplete(ALL_CASE_MAP[c.sample_id],STORE.decisions[c.sample_id])).length;document.getElementById('done').textContent=n;document.getElementById('reviewer').value=STORE.reviewer||'';renderExportBox()}
 function applyFilters(){const only=document.getElementById('onlyIncomplete').checked,fam=document.getElementById('familyFilter').value,reason=document.getElementById('reasonFilter').value;
   CASES.forEach(c=>{const complete=isComplete(ALL_CASE_MAP[c.sample_id],STORE.decisions[c.sample_id]);document.getElementById('case_'+c.sample_id).hidden=(only&&complete)||(fam&&c.family!==fam)||(reason&&!c.qc_reasons.includes(reason))})}
+function collectRows(){
+  const rows=[],bad=[],unset=[];
+  for(const d of Object.values(STORE.decisions)){
+    if(!d.verdict){unset.push(d.sample_id);continue}
+    const c=ALL_CASE_MAP[d.sample_id];if(!c){bad.push(d.sample_id+'：未知病例');continue}
+    const x=exportRow(d),errors=decisionErrors(c,x);if(errors.length)bad.push(d.sample_id+'：'+errors.join('；'));else rows.push(x)}
+  return {rows:rows,bad:bad,unset:unset};
+}
+function renderExportBox(){
+  const box=document.getElementById('exportBox');if(!box)return;
+  const r=collectRows();
+  document.getElementById('exportN').textContent=r.rows.length;
+  const hint=['跨页合并，本批次所有页的判定都在这里，任一页复制结果相同'];
+  if(r.unset.length)hint.push('未选最终判定 '+r.unset.length+' 条：'+r.unset.slice(0,10).join('、')+(r.unset.length>10?' …':''));
+  if(r.bad.length)hint.push('校验未过 '+r.bad.length+' 条：'+r.bad.slice(0,10).join(' ｜ ')+(r.bad.length>10?' …':''));
+  document.getElementById('exportHint').innerHTML=htmlEscape(hint.join('　·　'));
+  if(document.getElementById('exportBoxWrap').open)box.value=r.rows.length?r.rows.map(x=>JSON.stringify(x)).join('\n')+'\n':'';
+}
+function htmlEscape(v){return String(v).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+function copyExport(){
+  const box=document.getElementById('exportBox'),btn=document.getElementById('copyBtn');
+  if(!box.value){alert('没有校验通过的判定可复制。请先为病例在「1. 等级与最终判定」选择 批准／拒绝／需要补候选帧，未完成原因见上方提示。');return}
+  const done=()=>{btn.textContent='已复制 '+box.value.trim().split('\n').length+' 条，可直接粘贴';setTimeout(()=>{btn.textContent='复制到剪贴板'},2500)};
+  const fallback=()=>{box.removeAttribute('readonly');box.select();box.setSelectionRange(0,box.value.length);let ok=false;try{ok=document.execCommand('copy')}catch(e){}box.setAttribute('readonly','');return ok};
+  if(navigator.clipboard&&window.isSecureContext)navigator.clipboard.writeText(box.value).then(done,()=>{fallback()?done():alert('复制失败，请在框内全选后手动复制')});
+  else fallback()?done():alert('复制失败，请在框内全选后手动复制');
+}
 function exportDecisions(){
-  const rows=[],bad=[];
-  for(const d of Object.values(STORE.decisions).filter(x=>x.verdict)){const c=ALL_CASE_MAP[d.sample_id];if(!c){bad.push(d.sample_id+': 未知病例');continue}const x=exportRow(d),errors=decisionErrors(c,x);if(errors.length)bad.push(d.sample_id+': '+errors.join('；'));else rows.push(x)}
-  if(bad.length){alert('不能导出，存在未完成或无效决定：\n'+bad.slice(0,10).join('\n'));return}if(!rows.length){alert('没有可导出的决定');return}
+  const {rows,bad,unset}=collectRows();
+  if(bad.length){alert('不能导出，存在未完成或无效决定：\n'+bad.slice(0,10).join('\n'));return}
+  if(!rows.length){alert('没有可导出的决定'+(unset.length?'：已勾选的 '+unset.length+' 个病例都还没选最终判定':''));return}
   const blob=new Blob([rows.map(x=>JSON.stringify(x)).join('\n')+'\n'],{type:'application/x-ndjson'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='t6_review_decisions.jsonl';a.click();URL.revokeObjectURL(a.href);
 }
 function importDecisions(input){const file=input.files[0];if(!file)return;const reader=new FileReader();reader.onload=()=>{try{

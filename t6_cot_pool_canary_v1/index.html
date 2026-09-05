@@ -35,6 +35,10 @@ border-radius:4px;padding:2px 7px;margin:2px;font-size:.86em}.hard{background:#f
 .finding{border:1px solid #ddd;border-radius:5px;padding:9px;margin:8px 0}.finding label{margin-right:12px}
 .binding{width:250px}.notes{width:100%;min-height:58px}.done{border-left:5px solid #15803d}.incomplete{border-left:5px solid #d97706}
 .page-nav{display:flex;gap:12px;margin:16px 0}.small{font-size:.82em;color:#555}.frame-list label{display:inline-block;margin:3px 10px 3px 0}
+.export{border:1px solid #d8dee4;border-radius:6px;padding:8px 12px;margin:12px 0;background:#f6f8fa}
+.export summary{cursor:pointer;font-weight:600}
+.export textarea{width:100%;height:170px;margin-top:8px;padding:8px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+font-size:.78em;line-height:1.4;white-space:pre;resize:vertical;background:#fff;border:1px solid #d8dee4;border-radius:4px}
 </style></head><body>
 <div id="__gate_lock__" style="position:fixed;inset:0;z-index:99999;background:#f5f5f7;display:flex;align-items:center;justify-content:center;font-family:-apple-system,'PingFang SC',sans-serif;">
 <div style="text-align:center;background:#fff;padding:40px 48px;border-radius:12px;box-shadow:0 4px 24px rgba(0,0,0,.08);">
@@ -61,9 +65,12 @@ border-radius:4px;padding:2px 7px;margin:2px;font-size:.86em}.hard{background:#f
   if(sessionStorage.getItem("__gate_auth__")==="1")show();
 })();
 </script>
+
 <p><a href="../">&larr; 返回总览</a></p><h1>T6 CoT 人工证据复核（canary，10 例）</h1>
 <p>本页面使用已冻结的版本化复核快照；页面与导出决定均不包含原始患者文件名或绝对路径。</p>
-<div class="warn">浏览器按批次自动保存。先填 reviewer；完成后下载 JSONL，并用严格 validate 命令检查，未经校验不会进入 engine input。</div>
+<div class="warn">浏览器按批次自动保存，只在当前这台机器当前这个浏览器里。先填 reviewer；每页顶部的「复核结果」框会实时汇总跨页的全部判定，
+点「复制到剪贴板」即可直接贴回。校验未全部通过时复制框只显示已完成的条目，「下载 JSONL」则整体拒绝导出；
+导出/复制的结果仍需严格 validate 命令检查，未经校验不会进入 engine input。</div>
 <h2>分页</h2><ul><li><a href="page_001.html">第 1 页</a>（10 例）</li></ul><h2>原因计数</h2><table><tr><th>原因</th><th>例数</th></tr>
 <tr><td>仅 compare 路径找到候选证据</td><td>6</td></tr><tr><td>blind 与 compare 证据冲突</td><td>1</td></tr><tr><td>需医生确认报告等级</td><td>8</td></tr><tr><td>缺少必需部位帧：胃角</td><td>2</td></tr><tr><td>多个病灶尚未绑定到同一目标</td><td>2</td></tr><tr><td>没有 blind 支持帧</td><td>2</td></tr></table>
 </body></html>
