@@ -1,6 +1,4 @@
-<!DOCTYPE html>
-<html lang="zh"><head><meta charset="utf-8">
-<title>SCOPE 复核批次</title><style>
+<!DOCTYPE html><html lang="zh"><head><meta charset="utf-8"><title>T2 Grounding 人工复核（64 例）</title><style>
 body { font-family: -apple-system, "Helvetica Neue", "PingFang SC", sans-serif;
        margin: 0 auto; max-width: 1180px; padding: 24px; color: #1a1a1a; line-height: 1.6; }
 h1 { border-bottom: 2px solid #1a1a1a; padding-bottom: 8px; }
@@ -24,6 +22,13 @@ th { background: #f6f6f6; }
 .frame { width: 210px; }
 .frame img { width: 210px; border: 1px solid #ccc; border-radius: 4px; display: block; }
 .frame span { font-size: .82em; color: #666; }
+
+body{max-width:1400px}.toolbar{position:sticky;top:0;background:#fff;border-bottom:1px solid #ddd;
+padding:10px 0;z-index:10;display:flex;gap:12px;flex-wrap:wrap}.case{padding:0 16px 16px}.done{border-left:5px solid #15803d}
+.reason{background:#fff4e5;border:1px solid #f1c36d;border-radius:4px;padding:2px 7px;margin:2px}.box{background:#f8fafc;
+border:1px solid #ddd;border-radius:5px;padding:10px;margin:10px 0}.gallery{display:flex;gap:9px;flex-wrap:wrap}.tile{width:180px}
+.tile img{width:180px;height:135px;object-fit:contain;background:#111}.tile small{display:block}.evidence{border-left:3px solid #64748b;
+padding:8px;margin:8px}.page-nav{display:flex;gap:10px;flex-wrap:wrap}.notes{width:100%;min-height:55px}.bad{color:#b91c1c}
 </style></head><body>
 <div id="__gate_lock__" style="position:fixed;inset:0;z-index:99999;background:#f5f5f7;display:flex;align-items:center;justify-content:center;font-family:-apple-system,'PingFang SC',sans-serif;">
 <div style="text-align:center;background:#fff;padding:40px 48px;border-radius:12px;box-shadow:0 4px 24px rgba(0,0,0,.08);">
@@ -51,16 +56,6 @@ th { background: #f6f6f6; }
 })();
 </script>
 
-<h1>SCOPE 复核批次</h1>
-<p class="meta">每个批次是一个独立子目录，自带 <code>index.html</code>、<code>images/</code> 与
-<code>manifest.json</code>；批次一经发布不再改动，新的复核开新目录。</p>
-<div class="warn"><b>两类批次的性质不同，不要混读。</b>CoT 链是<b>构造</b>产物，结论作为既定事实给出，
-只有核验状态为 <code>verified</code>/<code>corrected</code> 的可用于对外报数；基准条目是从报告自动
-派生的<b>题目与标签</b>，其正确性取决于报告本身与抽取规则，同样未经人工逐条确认。</div>
-<table><tr><th>批次</th><th>说明</th><th>例数</th><th>帧数</th><th>分组</th><th>生成时间</th></tr>
-<tr><td><a href="2026-08-25-gold60/">2026-08-25-gold60</a></td><td>金标准链人工核验 · 全 60 例（三疾病）</td><td>60</td><td>459</td><td>HP感染（hp_infection） 20、反流性食管炎（reflux_esophagitis） 20、慢性萎缩性胃炎（chronic_atrophic_gastritis） 20</td><td>2026-08-25T06:04</td></tr><tr><td><a href="2026-08-25-release-v3-sample/">2026-08-25-release-v3-sample</a></td><td>v3 基准条目分层抽样查看 · 8 个任务层各 8 条</td><td>64</td><td>273</td><td>部位识别 8、异常发现列举 8、单发现有无 8、部位是否正常 8、病灶属性 8、所见报告生成 8、诊断印象 8、指南推理 8</td><td>2026-08-25T06:30</td></tr><tr><td><a href="2026-08-28-release-v4_1-en-sample/">2026-08-28-release-v4_1-en-sample</a></td><td>release_v4_1（英文）分层抽样 · 含真 prompt 与 T6 金标准链</td><td>79</td><td>320</td><td>部位识别 10、异常发现列举 10、部位是否正常 10、单发现有无 10、病灶属性 10、所见报告生成 9、诊断印象 10、指南推理链 10</td><td>2026-08-28T05:29</td></tr>
-<tr><td><a href="video_review_batch1/">video_review_batch1</a></td><td>v2 视频复核批次 1</td><td>-</td><td>206</td><td>-</td><td>2026-08-26</td></tr>
-<tr><td><a href="video_review_batch3/">video_review_batch3</a></td><td>v2 视频复核批次 3</td><td>-</td><td>200</td><td>-</td><td>2026-08-27</td></tr>
-<tr><td><a href="t6_cot_pool_canary_v1/">t6_cot_pool_canary_v1</a></td><td>T6 CoT 人工证据复核（canary，10 例）</td><td>10</td><td>118</td><td>仅等级确认 2、Compare-only 证据 2、Grounding 冲突/无 blind 支持 2、多病灶/Paris 病灶绑定 2、部位或 panel 补足 2</td><td>2026-09-04T09:13</td></tr>
-<tr><td><a href="t2_quality_v1/">t2_quality_v1</a></td><td>T2 Grounding 人工复核聚焦站 · 64 例（自动候选抽检 8 + 定向复核 56）；分层口径：核心候选 136（严格全元素支持 40 + 明确结构性异常支持 96）、低特异性扩展 333、可选人工挽救池 56</td><td>64</td><td>475</td><td>finding_presence 7、findings 52、normal_state 5</td><td>2026-09-05T04:56</td></tr></table>
-</body></html>
+<p><a href="../">&larr; 返回总览</a></p><h1>T2 Grounding 人工复核（64 例）</h1><p>Batch digest: <code>885049a2f586b8a774cdfafbc31d9e7dd87e787728984927a63f9f7036c810c5</code></p>
+<div class="warn">页面不含原始路径或文件名；浏览器检查仅辅助，CLI validate 是最终门禁。</div><ul><li><a href="page_001.html">第 1 页</a>（25 例）</li><li><a href="page_002.html">第 2 页</a>（25 例）</li><li><a href="page_003.html">第 3 页</a>（14 例）</li></ul>
+<table><tr><th>recommendation</th><th>数量</th></tr><tr><td>grounded_ready</td><td>4</td></tr><tr><td>review_required</td><td>60</td></tr></table></body></html>
