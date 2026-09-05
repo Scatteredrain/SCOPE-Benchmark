@@ -29,6 +29,10 @@ padding:10px 0;z-index:10;display:flex;gap:12px;flex-wrap:wrap}.case{padding:0 1
 border:1px solid #ddd;border-radius:5px;padding:10px;margin:10px 0}.gallery{display:flex;gap:9px;flex-wrap:wrap}.tile{width:180px}
 .tile img{width:180px;height:135px;object-fit:contain;background:#111}.tile small{display:block}.evidence{border-left:3px solid #64748b;
 padding:8px;margin:8px}.page-nav{display:flex;gap:10px;flex-wrap:wrap}.notes{width:100%;min-height:55px}.bad{color:#b91c1c}
+.export{border:1px solid #d8dee4;border-radius:6px;padding:8px 12px;margin:12px 0;background:#f6f8fa}
+.export summary{cursor:pointer;font-weight:600}
+.export textarea{width:100%;height:170px;margin-top:8px;padding:8px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+font-size:.78em;line-height:1.4;white-space:pre;resize:vertical;background:#fff;border:1px solid #d8dee4;border-radius:4px}
 </style></head><body>
 <div id="__gate_lock__" style="position:fixed;inset:0;z-index:99999;background:#f5f5f7;display:flex;align-items:center;justify-content:center;font-family:-apple-system,'PingFang SC',sans-serif;">
 <div style="text-align:center;background:#fff;padding:40px 48px;border-radius:12px;box-shadow:0 4px 24px rgba(0,0,0,.08);">
@@ -56,10 +60,14 @@ padding:8px;margin:8px}.page-nav{display:flex;gap:10px;flex-wrap:wrap}.notes{wid
 })();
 </script>
 
-<p><a href="./">&larr; 返回批次首页</a></p><h1>T2 Grounding 人工复核（64 例） · 3/3</h1>
+<p><a href="./">&larr; 返回批次首页</a> · <a href="../">&larr; 返回总览</a></p><h1>T2 Grounding 人工复核（64 例） · 3/3</h1>
 <div class="warn">页面做同方向结构检查，<b>CLI validate 是最终门禁</b>。浏览器按 batch digest 跨页保存。</div>
 <div class="toolbar">Reviewer <input id="reviewer" oninput="reviewer(this.value)"> 本页完成 <b id="done">0</b>/14
 <button onclick="exportRows()">导出 JSONL</button><label>导入 JSONL <input type="file" accept=".jsonl" onchange="importRows(this)"></label></div>
+<details class="export" id="exportBoxWrap" open ontoggle="renderBox()"><summary>复核结果（可直接复制）· 校验通过 <b id="exportN">0</b> 条 / 全批 64 例</summary>
+<p><button id="copyBtn" onclick="copyBox()">复制到剪贴板</button>
+<span id="exportHint" class="small"></span></p>
+<textarea id="exportBox" readonly spellcheck="false" placeholder="为病例选好「Item decision」并通过校验后，这里会自动出现可复制的 JSONL；也可以直接在框内全选复制。"></textarea></details>
 <div class="page-nav"><a href="page_001.html">1</a> <a href="page_002.html">2</a> <a href="page_003.html">3</a></div><details class="case" id="case_L2_d4083c32_胃底"><summary><code>L2_d4083c32_胃底</code> · findings · <span class="reason">blind_only_extra_abnormal</span></summary>
 <p class="meta">exam <code>SCOPEV2_0d58d4083c32</code> · site 胃底 · recommendation review_required</p>
 <div class="box"><b>英文 Question</b><p>This is an endoscopic image of the gastric fundus. List the abnormal findings you can see.</p><b>Gold</b><pre>[{&quot;code&quot;: &quot;AX10_01&quot;, &quot;label&quot;: &quot;erosion&quot;}, {&quot;code&quot;: &quot;AX04_03&quot;, &quot;label&quot;: &quot;hyperemia / redness&quot;}]</pre></div>
@@ -165,8 +173,25 @@ if(seen.size!==c.bindings.length)e.push('binding 未全部裁决');let chosen=d.
 if(d.item_decision==='approve_grounded_frames'){if(c.snapshot_errors.length)e.push('快照含缺图/输入错误');if(c.never_approve)e.push('该题型禁止 grounded approval');if(Object.values(actions).includes('conflict_unresolved'))e.push('冲突未解决');if(!chosen.length||chosen.some(v=>!accepted.has(v)))e.push('最终帧须来自 accepted evidence');let required=c.bindings.filter(b=>c.subtype!=='normal_state'||b.kind==='normal_state_abnormal_code');if(c.subtype==='findings'&&required.some(b=>b.kind==='finding_code'&&!acceptedBindings.has(b.binding_id)))e.push('finding code 未全部 accept');if(c.subtype==='finding_presence'&&required.some(b=>!acceptedBindings.has(b.binding_id)))e.push('presence target 未 accept');if(c.subtype==='normal_state'&&!required.some(b=>acceptedBindings.has(b.binding_id)))e.push('normal false 无异常 code accept');if((c.subtype==='findings'||c.subtype==='finding_presence')&&required.some(b=>acceptedBindings.has(b.binding_id)&&![...(acceptedBy[b.binding_id]||[])].some(v=>chosenSet.has(v))))e.push('最终 panel 未覆盖每个 accepted element');if(c.subtype==='normal_state'&&!required.some(b=>acceptedBindings.has(b.binding_id)&&[...(acceptedBy[b.binding_id]||[])].some(v=>chosenSet.has(v))))e.push('最终 panel 未覆盖异常 code')}
 if(d.item_decision==='keep_source_item'&&(!c.source_ok||chosen.length))e.push('源图不可读或不应替换');if(d.item_decision==='exclude_from_next_release'&&chosen.length)e.push('排除项不可选帧');return [...new Set(e)]}
 function sync(){document.querySelectorAll('[data-s]').forEach(el=>{let d=STORE.decisions[el.dataset.s],role=el.dataset.role;if(!d)return;if(role==='item')el.checked=d.item_decision===el.value;else if(role==='ed'){let x=element(d,el.dataset.b);el.checked=x&&x.decision===el.value}else if(role==='ev'){let x=element(d,el.dataset.b);el.checked=x&&x.evidence_ids.includes(el.value)}else if(role==='ef'){let x=element(d,el.dataset.b);el.checked=x&&x.frame_ids.includes(el.value)}else if(role==='sel')el.checked=d.selected_frame_ids.includes(el.value);else if(role==='notes')el.value=d.notes||''});CASES.forEach(c=>document.getElementById('case_'+c.sample_id).classList.toggle('done',errors(c,STORE.decisions[c.sample_id]).length===0));progress()}
-function progress(){document.getElementById('reviewer').value=STORE.reviewer||'';document.getElementById('done').textContent=CASES.filter(c=>errors(c,STORE.decisions[c.sample_id]).length===0).length}
-function exportRows(){let rows=[],bad=[];for(const d of Object.values(STORE.decisions)){if(!d.item_decision)continue;let c=MAP[d.sample_id];if(!c){bad.push(d.sample_id+':未知 sample');continue}touch(d);let x=errors(c,d);if(x.length)bad.push(d.sample_id+':'+x.join('；'));else rows.push(d)}if(bad.length){alert('不能导出：\n'+bad.slice(0,12).join('\n'));return}if(!rows.length){alert('没有有效决定');return}save();let a=document.createElement('a'),blob=new Blob([rows.map(JSON.stringify).join('\n')+'\n'],{type:'application/x-ndjson'});a.href=URL.createObjectURL(blob);a.download='t2_review_decisions.jsonl';a.click();URL.revokeObjectURL(a.href)}
+function progress(){document.getElementById('reviewer').value=STORE.reviewer||'';document.getElementById('done').textContent=CASES.filter(c=>errors(c,STORE.decisions[c.sample_id]).length===0).length;renderBox()}
+function collectRows(){let rows=[],bad=[],unset=[];for(const d of Object.values(STORE.decisions)){if(!d.item_decision){unset.push(d.sample_id);continue}let c=MAP[d.sample_id];if(!c){bad.push(d.sample_id+'：未知 sample');continue}let x=errors(c,d);if(x.length)bad.push(d.sample_id+'：'+x.join('；'));else rows.push(d)}return {rows:rows,bad:bad,unset:unset}}
+function htmlEscape(v){return String(v).replace(/[&<>"]/g,function(ch){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[ch]})}
+function renderBox(){let box=document.getElementById('exportBox');if(!box)return;let r=collectRows();
+ document.getElementById('exportN').textContent=r.rows.length;
+ let hint=['跨页合并，本批次所有页的判定都在这里，任一页复制结果相同'];
+ if(r.unset.length)hint.push('未选 item decision '+r.unset.length+' 条：'+r.unset.slice(0,10).join('、')+(r.unset.length>10?' …':''));
+ if(r.bad.length)hint.push('校验未过 '+r.bad.length+' 条：'+r.bad.slice(0,10).join(' ｜ ')+(r.bad.length>10?' …':''));
+ document.getElementById('exportHint').innerHTML=htmlEscape(hint.join('　·　'));
+ if(document.getElementById('exportBoxWrap').open)box.value=r.rows.length?r.rows.map(x=>JSON.stringify(x)).join('\n')+'\n':''}
+function copyBox(){let box=document.getElementById('exportBox'),btn=document.getElementById('copyBtn');
+ if(!box.value){alert('没有校验通过的判定可复制。请先为病例在「Item decision」选择一项，未完成原因见上方提示。');return}
+ let n=box.value.trim().split('\n').length;let done=()=>{btn.textContent='已复制 '+n+' 条，可直接粘贴';setTimeout(()=>{btn.textContent='复制到剪贴板'},2500)};
+ let fallback=()=>{box.removeAttribute('readonly');box.select();box.setSelectionRange(0,box.value.length);let ok=false;try{ok=document.execCommand('copy')}catch(_){}box.setAttribute('readonly','');return ok};
+ if(navigator.clipboard&&window.isSecureContext)navigator.clipboard.writeText(box.value).then(done,()=>{fallback()?done():alert('复制失败，请在框内全选后手动复制')});
+ else fallback()?done():alert('复制失败，请在框内全选后手动复制')}
+function exportRows(){let {rows,bad,unset}=collectRows();if(bad.length){alert('不能导出：\n'+bad.slice(0,12).join('\n'));return}
+ if(!rows.length){alert('没有可导出的决定'+(unset.length?'：已勾选的 '+unset.length+' 个病例都还没选 item decision':''));return}
+ rows.forEach(touch);save();let a=document.createElement('a'),blob=new Blob([rows.map(x=>JSON.stringify(x)).join('\n')+'\n'],{type:'application/x-ndjson'});a.href=URL.createObjectURL(blob);a.download='t2_review_decisions.jsonl';a.click();URL.revokeObjectURL(a.href)}
 function importRows(input){let f=input.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{try{let rows=r.result.split(/\r?\n/).filter(x=>x.trim()).map(JSON.parse),seen=new Set();for(const d of rows){let c=MAP[d.sample_id];if(!c||seen.has(d.sample_id)||d.review_snapshot_digest!==c.digest)throw Error('未知、重复或漂移 sample: '+d.sample_id);seen.add(d.sample_id);let x=errors(c,d);if(x.length)throw Error(d.sample_id+': '+x.join('；'))}rows.forEach(d=>STORE.decisions[d.sample_id]=d);if(rows[0])STORE.reviewer=rows[0].reviewer;save();sync();alert('已导入 '+rows.length+' 条；CLI 是最终门禁')}catch(e){alert('导入失败：'+e.message)}finally{input.value=''}};r.readAsText(f)}
 window.addEventListener('DOMContentLoaded',()=>{for(const c of CASES)get(c.sample_id);save();sync()});
 </script></body></html>
