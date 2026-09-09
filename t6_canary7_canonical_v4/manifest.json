@@ -1,27 +1,7 @@
 {
   "case_count": 7,
   "cases": {
-    "R2e47ea28f6b4145b": {
-      "cohort": "forrest",
-      "frame_assets": {
-        "F01": "97833b03267b6abdcd8712a62a52bab265fd9dfc27c50f58db035446f446310c",
-        "F02": "c438a06eb0373812a9505051c83fb94601d3551182ef05a5406241929a6fc21e",
-        "F03": "fda4c7c9379c62d1161d56a70b5e891323696a8769587476f138aea893189ca9",
-        "F04": "3706517f29c515130ea3e83360ce5bacef25e7ee9a8b665d281fa26b021645e7"
-      },
-      "guideline_family": "forrest",
-      "review_snapshot_digest": "a9ee118252440d30b6761c0e64a0258ddbbee6b956fab6ed89cdc9abd6d49953"
-    },
-    "R3ae64252c9e25919": {
-      "cohort": "ulcer_ahs",
-      "frame_assets": {
-        "F01": "6ec003ecc23898b7deb9f54d86d84fa7257f138e0dbd359defc8367f6b211882",
-        "F02": "717ce6e574a597487648c04f8897ef15bb7bfa81bfa5cc76602a553f2425aebe"
-      },
-      "guideline_family": "ulcer_ahs",
-      "review_snapshot_digest": "5178cf5ec8f07635f6de63435646c722cd329dd7e5e3e8a5766565c06e5aa787"
-    },
-    "R56fdb54768c6d820": {
+    "R2f9390be72cbcad7": {
       "cohort": "paris_mesdag",
       "frame_assets": {
         "F01": "c78257bf57aa26a6a7c59fbf2eede7dac562d5d33e5fc4074063d2690e990628",
@@ -31,41 +11,9 @@
         "F05": "9357578ff50795c485cd6a459dedb07779422687cd37a0f8346bd3c7bff7154d"
       },
       "guideline_family": "paris_mesdag",
-      "review_snapshot_digest": "f87aa2a0dc2542d3f80886ff11566264c1ab60f0ff53f25c053ad3eaad9fe2d1"
+      "review_snapshot_digest": "2f925af90544d18b07b8eab18fa9922cf2d405933ec2c880dd69b2b1d719b1ea"
     },
-    "R6d44eb767560f9ff": {
-      "cohort": "la",
-      "frame_assets": {
-        "F01": "e3c498d672bf3b2c80629a34bfd16361928d1a9a96ba7714b8ec96470680d980",
-        "F02": "46c54b66a58520dfd5f4594e68e17040f4de076ad22896a2a634df3ce751ae88",
-        "F03": "e7d002d56b7182d1db2bdccf6faf378d296b498c697c778df151574bfe5c06f1"
-      },
-      "guideline_family": "la",
-      "review_snapshot_digest": "4f2fe18752518169ca84e7c8fb5c01d0f5165c19ea51ed15aa95c449b36dcc19"
-    },
-    "R83f4595fbaf19724": {
-      "cohort": "kimura",
-      "frame_assets": {
-        "F01": "a3a79269bfba468e6b942f49edb76ac88903278612f67ac7061010fae9197fd6",
-        "F02": "65adea5573a21054bfc966378397ab1a8eccb536a5a65447a50e7d3c664fb2f9",
-        "F03": "a8a7ec62db4e3b1259547170b79f0345ca31c68175a81225d2a2b66b695a8374",
-        "F04": "0a06d49779b5209a42604e1ab8ec7f3aac98f1fa2d85e00f0d87159bc6126897",
-        "F05": "aa8a5078e903a828e51f4ca34caac18a036b29ef7a538d08ec4d90644e16e13d",
-        "F06": "53168101df56ee7bba7fda49aa70238c45b0971aef3e7c020cd1d50c34298498"
-      },
-      "guideline_family": "kimura_takemoto",
-      "review_snapshot_digest": "e267305410a9ec4f34dff3fb89cff9108d2e95d4b59ec17d9552409d66d53aa2"
-    },
-    "Rcff62325e7b4078e": {
-      "cohort": "prague",
-      "frame_assets": {
-        "F01": "05de50ad71c870d2e134d5fc4bf21a56ed93e00282c0be5fa5b06787f5b20c63",
-        "F02": "f97326b354a4125ec608d413a1dd2f8acc5bec985a9b178495f7d408d02ea6f6"
-      },
-      "guideline_family": "prague",
-      "review_snapshot_digest": "ce8b8b4576da6f1d9129b5123960889a70dd56dbdf440f901ec8d6e709c4e8f0"
-    },
-    "Re74285748c987547": {
+    "R3dc93f164e233ec9": {
       "cohort": "hp",
       "frame_assets": {
         "F01": "535fa57960c0867d136880b11de343ad649f8ca505dd46baa9e5405e9e647cfd",
@@ -80,11 +28,63 @@
         "F10": "c2bce70e33f511767ea72187807d8362b48233aba67e3c2cb8697cbfc50aae2e"
       },
       "guideline_family": "hp_kyoto8",
-      "review_snapshot_digest": "d65b7a500b612645c526d85f8574ed34a2200ea712832ca23c91c7b5a5ea0348"
+      "review_snapshot_digest": "fbcf470da6db303cf8502f503f86f4a4df1d032f00baadca5296a81ad6063370"
+    },
+    "R839cfc5886950f98": {
+      "cohort": "forrest",
+      "frame_assets": {
+        "F01": "97833b03267b6abdcd8712a62a52bab265fd9dfc27c50f58db035446f446310c",
+        "F02": "c438a06eb0373812a9505051c83fb94601d3551182ef05a5406241929a6fc21e",
+        "F03": "fda4c7c9379c62d1161d56a70b5e891323696a8769587476f138aea893189ca9",
+        "F04": "3706517f29c515130ea3e83360ce5bacef25e7ee9a8b665d281fa26b021645e7"
+      },
+      "guideline_family": "forrest",
+      "review_snapshot_digest": "b9acd8513b3d06695194c1b9abdb18142c63d14f0e2634a764d9fd7c5a5d1059"
+    },
+    "R8d1fe82e5b71e878": {
+      "cohort": "ulcer_ahs",
+      "frame_assets": {
+        "F01": "6ec003ecc23898b7deb9f54d86d84fa7257f138e0dbd359defc8367f6b211882",
+        "F02": "717ce6e574a597487648c04f8897ef15bb7bfa81bfa5cc76602a553f2425aebe"
+      },
+      "guideline_family": "ulcer_ahs",
+      "review_snapshot_digest": "f8bddd74847dc1fe1ee56d0cc567fcef2ebb873735b0efb071efda229ba2411e"
+    },
+    "Raa73cf0bd8289aa8": {
+      "cohort": "prague",
+      "frame_assets": {
+        "F01": "05de50ad71c870d2e134d5fc4bf21a56ed93e00282c0be5fa5b06787f5b20c63",
+        "F02": "f97326b354a4125ec608d413a1dd2f8acc5bec985a9b178495f7d408d02ea6f6"
+      },
+      "guideline_family": "prague",
+      "review_snapshot_digest": "2441c3558d9ef634d758950a9f7d3334bab636b6ab305b940c6620b8fc24819d"
+    },
+    "Raef320fed65fede3": {
+      "cohort": "la",
+      "frame_assets": {
+        "F01": "e3c498d672bf3b2c80629a34bfd16361928d1a9a96ba7714b8ec96470680d980",
+        "F02": "46c54b66a58520dfd5f4594e68e17040f4de076ad22896a2a634df3ce751ae88",
+        "F03": "e7d002d56b7182d1db2bdccf6faf378d296b498c697c778df151574bfe5c06f1"
+      },
+      "guideline_family": "la",
+      "review_snapshot_digest": "346422eb10b6109f2d47c2417c8798c42927b99fdb0933de4ab5aebb19924886"
+    },
+    "Rbd0848bd89d3b48f": {
+      "cohort": "kimura",
+      "frame_assets": {
+        "F01": "a3a79269bfba468e6b942f49edb76ac88903278612f67ac7061010fae9197fd6",
+        "F02": "65adea5573a21054bfc966378397ab1a8eccb536a5a65447a50e7d3c664fb2f9",
+        "F03": "a8a7ec62db4e3b1259547170b79f0345ca31c68175a81225d2a2b66b695a8374",
+        "F04": "0a06d49779b5209a42604e1ab8ec7f3aac98f1fa2d85e00f0d87159bc6126897",
+        "F05": "aa8a5078e903a828e51f4ca34caac18a036b29ef7a538d08ec4d90644e16e13d",
+        "F06": "53168101df56ee7bba7fda49aa70238c45b0971aef3e7c020cd1d50c34298498"
+      },
+      "guideline_family": "kimura_takemoto",
+      "review_snapshot_digest": "083ea15c8dec3762bcc71632b8971cf259a3d2e96fd338d7b92e2864214d1750"
     }
   },
   "content_state": "internal_unreviewed",
-  "generated_at": "2026-09-09T05:16:51.405430+00:00",
+  "generated_at": "2026-09-09T05:49:49.790133+00:00",
   "package_id": "t6_canary7_canonical_v4",
   "schema_version": "t6_canary7_review_manifest_v1"
 }
