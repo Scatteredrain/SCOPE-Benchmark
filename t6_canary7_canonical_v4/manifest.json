@@ -1,18 +1,6 @@
 {
   "case_count": 7,
   "cases": {
-    "R2f9390be72cbcad7": {
-      "cohort": "paris_mesdag",
-      "frame_assets": {
-        "F01": "c78257bf57aa26a6a7c59fbf2eede7dac562d5d33e5fc4074063d2690e990628",
-        "F02": "991c342aee8694b25cf67332377c4e273b357ba846909b102ed07e024f10e7b3",
-        "F03": "cf517126deba0662c32c7c4625b3730ea3504995d4c6e21ab51ec43c7e535945",
-        "F04": "82045265a58ba179ed3e3271c6c4b53153055b20d35b63f9fba6d08704ab398a",
-        "F05": "9357578ff50795c485cd6a459dedb07779422687cd37a0f8346bd3c7bff7154d"
-      },
-      "guideline_family": "paris_mesdag",
-      "review_snapshot_digest": "2f925af90544d18b07b8eab18fa9922cf2d405933ec2c880dd69b2b1d719b1ea"
-    },
     "R3dc93f164e233ec9": {
       "cohort": "hp",
       "frame_assets": {
@@ -81,10 +69,22 @@
       },
       "guideline_family": "kimura_takemoto",
       "review_snapshot_digest": "083ea15c8dec3762bcc71632b8971cf259a3d2e96fd338d7b92e2864214d1750"
+    },
+    "Rc18eb2d0c33b90f4": {
+      "cohort": "paris_mesdag",
+      "frame_assets": {
+        "F01": "c78257bf57aa26a6a7c59fbf2eede7dac562d5d33e5fc4074063d2690e990628",
+        "F02": "991c342aee8694b25cf67332377c4e273b357ba846909b102ed07e024f10e7b3",
+        "F03": "cf517126deba0662c32c7c4625b3730ea3504995d4c6e21ab51ec43c7e535945",
+        "F04": "82045265a58ba179ed3e3271c6c4b53153055b20d35b63f9fba6d08704ab398a",
+        "F05": "9357578ff50795c485cd6a459dedb07779422687cd37a0f8346bd3c7bff7154d"
+      },
+      "guideline_family": "paris_mesdag",
+      "review_snapshot_digest": "c2ac73519e9ad24da46f6c0f2ffa85bfef0283139b2b6ba56e65f16d392a12d4"
     }
   },
   "content_state": "internal_unreviewed",
-  "generated_at": "2026-09-09T05:49:49.790133+00:00",
+  "generated_at": "2026-09-09T05:58:18.924090+00:00",
   "package_id": "t6_canary7_canonical_v4",
   "schema_version": "t6_canary7_review_manifest_v1"
 }
