@@ -1,0 +1,152 @@
+{
+  "title": "release_v5（英文）每任务/子任务各 1 例",
+  "generated_at": "2026-09-12T13:52:55+00:00",
+  "cases": 8,
+  "frames": 31,
+  "groups": [
+    {
+      "title": "部位识别",
+      "layer": "T1_site",
+      "source": "outputs/v5/release_v5_en.jsonl",
+      "population": 4028,
+      "stratified_by": "部位",
+      "coverage": "抽 1 / 4028 条，覆盖 1 / 8 个分层，未抽到：duodenum、esophagus、gastric angulus、gastric antrum、gastric body、gastric fundus、pylorus",
+      "frames": 1,
+      "cases": [
+        {
+          "sample_id": "L1v_d8177c8a79ea",
+          "exam_id": "L1CURATED_ES247638（已去名）",
+          "subtype": "",
+          "input_tier": "single_image",
+          "images": 1
+        }
+      ]
+    },
+    {
+      "title": "异常发现列举",
+      "layer": "T2_findings:findings",
+      "source": "outputs/v5/release_v5_en.jsonl",
+      "population": 2298,
+      "stratified_by": "部位",
+      "coverage": "抽 1 / 2298 条，覆盖 1 / 8 个分层，未抽到：幽门、胃体、胃底、胃窦、胃角、贲门、食管",
+      "frames": 3,
+      "cases": [
+        {
+          "sample_id": "L2_0c323d14_十二指肠",
+          "exam_id": "SCOPEV2_1df80c323d14",
+          "subtype": "findings",
+          "input_tier": "clean_matched",
+          "images": 3
+        }
+      ]
+    },
+    {
+      "title": "部位是否正常",
+      "layer": "T2_findings:normal_state",
+      "source": "outputs/v5/release_v5_en.jsonl",
+      "population": 1593,
+      "stratified_by": "是否正常",
+      "coverage": "抽 1 / 1593 条，覆盖 1 / 2 个分层，未抽到：True",
+      "frames": 3,
+      "cases": [
+        {
+          "sample_id": "L2b_ded56118_食管",
+          "exam_id": "SCOPEV2_c7d9ded56118",
+          "subtype": "normal_state",
+          "input_tier": "clean_matched",
+          "images": 3
+        }
+      ]
+    },
+    {
+      "title": "单发现有无",
+      "layer": "T2_findings:finding_presence",
+      "source": "outputs/v5/release_v5_en.jsonl",
+      "population": 1835,
+      "stratified_by": "有无",
+      "coverage": "抽 1 / 1835 条，覆盖 1 / 2 个分层，未抽到：True",
+      "frames": 3,
+      "cases": [
+        {
+          "sample_id": "L2b_c91846f6_胃体_AX10_04",
+          "exam_id": "SCOPEV2_0013c91846f6",
+          "subtype": "finding_presence",
+          "input_tier": "clean_matched",
+          "images": 3
+        }
+      ]
+    },
+    {
+      "title": "病灶属性",
+      "layer": "T3_attributes",
+      "source": "outputs/v5/release_v5_en.jsonl",
+      "population": 1622,
+      "stratified_by": "属性槽",
+      "coverage": "抽 1 / 1622 条，覆盖 1 / 10 个分层，未抽到：border、color、count、distribution、shape、size、sub_position、surface…",
+      "frames": 1,
+      "cases": [
+        {
+          "sample_id": "L3_7d5e6d45_胃角_AX10_05_attachment",
+          "exam_id": "SCOPEV2_b9147d5e6d45",
+          "subtype": "",
+          "input_tier": "clean_matched",
+          "images": 1
+        }
+      ]
+    },
+    {
+      "title": "所见报告生成",
+      "layer": "T4_report",
+      "source": "outputs/v5/release_v5_en.jsonl",
+      "population": 1200,
+      "stratified_by": "帧数档",
+      "coverage": "抽 1 / 1200 条，覆盖 1 / 5 个分层，未抽到：≤1 帧、≤128 帧、≤32 帧、≤8 帧",
+      "frames": 8,
+      "cases": [
+        {
+          "sample_id": "L4_62d507dc",
+          "exam_id": "SCOPEV2_04f762d507dc",
+          "subtype": "",
+          "input_tier": "raw_dense",
+          "images": 132
+        }
+      ]
+    },
+    {
+      "title": "诊断印象",
+      "layer": "T5_impression",
+      "source": "outputs/v5/release_v5_en.jsonl",
+      "population": 2248,
+      "stratified_by": "首个诊断",
+      "coverage": "抽 1 / 2248 条，覆盖 1 / 69 个分层，未抽到：Mallory-Weiss syndrome、Schatzki ring、achalasia、anastomotic inflammation、anastomotic ulcer、anemia-related mucosal change、autoimmune gastritis、benign esophageal ulcer…",
+      "frames": 8,
+      "cases": [
+        {
+          "sample_id": "L5_5e98dd89",
+          "exam_id": "SCOPEV2_743b5e98dd89",
+          "subtype": "",
+          "input_tier": "clean_matched",
+          "images": 16
+        }
+      ]
+    },
+    {
+      "title": "指南推理链",
+      "layer": "T6_guideline_cot",
+      "source": "outputs/v5/release_v5_en.jsonl",
+      "population": 687,
+      "stratified_by": "指南",
+      "coverage": "抽 1 / 687 条，覆盖 1 / 6 个分层，未抽到：hp_kyoto8、kimura_takemoto、la、paris_mesdag、ulcer_ahs",
+      "frames": 4,
+      "cases": [
+        {
+          "sample_id": "L7_0c4374ab_forrest",
+          "exam_id": "SCOPEV2_98df0c4374ab",
+          "subtype": "",
+          "input_tier": "clean_matched",
+          "images": 4
+        }
+      ]
+    }
+  ]
+}

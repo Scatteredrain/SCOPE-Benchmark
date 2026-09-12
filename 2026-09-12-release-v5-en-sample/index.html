@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="zh"><head><meta charset="utf-8">
+<title>release_v5（英文）每任务/子任务各 1 例</title><style>
+body { font-family: -apple-system, "Helvetica Neue", "PingFang SC", sans-serif;
+       margin: 0 auto; max-width: 1180px; padding: 24px; color: #1a1a1a; line-height: 1.6; }
+h1 { border-bottom: 2px solid #1a1a1a; padding-bottom: 8px; }
+h2 { margin-top: 40px; background: #1a1a1a; color: #fff; padding: 8px 12px; font-size: 1.15em; }
+.warn { background: #fff4e5; border-left: 4px solid #d97706; padding: 12px 16px; margin: 16px 0; }
+.case { border: 1px solid #d4d4d4; border-radius: 6px; margin: 18px 0; padding: 0 18px 12px; }
+.case > summary { cursor: pointer; padding: 12px 0; font-weight: 600; font-size: 1.05em; }
+.meta { font-size: .9em; color: #555; margin: 4px 0 14px; }
+.meta code { background: #f1f1f1; padding: 1px 5px; border-radius: 3px; }
+table { border-collapse: collapse; margin: 10px 0 18px; font-size: .92em; }
+th, td { border: 1px solid #ddd; padding: 5px 10px; text-align: left; vertical-align: top; }
+th { background: #f6f6f6; }
+.gate-ok { color: #15803d; } .gate-bad { color: #b91c1c; font-weight: 600; }
+.gate-skip { color: #6b7280; }
+.mismatch { background: #fef2f2; }
+.layer { margin: 14px 0; }
+.layer h4 { margin: 0 0 6px; font-size: .95em; color: #1d4ed8; }
+.layer pre { white-space: pre-wrap; background: #fafafa; border-left: 3px solid #ddd;
+             margin: 0; padding: 8px 12px; font-family: inherit; font-size: .92em; }
+.frames { display: flex; flex-wrap: wrap; gap: 10px; }
+.frame { width: 210px; }
+.frame img { width: 210px; border: 1px solid #ccc; border-radius: 4px; display: block; }
+.frame span { font-size: .82em; color: #666; }
+</style></head><body>
+<div id="__gate_lock__" style="position:fixed;inset:0;z-index:99999;background:#f5f5f7;display:flex;align-items:center;justify-content:center;font-family:-apple-system,'PingFang SC',sans-serif;">
+<div style="text-align:center;background:#fff;padding:40px 48px;border-radius:12px;box-shadow:0 4px 24px rgba(0,0,0,.08);">
+<h2 style="margin:0 0 8px;">请输入访问码</h2>
+<p style="color:#888;font-size:.85em;margin:0 0 20px;">SCOPE Benchmark · 内部预览</p>
+<input type="password" id="__gate_pwd__" placeholder="访问码" style="padding:10px 14px;font-size:1em;border:1px solid #d4d4d4;border-radius:6px;width:220px;" onkeydown="if(event.key==='Enter')__gate_check__()" />
+<br><button onclick="__gate_check__()" style="margin-top:14px;padding:10px 28px;font-size:1em;border:none;border-radius:6px;background:#1a1a1a;color:#fff;cursor:pointer;">进入</button>
+<p id="__gate_err__" style="color:#b91c1c;min-height:1.2em;margin:12px 0 0;"></p>
+</div>
+</div>
+<script>
+(function(){
+  var H="24c1486eac30d982b5015a2604405e824bb1f9dd1a4c0aaab2b3da028326cf6b";
+  function show(){var l=document.getElementById("__gate_lock__");if(l)l.style.display="none";}
+  async function digest(s){
+    var b=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(s));
+    return Array.from(new Uint8Array(b)).map(function(x){return x.toString(16).padStart(2,"0");}).join("");
+  }
+  window.__gate_check__=async function(){
+    var v=document.getElementById("__gate_pwd__").value;
+    if(await digest(v)===H){sessionStorage.setItem("__gate_auth__","1");show();}
+    else{document.getElementById("__gate_err__").textContent="访问码错误";}
+  };
+  if(sessionStorage.getItem("__gate_auth__")==="1")show();
+})();
+</script>
+
+<p><a href="../">&larr; 返回总览</a></p>
+<h1>release_v5（英文）每任务/子任务各 1 例</h1>
+<p class="meta">共 8 条，来自 8 个任务层，抽自 <code>outputs/v5/release_v5_en.jsonl</code>（15511 条）。每条附题干、
+<b>实际送进模型的 prompt</b>、标准答案、任务参数、标签来源与问法变体。条目里的 <code>question</code>
+只是题干，模型收到的是 <code>build_inference_prompt</code> 拼出来的那一段——帧号范围、分节要求、
+答案空间、选项与作答格式都在那里，本页两者并列，所以看到的就是模型看到的。</p>
+<div class="warn"><b>本页题干与答案取自英文版 <code>release_v5_en.jsonl</code>，即真正送进模型的那一份。</b>
+按 <code>AGENTS.md</code>，评测只用英文题面，中文版仅作构建源与翻译源，所以这里不放中文题。
+任务层命名为 <b>T1–T6</b>；<code>T2_findings</code> 在本页拆成三节，因为它下面是三个不同的问题
+（列举发现 / 该部位是否正常 / 某个发现是否可见），节标题用的是
+<code>T2_findings:normal_state</code> 这种扁平键，与榜单行名一致。<b>本批次不做 split</b>，
+所以既没有「划分」字段也不按划分分层。<code>sample_id</code> 前缀仍是旧层名（<code>L2_…</code>、
+<code>L7_…</code>）：它同时是预测文件的 join key，本轮冻结不动。</div>
+<div class="warn"><b>T6 这一节现在把金标准推理链也放上来了。</b>条目本身只带题干、最终分级
+（<code>answer</code>）与规则派生的征象表（<code>task_payload.reference</code>）——这些是模型能看到
+和被比对的部分；作为参考答案的<b>完整分层推理链</b>存在 <code>provenance.cot_chain_source</code>
+指向的 CoT engine 文件里，本页按 <code>sample_id</code> join 回来、逐条展开（每条标注了来源文件、
+生成模型与机制、锚定答案、过闸与核验状态）。它是 judge 打分时比对的金标准，<b>不随题面下发给模型</b>。
+<code>layer_config</code> 决定该条实际要求哪几步，六族里有四族少于五步，缺的步会明确标出。
+<b>规则本身也不给</b>：prompt 里有指南名称、答案空间（paris 与 prague 这两族
+连答案空间都为空），以及在 <code>layer_config</code> 含征象步时给出的征象名单，但
+<code>schemas/guideline_cards/*.yaml</code> 里的判定规则从不注入——T6 默认是闭卷，考的是模型自己
+是否记得该指南。把卡片正文喂进去是另一套设置（见 <code>paper/overview.md</code> 的范式 2），不是这里。</div>
+<div class="warn"><b>这些题目与标签由报告自动派生，未经人工逐条确认。</b>标签来源写在每条的
+<code>provenance</code> 里：<code>report_findings</code> 表示取自报告所见文本，
+<code>physician_stated_grade</code> 表示医师在报告里直接写了分级，
+<code>clinician_station_annotation</code> 表示医师标准化摄影记录（部位识别层即属此类，是本页唯一
+经医师逐帧确认的标签）。因此「答案错」有两种可能——抽取规则错，或报告本身没写/写错，看的时候请分开
+记。图像与标签的对应只到<b>部位</b>一级：<code>frames_site_matched_only</code> 标记的条目只保证帧
+来自该部位，不保证病灶在这几帧里可见。</div>
+<div class="warn"><b>仅供内部查看，勿外传。</b>图像按原字节复制到 <code>images/</code> 并以相对路径引用，帧名改成 F 序号——源文件名带姓名、院区与住院号，不能外传；但叠加在像素上的信息本脚本不处理。
+「检查号」中的中文姓名已删除（标注<code>已去名</code>者即是），<code>provenance</code> 里的绝对路径
+（文件名含患者姓名）也已替换。要引用某条请用 <code>sample_id</code>，它不含个人信息。</div>
+<h2>部位识别 <code>T1_site</code></h2><p class="meta">全库 4028 条 · 按部位分层，抽 1 / 4028 条，覆盖 1 / 8 个分层，未抽到：duodenum、esophagus、gastric angulus、gastric antrum、gastric body、gastric fundus、pylorus · 来自 <code>outputs/v5/release_v5_en.jsonl</code><br>帧数 1/1/1（最少/中位/最多） · 输入档 single_image 4028 · 问法 mcq 4028</p><details class="case"><summary>L1v_d8177c8a79ea</summary>
+<p class="meta">检查号 <code>L1CURATED_ES247638（已去名）</code> · 子类型 <code>—</code> · 输入档 <code>single_image</code> · 发布角色 <code>clinician_gold</code> · 分层 <code>site:贲门</code> · 标签置信 <code>1</code> · 标记 <code>clinician_station_gold、clean_frame_distribution</code></p>
+<div class="layer"><h4>题干（条目里的 <code>question</code> 字段）</h4><pre>Which station does this frame record? Answer with exactly one of: esophagus, cardia, gastric fundus, gastric body, gastric angulus, gastric antrum, pylorus, duodenum.</pre></div>
+<div class="layer"><h4>实际送进模型的 prompt（<code>build_inference_prompt</code>）</h4><h5>mcq</h5><pre>Which station does this frame record? Choose exactly one option.
+
+A. gastric antrum
+B. esophagus
+C. gastric angulus
+D. cardia
+
+Reply with a single option letter only. Do not explain.</pre></div>
+<div class="layer"><h4>标准答案</h4><pre>{
+  &quot;anatomy_class&quot;: &quot;cardia&quot;
+}</pre></div>
+
+<div class="layer"><h4>任务参数 task_payload</h4><pre>{
+  &quot;label_source&quot;: &quot;clinician_station_annotation&quot;,
+  &quot;site_model_conf&quot;: 1.0,
+  &quot;site_model_pred&quot;: &quot;贲门&quot;
+}</pre></div>
+<div class="layer"><h4>标签来源 provenance</h4><pre>{
+  &quot;dataset&quot;: &quot;胃部位的标准化标注 (eval split)&quot;,
+  &quot;label_source&quot;: &quot;clinician_station_annotation&quot;,
+  &quot;note&quot;: &quot;医师标准化摄影记录，文件名即 31 站点编号，映射到 8 类；直接以医师标注为准&quot;,
+  &quot;verified_by_physician&quot;: true
+}</pre></div>
+<h4 style="margin:18px 0 8px">问法变体</h4>
+<table><tr><th>问法</th><th>题干</th><th>选项</th><th>答案</th></tr><tr><td><code>mcq</code></td><td>Which station does this frame record? Choose exactly one option.</td><td>A. gastric antrum；B. esophagus；C. gastric angulus；D. cardia</td><td>&quot;D&quot;</td></tr></table>
+<h4 style="margin:18px 0 8px">图像</h4>
+<div class="frames"><div class="frame"><img src="images/L1v_d8177c8a79ea/F01.jpg" alt="F01" loading="lazy" decoding="async"><span><b>F01</b> · 未标注 · 未标注</span></div></div>
+</details><h2>异常发现列举 <code>T2_findings:findings</code></h2><p class="meta">全库 2298 条 · 按部位分层，抽 1 / 2298 条，覆盖 1 / 8 个分层，未抽到：幽门、胃体、胃底、胃窦、胃角、贲门、食管 · 来自 <code>outputs/v5/release_v5_en.jsonl</code><br>帧数 1/3/3（最少/中位/最多） · 输入档 clean_matched 2298 · 问法 mcq 1163、select_all 1135</p><details class="case"><summary>L2_0c323d14_十二指肠</summary>
+<p class="meta">检查号 <code>SCOPEV2_1df80c323d14</code> · 子类型 <code>findings</code> · 输入档 <code>clean_matched</code> · 发布角色 <code>balanced</code> · 分层 <code>AX01_07</code> · 标签置信 <code>1</code> · 标记 <code>frames_site_matched_only</code></p>
+<div class="layer"><h4>题干（条目里的 <code>question</code> 字段）</h4><pre>List the abnormal findings visible in this endoscopic image of the duodenum.</pre></div>
+<div class="layer"><h4>实际送进模型的 prompt（<code>build_inference_prompt</code>）</h4><h5>select_all</h5><pre>Select every abnormal finding visible in this image. More than one may be correct.
+
+A. luminal dilatation
+B. erosion
+C. deformity
+D. ulcer
+
+Reply with the letters of every option that applies, comma-separated, e.g. &quot;A, C&quot;. Do not explain.</pre></div>
+<div class="layer"><h4>标准答案</h4><pre>[
+  {
+    &quot;code&quot;: &quot;AX01_07&quot;,
+    &quot;label&quot;: &quot;deformity&quot;
+  },
+  {
+    &quot;code&quot;: &quot;AX10_04&quot;,
+    &quot;label&quot;: &quot;ulcer&quot;
+  }
+]</pre></div>
+
+<div class="layer"><h4>任务参数 task_payload</h4><pre>{
+  &quot;site&quot;: &quot;十二指肠&quot;
+}</pre></div>
+<div class="layer"><h4>标签来源 provenance</h4><pre>{
+  &quot;frame_lesion_verified&quot;: false,
+  &quot;label_source&quot;: &quot;report_findings&quot;,
+  &quot;site&quot;: &quot;十二指肠&quot;
+}</pre></div>
+<h4 style="margin:18px 0 8px">问法变体</h4>
+<table><tr><th>问法</th><th>题干</th><th>选项</th><th>答案</th></tr><tr><td><code>select_all</code></td><td>Select every abnormal finding visible in this image. More than one may be correct.</td><td>A. luminal dilatation；B. erosion；C. deformity；D. ulcer</td><td>[&quot;C&quot;, &quot;D&quot;]</td></tr></table>
+<h4 style="margin:18px 0 8px">图像</h4>
+<div class="frames"><div class="frame"><img src="images/L2_0c323d14_十二指肠/F01.jpg" alt="F01" loading="lazy" decoding="async"><span><b>F01</b> · 十二指肠 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L2_0c323d14_十二指肠/F02.jpg" alt="F02" loading="lazy" decoding="async"><span><b>F02</b> · 十二指肠 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L2_0c323d14_十二指肠/F03.jpg" alt="F03" loading="lazy" decoding="async"><span><b>F03</b> · 十二指肠 · white_light · 部位置信 1.00</span></div></div>
+</details><h2>部位是否正常 <code>T2_findings:normal_state</code></h2><p class="meta">全库 1593 条 · 按是否正常分层，抽 1 / 1593 条，覆盖 1 / 2 个分层，未抽到：True · 来自 <code>outputs/v5/release_v5_en.jsonl</code><br>帧数 1/3/3（最少/中位/最多） · 输入档 clean_matched 1593 · 问法 mcq 1593</p><details class="case"><summary>L2b_ded56118_食管</summary>
+<p class="meta">检查号 <code>SCOPEV2_c7d9ded56118</code> · 子类型 <code>normal_state</code> · 输入档 <code>clean_matched</code> · 发布角色 <code>balanced</code> · 分层 <code>normal:False</code> · 标签置信 <code>1</code> · 标记 <code>frames_site_matched_only</code></p>
+<div class="layer"><h4>题干（条目里的 <code>question</code> 字段）</h4><pre>Is the mucosa normal in this endoscopic image of the esophagus?</pre></div>
+<div class="layer"><h4>实际送进模型的 prompt（<code>build_inference_prompt</code>）</h4><h5>mcq</h5><pre>Is this site&#x27;s mucosa normal? Choose exactly one option.
+
+A. abnormal
+B. normal
+
+Reply with a single option letter only. Do not explain.</pre></div>
+<div class="layer"><h4>标准答案</h4><pre>{
+  &quot;is_normal&quot;: false
+}</pre></div>
+
+<div class="layer"><h4>任务参数 task_payload</h4><pre>{
+  &quot;site&quot;: &quot;食管&quot;
+}</pre></div>
+<div class="layer"><h4>标签来源 provenance</h4><pre>{
+  &quot;abnormal_codes&quot;: [
+    &quot;AX09_08&quot;,
+    &quot;AX99_02&quot;
+  ],
+  &quot;label_source&quot;: &quot;report_findings&quot;,
+  &quot;normal_evidence_codes&quot;: [
+    &quot;AX04_09&quot;,
+    &quot;AX01_12&quot;
+  ]
+}</pre></div>
+<h4 style="margin:18px 0 8px">问法变体</h4>
+<table><tr><th>问法</th><th>题干</th><th>选项</th><th>答案</th></tr><tr><td><code>mcq</code></td><td>Is this site&#x27;s mucosa normal? Choose exactly one option.</td><td>A. abnormal；B. normal</td><td>&quot;A&quot;</td></tr></table>
+<h4 style="margin:18px 0 8px">图像</h4>
+<div class="frames"><div class="frame"><img src="images/L2b_ded56118_食管/F01.jpg" alt="F01" loading="lazy" decoding="async"><span><b>F01</b> · 食管 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L2b_ded56118_食管/F02.jpg" alt="F02" loading="lazy" decoding="async"><span><b>F02</b> · 食管 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L2b_ded56118_食管/F03.jpg" alt="F03" loading="lazy" decoding="async"><span><b>F03</b> · 食管 · white_light · 部位置信 1.00</span></div></div>
+</details><h2>单发现有无 <code>T2_findings:finding_presence</code></h2><p class="meta">全库 1835 条 · 按有无分层，抽 1 / 1835 条，覆盖 1 / 2 个分层，未抽到：True · 来自 <code>outputs/v5/release_v5_en.jsonl</code><br>帧数 1/3/3（最少/中位/最多） · 输入档 clean_matched 1835 · 问法 mcq 1835</p><details class="case"><summary>L2b_c91846f6_胃体_AX10_04</summary>
+<p class="meta">检查号 <code>SCOPEV2_0013c91846f6</code> · 子类型 <code>finding_presence</code> · 输入档 <code>clean_matched</code> · 发布角色 <code>balanced</code> · 分层 <code>溃疡:False</code> · 标签置信 <code>1</code> · 标记 <code>frames_site_matched_only</code></p>
+<div class="layer"><h4>题干（条目里的 <code>question</code> 字段）</h4><pre>In this endoscopic image of the gastric body, is the following finding visible: ulcer?</pre></div>
+<div class="layer"><h4>实际送进模型的 prompt（<code>build_inference_prompt</code>）</h4><h5>mcq</h5><pre>Is this finding present at the site: ulcer? Choose exactly one option.
+
+A. visible
+B. not visible
+
+Reply with a single option letter only. Do not explain.</pre></div>
+<div class="layer"><h4>标准答案</h4><pre>{
+  &quot;code&quot;: &quot;AX10_04&quot;,
+  &quot;finding&quot;: &quot;ulcer&quot;,
+  &quot;present&quot;: false
+}</pre></div>
+
+<div class="layer"><h4>任务参数 task_payload</h4><pre>{
+  &quot;finding_code&quot;: &quot;AX10_04&quot;,
+  &quot;site&quot;: &quot;胃体&quot;
+}</pre></div>
+<div class="layer"><h4>标签来源 provenance</h4><pre>{
+  &quot;label_source&quot;: &quot;report_findings&quot;,
+  &quot;negative_from_explicit_negation&quot;: true
+}</pre></div>
+<h4 style="margin:18px 0 8px">问法变体</h4>
+<table><tr><th>问法</th><th>题干</th><th>选项</th><th>答案</th></tr><tr><td><code>mcq</code></td><td>Is this finding present at the site: ulcer? Choose exactly one option.</td><td>A. visible；B. not visible</td><td>&quot;B&quot;</td></tr></table>
+<h4 style="margin:18px 0 8px">图像</h4>
+<div class="frames"><div class="frame"><img src="images/L2b_c91846f6_胃体_AX10_04/F01.jpg" alt="F01" loading="lazy" decoding="async"><span><b>F01</b> · 胃体 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L2b_c91846f6_胃体_AX10_04/F02.jpg" alt="F02" loading="lazy" decoding="async"><span><b>F02</b> · 胃体 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L2b_c91846f6_胃体_AX10_04/F03.jpg" alt="F03" loading="lazy" decoding="async"><span><b>F03</b> · 胃体 · white_light · 部位置信 1.00</span></div></div>
+</details><h2>病灶属性 <code>T3_attributes</code></h2><p class="meta">全库 1622 条 · 按属性槽分层，抽 1 / 1622 条，覆盖 1 / 10 个分层，未抽到：border、color、count、distribution、shape、size、sub_position、surface… · 来自 <code>outputs/v5/release_v5_en.jsonl</code><br>帧数 1/3/3（最少/中位/最多） · 输入档 clean_matched 1622 · 问法 mcq 768、open_ended 854</p><details class="case"><summary>L3_7d5e6d45_胃角_AX10_05_attachment</summary>
+<p class="meta">检查号 <code>SCOPEV2_b9147d5e6d45</code> · 子类型 <code>—</code> · 输入档 <code>clean_matched</code> · 发布角色 <code>balanced</code> · 分层 <code>attachment:白苔</code> · 标签置信 <code>1</code> · 标记 <code>frames_site_matched_only</code></p>
+<div class="layer"><h4>题干（条目里的 <code>question</code> 字段）</h4><pre>In this gastric angulus image, what is the adherent material of the white fibrin coating?</pre></div>
+<div class="layer"><h4>实际送进模型的 prompt（<code>build_inference_prompt</code>）</h4><h5>mcq</h5><pre>For the lesion in this gastric angulus image, what is the adherent material? Choose exactly one option.
+
+A. white coating
+B. covered by white coating
+C. necrotic material
+D. food residue
+
+Reply with a single option letter only. Do not explain.</pre></div>
+<div class="layer"><h4>标准答案</h4><pre>{
+  &quot;slot&quot;: &quot;attachment&quot;,
+  &quot;value&quot;: &quot;white coating&quot;
+}</pre></div>
+
+<div class="layer"><h4>任务参数 task_payload</h4><pre>{
+  &quot;lesion_code&quot;: &quot;AX10_05&quot;,
+  &quot;lesion_term&quot;: &quot;白苔&quot;,
+  &quot;options&quot;: [
+    &quot;白苔&quot;,
+    &quot;覆白苔&quot;,
+    &quot;血痂&quot;,
+    &quot;食物残渣&quot;,
+    &quot;粘液附着&quot;,
+    &quot;黏液附着&quot;,
+    &quot;脓性&quot;,
+    &quot;坏死物&quot;
+  ],
+  &quot;site&quot;: &quot;胃角&quot;,
+  &quot;slot&quot;: &quot;attachment&quot;,
+  &quot;slot_zh&quot;: &quot;附着物&quot;,
+  &quot;value_type&quot;: &quot;closed&quot;
+}</pre></div>
+<div class="layer"><h4>标签来源 provenance</h4><pre>{
+  &quot;label_source&quot;: &quot;report_findings_phrase&quot;,
+  &quot;phrase&quot;: &quot;福白苔&quot;,
+  &quot;structured_value&quot;: null,
+  &quot;value_type&quot;: &quot;closed&quot;
+}</pre></div>
+<h4 style="margin:18px 0 8px">问法变体</h4>
+<table><tr><th>问法</th><th>题干</th><th>选项</th><th>答案</th></tr><tr><td><code>mcq</code></td><td>For the lesion in this gastric angulus image, what is the adherent material? Choose exactly one option.</td><td>A. white coating；B. covered by white coating；C. necrotic material；D. food residue</td><td>&quot;A&quot;</td></tr></table>
+<h4 style="margin:18px 0 8px">图像</h4>
+<div class="frames"><div class="frame"><img src="images/L3_7d5e6d45_胃角_AX10_05_attachment/F01.jpg" alt="F01" loading="lazy" decoding="async"><span><b>F01</b> · 胃角 · white_light · 部位置信 1.00</span></div></div>
+</details><h2>所见报告生成 <code>T4_report</code></h2><p class="meta">全库 1200 条 · 按帧数档分层，抽 1 / 1200 条，覆盖 1 / 5 个分层，未抽到：≤1 帧、≤128 帧、≤32 帧、≤8 帧 · 来自 <code>outputs/v5/release_v5_en.jsonl</code><br>帧数 1/32/399（最少/中位/最多） · 输入档 raw_dense 1200 · 问法 open_ended 1200</p><details class="case"><summary>L4_62d507dc</summary>
+<p class="meta">检查号 <code>SCOPEV2_04f762d507dc</code> · 子类型 <code>—</code> · 输入档 <code>raw_dense</code> · 发布角色 <code>balanced</code> · 分层 <code>—</code> · 标签置信 <code>1</code></p>
+<div class="layer"><h4>题干（条目里的 <code>question</code> 字段）</h4><pre>Write the endoscopic findings for this upper-GI examination, organised site by site.</pre></div>
+<div class="layer"><h4>实际送进模型的 prompt（<code>build_inference_prompt</code>）</h4><h5>open_ended</h5><pre>Write the endoscopic findings for this upper-GI examination, organised site by site.</pre></div>
+<div class="layer"><h4>标准答案</h4><pre>&quot;Esophagus: The esophagus is patent, the mucosa is smooth and soft, and wall peristalsis is normal; isolated island-like orange mucosa is seen in the upper segment at 17 cm.\nCardia: The Z-line is clear, the mucosa is smooth, and opening and closing are normal.\nGastric fundus: The mucosa is mottled red and white, and the mucus lake is yellow and scant.\nGastric body: The mucosa on the lesser curvature side is rough and edematous, with localized white areas;\nGastric angulus: The arch is present, with localized white areas; scattered ulcer lesions measuring 0.2-0.5 cm are seen, covered with yellow-white fibrinous exudate, and the surrounding mucosa is congested and edematous, biopsy was taken.\nGastric antrum: The mucosa is congested and edematous, predominantly with localized white areas.\nPylorus: A shallow ulcer is seen, and the lumen is deformed;\nDuodenum: The morphology is normal, the mucosal color is normal, and no ulcers or tumors are seen. A 1.0 cm submucosal elevation is seen in the descending duodenum.&quot;</pre></div>
+
+<div class="layer"><h4>任务参数 task_payload</h4><pre>（空）</pre></div>
+<div class="layer"><h4>标签来源 provenance</h4><pre>{
+  &quot;label_source&quot;: &quot;report_findings_verbatim&quot;
+}</pre></div>
+<h4 style="margin:18px 0 8px">问法变体</h4>
+<table><tr><th>问法</th><th>题干</th><th>选项</th><th>答案</th></tr><tr><td><code>open_ended</code></td><td>Write the endoscopic findings for this upper-GI examination, organised site by site.</td><td>—</td><td>&quot;Esophagus: The esophagus is patent, the mucosa is smooth and soft, and wall peristalsis is normal; isolated island-like orange mucosa is seen in the upper segment at 17 cm.\nCardia: The Z-line is clear, the mucosa is smooth, and opening and closing are normal.\nGastric fundus: The mucosa is mottled red and white, and the mucus lake is yellow and scant.\nGastric body: The mucosa on the lesser curvature side is rough and edematous, with localized white areas;\nGastric angulus: The arch is present, with localized white areas; scattered ulcer lesions measuring 0.2-0.5 cm are seen, covered with yellow-white fibrinous exudate, and the surrounding mucosa is congested and edematous, biopsy was taken.\nGastric antrum: The mucosa is congested and edematous, predominantly with localized white areas.\nPylorus: A shallow ulcer is seen, and the lumen is deformed;\nDuodenum: The morphology is normal, the mucosal color is normal, and no ulcers or tumors are seen. A 1.0 cm submucosal elevation is seen in the descending duodenum.&quot;</td></tr></table>
+<h4 style="margin:18px 0 8px">图像</h4>
+<p class="meta">共 132 帧，等距展示其中 8 帧。<b>模型收到的是全部 132 帧</b>，这里只是够不够看的抽样。</p><div class="frames"><div class="frame"><img src="images/L4_62d507dc/F01.jpg" alt="F01" loading="lazy" decoding="async"><span><b>F01</b> · 胃体 · uncertain · 部位置信 1.00</span></div><div class="frame"><img src="images/L4_62d507dc/F17.jpg" alt="F17" loading="lazy" decoding="async"><span><b>F17</b> · 贲门 · narrow_band · 部位置信 0.64</span></div><div class="frame"><img src="images/L4_62d507dc/F34.jpg" alt="F34" loading="lazy" decoding="async"><span><b>F34</b> · 胃体 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L4_62d507dc/F50.jpg" alt="F50" loading="lazy" decoding="async"><span><b>F50</b> · 胃体 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L4_62d507dc/F67.jpg" alt="F67" loading="lazy" decoding="async"><span><b>F67</b> · 胃体 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L4_62d507dc/F83.jpg" alt="F83" loading="lazy" decoding="async"><span><b>F83</b> · 胃窦 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L4_62d507dc/F100.jpg" alt="F100" loading="lazy" decoding="async"><span><b>F100</b> · 十二指肠 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L4_62d507dc/F116.jpg" alt="F116" loading="lazy" decoding="async"><span><b>F116</b> · 胃窦 · white_light · 部位置信 0.50</span></div></div>
+</details><h2>诊断印象 <code>T5_impression</code></h2><p class="meta">全库 2248 条 · 按首个诊断分层，抽 1 / 2248 条，覆盖 1 / 69 个分层，未抽到：Mallory-Weiss syndrome、Schatzki ring、achalasia、anastomotic inflammation、anastomotic ulcer、anemia-related mucosal change、autoimmune gastritis、benign esophageal ulcer… · 来自 <code>outputs/v5/release_v5_en.jsonl</code><br>帧数 2/16/24（最少/中位/最多） · 输入档 clean_matched 2248 · 问法 mcq 2248</p><details class="case"><summary>L5_5e98dd89</summary>
+<p class="meta">检查号 <code>SCOPEV2_743b5e98dd89</code> · 子类型 <code>—</code> · 输入档 <code>clean_matched</code> · 发布角色 <code>balanced</code> · 分层 <code>巴雷特食管</code> · 标签置信 <code>1</code> · 标记 <code>pathology_diseases_excluded</code></p>
+<div class="layer"><h4>题干（条目里的 <code>question</code> 字段）</h4><pre>Based on these endoscopic images, give the endoscopic diagnosis.</pre></div>
+<div class="layer"><h4>实际送进模型的 prompt（<code>build_inference_prompt</code>）</h4><h5>mcq</h5><pre>Based on these endoscopic findings, which diagnosis is most appropriate? Choose exactly one option.
+
+A. Schatzki ring
+B. Barrett&#x27;s esophagus
+C. web
+D. esophageal vascular ectasia
+
+Reply with a single option letter only. Do not explain.</pre></div>
+<div class="layer"><h4>标准答案</h4><pre>[
+  {
+    &quot;label&quot;: &quot;Barrett&#x27;s esophagus&quot;
+  },
+  {
+    &quot;label&quot;: &quot;chronic nonatrophic gastritis&quot;
+  },
+  {
+    &quot;label&quot;: &quot;Helicobacter pylori infection&quot;
+  },
+  {
+    &quot;label&quot;: &quot;duodenal ulcer&quot;
+  }
+]</pre></div>
+
+<div class="layer"><h4>任务参数 task_payload</h4><pre>（空）</pre></div>
+<div class="layer"><h4>标签来源 provenance</h4><pre>{
+  &quot;label_source&quot;: &quot;report_impression&quot;,
+  &quot;pathology_diseases_excluded&quot;: 4
+}</pre></div>
+<h4 style="margin:18px 0 8px">问法变体</h4>
+<table><tr><th>问法</th><th>题干</th><th>选项</th><th>答案</th></tr><tr><td><code>mcq</code></td><td>Based on these endoscopic findings, which diagnosis is most appropriate? Choose exactly one option.</td><td>A. Schatzki ring；B. Barrett&#x27;s esophagus；C. web；D. esophageal vascular ectasia</td><td>&quot;B&quot;</td></tr></table>
+<h4 style="margin:18px 0 8px">图像</h4>
+<p class="meta">共 16 帧，等距展示其中 8 帧。<b>模型收到的是全部 16 帧</b>，这里只是够不够看的抽样。</p><div class="frames"><div class="frame"><img src="images/L5_5e98dd89/F01.jpg" alt="F01" loading="lazy" decoding="async"><span><b>F01</b> · 食管 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L5_5e98dd89/F03.jpg" alt="F03" loading="lazy" decoding="async"><span><b>F03</b> · 食管 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L5_5e98dd89/F05.jpg" alt="F05" loading="lazy" decoding="async"><span><b>F05</b> · 胃底 · white_light · 部位置信 0.98</span></div><div class="frame"><img src="images/L5_5e98dd89/F07.jpg" alt="F07" loading="lazy" decoding="async"><span><b>F07</b> · 胃体 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L5_5e98dd89/F09.jpg" alt="F09" loading="lazy" decoding="async"><span><b>F09</b> · 胃体 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L5_5e98dd89/F11.jpg" alt="F11" loading="lazy" decoding="async"><span><b>F11</b> · 胃角 · white_light · 部位置信 0.99</span></div><div class="frame"><img src="images/L5_5e98dd89/F13.jpg" alt="F13" loading="lazy" decoding="async"><span><b>F13</b> · 胃窦 · white_light · 部位置信 1.00</span></div><div class="frame"><img src="images/L5_5e98dd89/F15.jpg" alt="F15" loading="lazy" decoding="async"><span><b>F15</b> · 十二指肠 · white_light · 部位置信 1.00</span></div></div>
+</details><h2>指南推理链 <code>T6_guideline_cot</code></h2><p class="meta">全库 687 条 · 按指南分层，抽 1 / 687 条，覆盖 1 / 6 个分层，未抽到：hp_kyoto8、kimura_takemoto、la、paris_mesdag、ulcer_ahs · 来自 <code>outputs/v5/release_v5_en.jsonl</code><br>帧数 1/8/10（最少/中位/最多） · 输入档  197、clean_matched 488、grounding_candidate 2 · 问法 无变体</p><details class="case"><summary>L7_0c4374ab_forrest</summary>
+<p class="meta">检查号 <code>SCOPEV2_98df0c4374ab</code> · 子类型 <code>—</code> · 输入档 <code>clean_matched</code> · 发布角色 <code>cot_chain</code> · 分层 <code>forrest:IIa</code> · 标签置信 <code>1</code> · 标记 <code>single_reader_grade</code></p>
+<div class="layer"><h4>题干（条目里的 <code>question</code> 字段）</h4><pre>The following frames are an upper gastrointestinal endoscopy of one patient. Grade this case according to the Forrest Classification of Peptic Ulcer Bleeding, and state the signs your grade rests on.</pre></div>
+<div class="layer"><h4>实际送进模型的 prompt（<code>build_inference_prompt</code>）</h4><h5>open_ended</h5><pre>The following frames are an upper gastrointestinal endoscopy of one patient. Grade this case according to the Forrest Classification of Peptic Ulcer Bleeding, and state the signs your grade rests on.
+
+This case has 4 frames, labelled F1-F4; cite only these. Answer in the following sections, in order:
+[Visible findings] Describe what you see, citing frame numbers (e.g. F1, F2, F3, F4).
+[Sign analysis] Go through the signs below, one line each, &quot;sign name: present/absent (frames)&quot;: Spurting arterial bleeding; Oozing bleeding; Non-bleeding visible vessel; Adherent clot (sentinel clot); Flat pigmented spot; Clean ulcer base
+[Guideline reasoning] Apply the guideline&#x27;s rules step by step, showing the criteria used.
+[Conclusion] Give the final grade or diagnosis, written verbatim as exactly one of: Ia, Ib, IIa, IIb, IIc, III
+[Recommendation] State the next clinical step, one per line.</pre></div>
+<div class="layer"><h4>标准答案</h4><pre>{
+  &quot;score_or_grade&quot;: &quot;IIa&quot;
+}</pre></div>
+<div class="layer"><h4>金标准推理链（CoT engine 生成，judge 比对用）</h4><p class="meta">未在 <code>provenance.cot_chain_source</code> 找到对应金标准链（按 <code>sample_id</code>  join）。</p></div>
+<div class="layer"><h4>任务参数 task_payload</h4><pre>{
+  &quot;answer_source&quot;: &quot;physician_stated_grade&quot;,
+  &quot;answer_space&quot;: [],
+  &quot;guideline&quot;: &quot;forrest&quot;,
+  &quot;guideline_name&quot;: &quot;Forrest Classification of Peptic Ulcer Bleeding&quot;,
+  &quot;layer_config&quot;: [
+    &quot;L1&quot;,
+    &quot;L2&quot;,
+    &quot;L3&quot;,
+    &quot;L4&quot;,
+    &quot;L5&quot;
+  ],
+  &quot;reference&quot;: {
+    &quot;direct_findings&quot;: [
+      {
+        &quot;code&quot;: &quot;AX02_07&quot;,
+        &quot;sites&quot;: [
+          &quot;胃体&quot;
+        ],
+        &quot;term&quot;: &quot;血液&quot;
+      },
+      {
+        &quot;code&quot;: &quot;AX06_04&quot;,
+        &quot;sites&quot;: [
+          &quot;十二指肠&quot;,
+          &quot;胃体&quot;
+        ],
+        &quot;term&quot;: &quot;前哨血块&quot;
+      },
+      {
+        &quot;code&quot;: &quot;AX10_04&quot;,
+        &quot;sites&quot;: [
+          &quot;十二指肠&quot;
+        ],
+        &quot;term&quot;: &quot;溃疡&quot;
+      },
+      {
+        &quot;code&quot;: &quot;AX04_04&quot;,
+        &quot;sites&quot;: [
+          &quot;胃窦&quot;
+        ],
+        &quot;term&quot;: &quot;苍白/贫血样&quot;
+      },
+      {
+        &quot;code&quot;: &quot;AX01_07&quot;,
+        &quot;sites&quot;: [
+          &quot;十二指肠&quot;
+        ],
+        &quot;term&quot;: &quot;变形&quot;
+      }
+    ],
+    &quot;quality&quot;: &quot;ok&quot;,
+    &quot;signs&quot;: {
+      &quot;adherent_clot&quot;: {
+        &quot;allowed_sites&quot;: [
+          &quot;十二指肠&quot;,
+          &quot;胃体&quot;,
+          &quot;胃窦&quot;,
+          &quot;胃角&quot;
+        ],
+        &quot;label_source&quot;: &quot;rule_from_site_filtered_l2&quot;,
+        &quot;matched_codes&quot;: [
+          &quot;AX06_04&quot;
+        ],
+        &quot;matched_evidence&quot;: [
+          {
+            &quot;code&quot;: &quot;AX06_04&quot;,
+            &quot;sites&quot;: [
+              &quot;十二指肠&quot;
+            ],
+            &quot;term&quot;: &quot;前哨血块&quot;
+          },
+          {
+            &quot;code&quot;: &quot;AX06_04&quot;,
+            &quot;sites&quot;: [
+              &quot;胃体&quot;
+            ],
+            &quot;term&quot;: &quot;前哨血块&quot;
+          }
+        ],
+        &quot;present&quot;: true
+      },
+      &quot;clean_base&quot;: {
+        &quot;allowed_sites&quot;: [
+          &quot;十二指肠&quot;,
+          &quot;胃体&quot;,
+          &quot;胃窦&quot;,
+          &quot;胃角&quot;
+        ],
+        &quot;label_source&quot;: &quot;rule_from_site_filtered_l2&quot;,
+        &quot;matched_codes&quot;: [],
+        &quot;matched_evidence&quot;: [],
+        &quot;present&quot;: false
+      },
+      &quot;flat_pigmented_spot&quot;: {
+        &quot;allowed_sites&quot;: [
+          &quot;十二指肠&quot;,
+          &quot;胃体&quot;,
+          &quot;胃窦&quot;,
+          &quot;胃角&quot;
+        ],
+        &quot;label_source&quot;: &quot;rule_from_site_filtered_l2&quot;,
+        &quot;matched_codes&quot;: [],
+        &quot;matched_evidence&quot;: [],
+        &quot;present&quot;: false
+      },
+      &quot;oozing&quot;: {
+        &quot;allowed_sites&quot;: [
+          &quot;十二指肠&quot;,
+          &quot;胃体&quot;,
+          &quot;胃窦&quot;,
+          &quot;胃角&quot;
+        ],
+        &quot;label_source&quot;: &quot;rule_from_site_filtered_l2&quot;,
+        &quot;matched_codes&quot;: [],
+        &quot;matched_evidence&quot;: [],
+        &quot;present&quot;: false
+      },
+      &quot;spurting&quot;: {
+        &quot;allowed_sites&quot;: [
+          &quot;十二指肠&quot;,
+          &quot;胃体&quot;,
+          &quot;胃窦&quot;,
+          &quot;胃角&quot;
+        ],
+        &quot;label_source&quot;: &quot;rule_from_site_filtered_l2&quot;,
+        &quot;matched_codes&quot;: [],
+        &quot;matched_evidence&quot;: [],
+        &quot;present&quot;: false
+      },
+      &quot;visible_vessel&quot;: {
+        &quot;allowed_sites&quot;: [
+          &quot;十二指肠&quot;,
+          &quot;胃体&quot;,
+          &quot;胃窦&quot;,
+          &quot;胃角&quot;
+        ],
+        &quot;label_source&quot;: &quot;rule_from_site_filtered_l2&quot;,
+        &quot;matched_codes&quot;: [],
+        &quot;matched_evidence&quot;: [],
+        &quot;present&quot;: false
+      }
+    },
+    &quot;source&quot;: &quot;report_extraction&quot;,
+    &quot;stated_criteria&quot;: {
+      &quot;break_length_mm&quot;: {
+        &quot;comparator&quot;: &quot;exact&quot;,
+        &quot;site&quot;: &quot;十二指肠&quot;,
+        &quot;value&quot;: 8.0
+      }
+    }
+  },
+  &quot;reference_granularity&quot;: &quot;site_or_report&quot;
+}</pre></div>
+<div class="layer"><h4>标签来源 provenance</h4><pre>{
+  &quot;cot_adjudicated&quot;: true,
+  &quot;cot_construction_status&quot;: &quot;complete&quot;,
+  &quot;cot_fallback_invoked&quot;: true,
+  &quot;cot_final_chain_sha256&quot;: &quot;f6565911aba9567f58f724be895ade9502c14eb72cad7a30e0bf31f761cd3be5&quot;,
+  &quot;cot_frame_content_sha256&quot;: [
+    &quot;fb9616401cb1a5b068c471e284e9783e7f9d2ae5a7bc9d967760f35157725327&quot;,
+    &quot;60b97610fbc31996d5a48e6a7648fc2264b376a874b1fcf9db7c18955c44a9a3&quot;,
+    &quot;b1f4ff6f922724646099452dd91679424c1ca857eddf6559a2bc27d6453d99ea&quot;,
+    &quot;fb22679a38815bd750b87e0cb4b9540c97358acdfcfe7b860ebbd6a2c29ae224&quot;
+  ],
+  &quot;cot_gate_passed&quot;: true,
+  &quot;cot_gate_passing_candidate_count&quot;: 3,
+  &quot;cot_generator_roles&quot;: [
+    &quot;cot_generator_1&quot;,
+    &quot;cot_generator_2&quot;,
+    &quot;cot_generator_3&quot;
+  ],
+  &quot;cot_human_review_ledger&quot;: null,
+  &quot;cot_invoked_generator_roles&quot;: [
+    &quot;cot_generator_1&quot;,
+    &quot;cot_generator_2&quot;,
+    &quot;cot_generator_3&quot;
+  ],
+  &quot;cot_lang&quot;: &quot;en&quot;,
+  &quot;cot_model&quot;: &quot;claude-opus-4-8&quot;,
+  &quot;cot_n_candidates&quot;: 3,
+  &quot;cot_orchestration_policy_version&quot;: &quot;t6_cot_adaptive_primary_fallback_v1&quot;,
+  &quot;cot_prompt_policy_version&quot;: &quot;t6_cot_prompt_policy_v7&quot;,
+  &quot;cot_recovery_method&quot;: &quot;C_readjudication&quot;,
+  &quot;cot_regime&quot;: &quot;R2&quot;,
+  &quot;cot_release_eligible&quot;: false,
+  &quot;cot_reviewed_at&quot;: &quot;&quot;,
+  &quot;cot_reviewer&quot;: &quot;&quot;,
+  &quot;cot_verification_failed_checks&quot;: [],
+  &quot;cot_verification_passed&quot;: true,
+  &quot;cot_verification_status&quot;: &quot;pending&quot;,
+  &quot;frames_shown&quot;: 4,
+  &quot;label_adjudicated&quot;: true,
+  &quot;label_parsed_from&quot;: &quot;report_impression&quot;,
+  &quot;label_source&quot;: &quot;physician_stated_grade&quot;,
+  &quot;source_images&quot;: [
+    &quot;（源文件路径含姓名，已删除）&quot;,
+    &quot;（源文件路径含姓名，已删除）&quot;,
+    &quot;（源文件路径含姓名，已删除）&quot;,
+    &quot;（源文件路径含姓名，已删除）&quot;
+  ],
+  &quot;staging_disposition&quot;: &quot;retained&quot;,
+  &quot;staging_reason&quot;: &quot;gate_passed_machine_verified&quot;,
+  &quot;t6_case_fingerprint&quot;: &quot;35cf95aee05eb429bf52456289bbf593feec1cdbc4e0910e1fd330c19a07a7da&quot;,
+  &quot;t6_cohort&quot;: &quot;forrest&quot;,
+  &quot;t6_disease&quot;: &quot;bleeding_peptic_ulcer&quot;,
+  &quot;t6_pool&quot;: &quot;frozen1047_v2&quot;,
+  &quot;t6_pool_case_source&quot;: {
+    &quot;file_sha256&quot;: &quot;51e5ae90e5e023ef574f741d2046530da23b675a8f0fe10ceb04388272ea53ec&quot;,
+    &quot;logical_name&quot;: &quot;source/engine_inputs/forrest.jsonl&quot;,
+    &quot;row_number&quot;: 5,
+    &quot;row_sha256&quot;: &quot;591785dc0c9595bfad0d99671297845b4aad93eb8fdc96b87bc8f80de50390b0&quot;
+  },
+  &quot;t6_run&quot;: &quot;full1047_v2&quot;
+}</pre></div>
+<h4 style="margin:18px 0 8px">问法变体</h4>
+<p class="meta">该层无问法变体——答案是一条分层推理链，做成选择题就没有推理可评。（是否豁免「必须跑全部题型」仍是待商讨第 2 条。）</p>
+<h4 style="margin:18px 0 8px">图像</h4>
+<div class="frames"><div class="frame"><img src="images/L7_0c4374ab_forrest/F01.jpg" alt="F01" loading="lazy" decoding="async"><span><b>F01</b> · 食管 · 未标注 · 部位置信 0.92</span></div><div class="frame"><img src="images/L7_0c4374ab_forrest/F02.jpg" alt="F02" loading="lazy" decoding="async"><span><b>F02</b> · 食管 · 未标注 · 部位置信 0.68</span></div><div class="frame"><img src="images/L7_0c4374ab_forrest/F03.jpg" alt="F03" loading="lazy" decoding="async"><span><b>F03</b> · 食管 · 未标注 · 部位置信 0.98</span></div><div class="frame"><img src="images/L7_0c4374ab_forrest/F04.jpg" alt="F04" loading="lazy" decoding="async"><span><b>F04</b> · 食管 · 未标注 · 部位置信 0.65</span></div></div>
+</details>
+</body></html>
