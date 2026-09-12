@@ -313,7 +313,69 @@ This case has 4 frames, labelled F1-F4; cite only these. Answer in the following
 <div class="layer"><h4>标准答案</h4><pre>{
   &quot;score_or_grade&quot;: &quot;IIa&quot;
 }</pre></div>
-<div class="layer"><h4>金标准推理链（CoT engine 生成，judge 比对用）</h4><p class="meta">未在 <code>provenance.cot_chain_source</code> 找到对应金标准链（按 <code>sample_id</code>  join）。</p></div>
+<div class="layer"><h4>金标准推理链（CoT engine 生成，judge 比对用）</h4><p class="meta">金标准链来自 <code>L7_0c4374ab_forrest.json</code> · 模型 <code>claude-opus-4-8</code> · 机制 <code>R2</code> · rollouts <code>3</code> · 锚定答案 <code>IIa</code>（<code>physician_stated_grade</code>） · 过闸 <code>True</code> · 核验状态 <code>pending</code><br><b>这条链是 judge 打分时比对的金标准，不随题面下发给模型。</b>源文件里的帧绝对路径（文件名含姓名）已删除。</p><h5>L1 可见描述（逐帧所见）</h5><pre>Mucosal defect with a rounded, protruding, smooth, glistening red-to-purple bump arising from its base; the protrusion has a discrete margin and stands proud of the surrounding surface (F1, F2, F3; stations: F1 esophagus, F2 unknown, F3 esophagus). Qualitatively the protrusion measures a few millimetres; no calibrated reference is in frame, so an exact size is not directly measurable. Dark-red static material sits in the dependent recess adjacent to the bump. Foamy surface bubbles and a peripheral transparent cap ring are present. No jet, flowing blood, or sheet of blood emerges from the protrusion on any view.</pre><pre>Pale, smooth mucosa carrying a single flat red macule with no elevation, crater, depression, or dark coating; surrounding mucosa otherwise unremarkable (F4; station unknown). This is a separate site from the protruding lesion and shows no bleeding or adherent material.</pre><h5>L2 征象映射</h5><pre>{
+  &quot;adherent_clot&quot;: {
+    &quot;evidence_state&quot;: &quot;indeterminate&quot;,
+    &quot;frames&quot;: [
+      &quot;F1&quot;,
+      &quot;F2&quot;,
+      &quot;F3&quot;
+    ],
+    &quot;present&quot;: null,
+    &quot;supporting_af&quot;: []
+  },
+  &quot;clean_base&quot;: {
+    &quot;evidence_state&quot;: &quot;absent&quot;,
+    &quot;frames&quot;: [
+      &quot;F1&quot;,
+      &quot;F2&quot;,
+      &quot;F3&quot;
+    ],
+    &quot;present&quot;: false,
+    &quot;supporting_af&quot;: []
+  },
+  &quot;flat_pigmented_spot&quot;: {
+    &quot;evidence_state&quot;: &quot;absent&quot;,
+    &quot;frames&quot;: [
+      &quot;F1&quot;,
+      &quot;F2&quot;,
+      &quot;F3&quot;,
+      &quot;F4&quot;
+    ],
+    &quot;present&quot;: false,
+    &quot;supporting_af&quot;: []
+  },
+  &quot;oozing&quot;: {
+    &quot;evidence_state&quot;: &quot;absent&quot;,
+    &quot;frames&quot;: [
+      &quot;F1&quot;,
+      &quot;F2&quot;,
+      &quot;F3&quot;
+    ],
+    &quot;present&quot;: false,
+    &quot;supporting_af&quot;: []
+  },
+  &quot;spurting&quot;: {
+    &quot;evidence_state&quot;: &quot;absent&quot;,
+    &quot;frames&quot;: [
+      &quot;F1&quot;,
+      &quot;F2&quot;,
+      &quot;F3&quot;
+    ],
+    &quot;present&quot;: false,
+    &quot;supporting_af&quot;: []
+  },
+  &quot;visible_vessel&quot;: {
+    &quot;evidence_state&quot;: &quot;present&quot;,
+    &quot;frames&quot;: [
+      &quot;F1&quot;,
+      &quot;F2&quot;,
+      &quot;F3&quot;
+    ],
+    &quot;present&quot;: true,
+    &quot;supporting_af&quot;: []
+  }
+}</pre><h5>L3 规则推理（评分/分级依据）</h5><pre>&quot;The classification prerequisite is demonstrated: F1–F3 show a mucosal defect with an assessable base bearing a stigma, while F4 shows no ulcer base and serves only as a separate comparator site. The retained class is anchored in its own defining criterion — a discrete, non-bleeding protruding vessel at the ulcer base, directly visualized in F1–F3 with no spurting or oozing. The nearest competing definition, IIb (adherent clot covering the base), is not satisfied: no cohesive amorphous clot obscures the base, the stigma is fully seen, and the equivocal dependent recess material provides only accompanying recent-bleeding context that cannot confirm a clot-covered base, leaving that criterion unestablished rather than contradicted. Reconciliation Step: the grade is controlled by the defining stigma at the ulcer base, so the equivocal recess material is weighted as non-defining accompanying context while the directly demonstrated non-bleeding protruding vessel determines the grade.&quot;</pre><h5>L4 结论</h5><pre>&quot;IIa&quot;</pre><h5>L5 建议</h5><pre>&quot;Perform endoscopic haemostatic treatment of the non-bleeding visible vessel at this session, preceded by gentle irrigation to clarify the equivocal dark-red recess material and re-confirm the stigma before therapy; give high-dose PPI and observe as an inpatient with monitoring proportionate to high rebleeding risk. No additional staging test is required before treatment.&quot;</pre></div>
 <div class="layer"><h4>任务参数 task_payload</h4><pre>{
   &quot;answer_source&quot;: &quot;physician_stated_grade&quot;,
   &quot;answer_space&quot;: [],
